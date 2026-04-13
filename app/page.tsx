@@ -1,65 +1,128 @@
-import Image from "next/image";
+import { Navbar } from "@/components/sections/Nav";
+import { HeroPlaceholder } from "@/components/hero/HeroPlaceholder";
+import { AboutStrip } from "@/components/sections/AboutStrip";
+import { FeaturedCard } from "@/components/sections/FeaturedCard";
+import { ProjectGrid, type SecondaryProject } from "@/components/sections/ProjectGrid";
+import { Footer } from "@/components/sections/Footer";
+
+// ─── Tier 1: 3 featured projects ─────────────────────────────────────────────
+const featuredProjects = [
+  {
+    title: "Malloy Group",
+    outcome:
+      "Three client consulting splits — competitive analysis, feasibility study, and GTM strategy — for real startups across three semesters.",
+    category: "Consulting · GTM · Brand",
+    year: "2024–2025",
+    href: "/projects/malloy-group",
+  },
+  {
+    title: "B2B Sales Pipeline Analytics",
+    outcome:
+      "Applied k-prototypes clustering and association rule mining to a mock CRM to segment leads and predict cross-sell opportunities.",
+    category: "Data Mining · B2B · R",
+    year: "Fall 2025",
+    href: "/projects/bus315-data-mining",
+  },
+  {
+    title: "AUGMENT",
+    outcome:
+      "Designed a mind-map engine app where AI outputs relationships — not answers — so users build the argument path themselves.",
+    category: "UX Design · Product · Figma",
+    year: "2025",
+    href: "/projects/augment",
+  },
+];
+
+// ─── Tier 2: 6 secondary projects ────────────────────────────────────────────
+const secondaryProjects: SecondaryProject[] = [
+  {
+    title: "Fillmore Ecosystem",
+    description:
+      "Community-based research into SF's Lower Fillmore food and pharmacy desert after the Safeway closure.",
+    category: "Community Research",
+    year: "Fall 2025",
+    href: "/projects/fillmore",
+  },
+  {
+    title: "Uber India Ride Analytics",
+    description:
+      "Tested three business hypotheses on Uber India ride data using Tableau. Two confirmed, one rejected.",
+    category: "Data Visualization · Tableau",
+    year: "Fall 2025",
+    href: "/projects/uber-analytics",
+  },
+  {
+    title: "Wildfire Proximity ML",
+    description:
+      "Kaggle datathon predicting wildfire proximity to evacuation zones using survival analysis and XGBoost.",
+    category: "ML · Python · Kaggle",
+    year: "Spring 2026",
+    href: "/projects/wildfire-ml",
+  },
+  {
+    title: "LMU EMS Datathon",
+    description:
+      "Spatial cluster analysis of EMS call data. Honest post-mortem: over-complicated the 'so what.'",
+    category: "Data Analysis · Growth",
+    year: "Spring 2026",
+    href: "/projects/lmu-datathon",
+  },
+  {
+    title: "ChamberGPT",
+    description:
+      "Member-facing support chatbot for the SF Chamber of Commerce using Voiceflow. $0 budget, intern-run.",
+    category: "AI · No-Code · Internship",
+    year: "Spring 2025",
+    href: "/projects/chambergpt",
+  },
+  {
+    title: "AI Investment Bubble",
+    description:
+      "Applied money and banking concepts to ask: is the AI investment boom a financial bubble?",
+    category: "Economics · Research",
+    year: "Fall 2025",
+    href: "/projects/ai-bubble",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <>
+      <Navbar />
+
+      <main>
+        {/* Hero — BranchingGraph replaces HeroPlaceholder in Task 4 */}
+        <HeroPlaceholder />
+
+        {/* About */}
+        <AboutStrip />
+
+        {/* Featured projects — Tier 1 */}
+        <section
+          id="work"
+          className="w-full py-16 md:py-24 px-6 sm:px-8 lg:px-12"
+          style={{ backgroundColor: "#F7F3EC" }}
+        >
+          <div className="max-w-7xl mx-auto">
+            <h2
+              className="text-2xl md:text-3xl font-medium mb-10"
+              style={{ fontFamily: "var(--font-fraunces)", color: "#1F2A23" }}
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+              Featured work
+            </h2>
+            <div className="flex flex-col gap-6">
+              {featuredProjects.map((project) => (
+                <FeaturedCard key={project.href} {...project} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Secondary projects — Tier 2 */}
+        <ProjectGrid projects={secondaryProjects} heading="More work" />
       </main>
-    </div>
+
+      <Footer />
+    </>
   );
 }
