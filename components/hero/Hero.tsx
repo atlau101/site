@@ -1,19 +1,35 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { BranchingGraph } from "./BranchingGraph";
 
 export function Hero() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    let destroy: (() => void) | undefined;
+    (async () => {
+      const mod = await import("./hero-canvas.js");
+      destroy = mod.init("hero-scatter-canvas");
+    })();
+    return () => destroy?.();
+  }, []);
+
   return (
     <section
-      className="relative w-full min-h-screen overflow-hidden"
-      style={{ backgroundColor: "#F7F3EC" }}
+      className="relative w-full overflow-hidden"
+      style={{ backgroundColor: "#F5F0E8" }}
     >
-      {/* BranchingGraph fills the entire hero */}
-      <BranchingGraph className="absolute inset-0 w-full h-full" />
+      {/* Canvas background */}
+      <canvas
+        id="hero-scatter-canvas"
+        ref={canvasRef}
+        className="block w-full"
+        style={{ height: 420 }}
+      />
 
-      {/* Text overlay — bottom-left */}
-      <div className="relative z-10 flex flex-col justify-end min-h-screen px-6 sm:px-8 lg:px-12 pb-16 pointer-events-none">
+      {/* Text overlay — bottom-left, absolutely positioned over canvas */}
+      <div className="absolute inset-0 z-10 flex flex-col justify-end px-6 sm:px-8 lg:px-12 pb-12 pointer-events-none">
         <div className="max-w-7xl w-full mx-auto">
           <motion.p
             initial={{ opacity: 0, y: 10 }}
@@ -22,7 +38,7 @@ export function Hero() {
             className="text-sm tracking-widest uppercase mb-5"
             style={{ color: "#C97B4A" }}
           >
-            Business Analyst · Designer · Experimenter
+            Problem Solver · Analyst · Tinkerer
           </motion.p>
 
           <motion.h1
@@ -57,7 +73,7 @@ export function Hero() {
             className="mt-8 flex items-center gap-2 text-sm"
             style={{ color: "#6B8A66" }}
           >
-            <span>Hover a node to explore</span>
+            <span>Scroll to explore</span>
             <motion.span
               animate={{ y: [0, 4, 0] }}
               transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}

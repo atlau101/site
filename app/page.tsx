@@ -1,5 +1,5 @@
 import { Navbar } from "@/components/sections/Nav";
-import { HeroPlaceholder } from "@/components/hero/HeroPlaceholder";
+import { Hero } from "@/components/hero/Hero";
 import { AboutStrip } from "@/components/sections/AboutStrip";
 import { FeaturedCard } from "@/components/sections/FeaturedCard";
 import { ProjectGrid, type SecondaryProject } from "@/components/sections/ProjectGrid";
@@ -90,9 +90,8 @@ export default function Home() {
     <>
       <Navbar />
 
-      <main>
-        {/* Hero — BranchingGraph replaces HeroPlaceholder in Task 4 */}
-        <HeroPlaceholder />
+      <main className="pt-16 sm:pt-20">
+        <Hero />
 
         {/* About */}
         <AboutStrip />
