@@ -1,82 +1,96 @@
 import React from "react";
-import { Mail } from "lucide-react";
-
-const GitHubIcon = () => (
-  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true">
-    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
-  </svg>
-);
-
-const LinkedInIcon = () => (
-  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true">
-    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-  </svg>
-);
 
 interface FooterProps {
   name?: string;
-  tagline?: string;
-  githubUrl?: string;
-  linkedinUrl?: string;
-  email?: string;
 }
 
-export function Footer({
-  name = "Andrew Lau",
-  tagline = "Business analytics and product thinking. USF '26.",
-  githubUrl = "https://github.com/atlau101",
-  linkedinUrl = "https://linkedin.com/in/andrewlau",
-  email = "mailto:atlau2@dons.usfca.edu",
-}: FooterProps) {
-  const socialLinks = [
-    { icon: <GitHubIcon />, href: githubUrl, label: "GitHub" },
-    { icon: <LinkedInIcon />, href: linkedinUrl, label: "LinkedIn" },
-    { icon: <Mail className="h-5 w-5" />, href: email, label: "Email" },
+export function Footer({ name = "Andrew Lau" }: FooterProps) {
+  const contactRows = [
+    {
+      label: "EMAIL",
+      display: "andrew.t.lau101@gmail.com",
+      href: "mailto:andrew.t.lau101@gmail.com",
+    },
+    {
+      label: "LINKEDIN",
+      display: "atlau04",
+      href: "https://www.linkedin.com/in/atlau101/",
+    },
+    {
+      label: "GITHUB",
+      display: "atlau101",
+      href: "https://github.com/atlau101",
+    },
   ];
 
   return (
-    <footer className="w-full py-12 px-6 md:px-8 lg:px-12" style={{ backgroundColor: "#1F2A23" }}>
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8">
-          {/* Left — name + tagline */}
-          <div className="flex-1">
-            <h2
-              className="text-3xl md:text-4xl mb-3 font-medium"
-              style={{ fontFamily: "var(--font-fraunces)", color: "#F5F3EF" }}
-            >
-              {name}
-            </h2>
-            <p className="text-sm md:text-base max-w-md" style={{ color: "#C8C4BC" }}>
-              {tagline}
-            </p>
-          </div>
+    <footer id="contact" className="w-full bg-paper-dim text-foreground">
+      {/* ── CTA section ───────────────────────────────────────────── */}
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 pt-16 md:pt-24 pb-16 md:pb-20">
+        {/* Label */}
+        <p className="annotation text-muted-foreground mb-10 md:mb-14 text-xs tracking-widest uppercase">
+          Get in touch · 04
+        </p>
 
-          {/* Right — social links */}
-          <div className="flex items-center gap-3">
-            {socialLinks.map((link) => (
+        {/* Headline */}
+        <div className="mb-16 md:mb-24">
+          <h2
+            className="font-heading font-medium text-foreground leading-[1.05]"
+            style={{
+              fontSize: "clamp(2.25rem, 6vw, 4.5rem)",
+            }}
+          >
+            Looking for client-facing,
+            <br />
+            data-focused roles
+          </h2>
+          <p
+            className="font-heading font-medium italic text-primary leading-[1.05] mt-1"
+            style={{
+              fontSize: "clamp(2.25rem, 6vw, 4.5rem)",
+            }}
+          >
+            where flexible thinking
+            <br />
+            and communication matters.
+          </p>
+        </div>
+
+        {/* Bottom: blurb + contact rows */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-10 md:gap-16">
+          <p className="annotation normal-case text-muted-foreground text-sm leading-relaxed max-w-xs">
+            GTM, Sales, Analytics, or anything in between.
+            <br />
+            If you&apos;re hiring for a role where ideas and data
+            work together, I&apos;d love to chat.
+          </p>
+
+          {/* Contact rows */}
+          <div className="flex flex-col min-w-[260px]">
+            {contactRows.map((row, i) => (
               <a
-                key={link.label}
-                href={link.href}
-                target="_blank"
+                key={row.label}
+                href={row.href}
+                target={row.href.startsWith("mailto") ? undefined : "_blank"}
                 rel="noopener noreferrer"
-                aria-label={link.label}
-                className="flex h-11 w-11 items-center justify-center rounded-full transition-all duration-200 hover:scale-110 cursor-pointer"
-                style={{
-                  backgroundColor: "rgba(245, 243, 239, 0.08)",
-                  color: "#F5F3EF",
-                  border: "1px solid rgba(245, 243, 239, 0.15)",
-                }}
+                className={`flex items-center justify-between gap-8 py-4 no-underline group transition-opacity duration-200 hover:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded-sm ${i < contactRows.length - 1 ? "border-b border-border" : ""
+                  }`}
               >
-                {link.icon}
+                <span className="annotation text-xs text-muted-foreground tracking-widest uppercase shrink-0">
+                  {row.label}
+                </span>
+                <span className="font-heading text-base font-medium text-foreground text-right">
+                  {row.display}
+                </span>
               </a>
             ))}
           </div>
         </div>
+      </div>
 
-        <div
-          className="mt-10 pt-6 border-t text-sm"
-          style={{ borderColor: "rgba(245, 243, 239, 0.12)", color: "#8A8880" }}
-        >
+      {/* ── Footer strip ──────────────────────────────────────────── */}
+      <div className="border-t border-border px-6 sm:px-8 lg:px-12 py-5">
+        <div className="max-w-7xl mx-auto annotation normal-case text-muted-foreground text-xs">
           © {new Date().getFullYear()} {name}. All rights reserved.
         </div>
       </div>

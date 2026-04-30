@@ -1,97 +1,100 @@
-import { Navbar } from "@/components/sections/Nav";
 import { Hero } from "@/components/hero/Hero";
+import { ProofStrip } from "@/components/sections/ProofStrip";
 import { AboutStrip } from "@/components/sections/AboutStrip";
 import { FeaturedCard } from "@/components/sections/FeaturedCard";
-import { ProjectGrid, type SecondaryProject } from "@/components/sections/ProjectGrid";
+import { GroupedFeaturedCard } from "@/components/sections/GroupedFeaturedCard";
 import { Footer } from "@/components/sections/Footer";
 
-// ─── Tier 1: 3 featured projects ─────────────────────────────────────────────
-const featuredProjects = [
-  {
-    title: "Malloy Group",
-    outcome:
-      "Three client consulting splits — competitive analysis, feasibility study, and GTM strategy — for real startups across three semesters.",
-    category: "Consulting · GTM · Brand",
-    year: "2024–2025",
-    href: "/projects/malloy-group",
-  },
-  {
-    title: "B2B Sales Pipeline Analytics",
-    outcome:
-      "Applied k-prototypes clustering and association rule mining to a mock CRM to segment leads and predict cross-sell opportunities.",
-    category: "Data Mining · B2B · R",
-    year: "Fall 2025",
-    href: "/projects/bus315-data-mining",
-  },
-  {
-    title: "AUGMENT",
-    outcome:
-      "Designed a mind-map engine app where AI outputs relationships — not answers — so users build the argument path themselves.",
-    category: "UX Design · Product · Figma",
-    year: "2025",
-    href: "/projects/augment",
-  },
-];
+// ─── Tier 1: featured projects ────────────────────────────────────────────────
+const malloyGroup = {
+  title: "Malloy Group",
+  outcome:
+    "Three client consulting splits — competitive analysis, feasibility study, and GTM strategy. Real companies, real deliverables.",
+  category: "Consulting · GTM · Brand · 2024–2025",
+  href: "/projects/malloy",
+  projects: [
+    {
+      title: "Competitive Analysis & Brand Strategy",
+      category: "Rebrandly · Nov 2024",
+      href: "/projects/malloy-rebrandly",
+    },
+    {
+      title: "Smart Attendance Feasibility Study",
+      category: "Amal & Company · Feb 2025",
+      href: "/projects/malloy-amal",
+    },
+    {
+      title: "Go-To-Market Strategy",
+      category: "Noble Note · Oct 2025",
+      href: "/projects/malloy-noble-note",
+    },
+  ],
+};
 
-// ─── Tier 2: 6 secondary projects ────────────────────────────────────────────
-const secondaryProjects: SecondaryProject[] = [
-  {
-    title: "Fillmore Ecosystem",
-    description:
-      "Community-based research into SF's Lower Fillmore food and pharmacy desert after the Safeway closure.",
-    category: "Community Research",
-    year: "Fall 2025",
-    href: "/projects/fillmore",
-  },
-  {
-    title: "Uber India Ride Analytics",
-    description:
-      "Tested three business hypotheses on Uber India ride data using Tableau. Two confirmed, one rejected.",
-    category: "Data Visualization · Tableau",
-    year: "Fall 2025",
-    href: "/projects/uber-analytics",
-  },
-  {
-    title: "Wildfire Proximity ML",
-    description:
-      "Kaggle datathon predicting wildfire proximity to evacuation zones using survival analysis and XGBoost.",
-    category: "ML · Python · Kaggle",
-    year: "Spring 2026",
-    href: "/projects/wildfire-ml",
-  },
-  {
-    title: "LMU EMS Datathon",
-    description:
-      "Spatial cluster analysis of EMS call data. Honest post-mortem: over-complicated the 'so what.'",
-    category: "Data Analysis · Growth",
-    year: "Spring 2026",
-    href: "/projects/lmu-datathon",
-  },
-  {
-    title: "ChamberGPT",
-    description:
-      "Member-facing support chatbot for the SF Chamber of Commerce using Voiceflow. $0 budget, intern-run.",
-    category: "AI · No-Code · Internship",
-    year: "Spring 2025",
-    href: "/projects/chambergpt",
-  },
-  {
-    title: "AI Investment Bubble",
-    description:
-      "Applied money and banking concepts to ask: is the AI investment boom a financial bubble?",
-    category: "Economics · Research",
-    year: "Fall 2025",
-    href: "/projects/ai-bubble",
-  },
-];
+const dataProjects = {
+  title: "Data Projects",
+  outcome:
+    "Analytics and predicting modeling projects across coursework and extracurriculars. Each built around real world hypotheses and problems.",
+  category: "Data Analytics · ML · Visualization. (Python, Tableau, R)",
+  projects: [
+    {
+      title: "B2B Sales Pipeline Analytics",
+      category: "Data Mining · B2B · R",
+      href: "/projects/bus315-data-mining",
+    },
+    {
+      title: "Uber India Ride Analytics",
+      category: "Data Visualization · Tableau",
+      href: "/projects/uber-analytics",
+    },
+    {
+      title: "Wildfire Proximity ML",
+      category: "ML(Survival Analysis-Horizon) · Python · Kaggle",
+      href: "/projects/wildfire-ml",
+    },
+    {
+      title: "LMU EMS Datathon",
+      category: "Data Analysis · Project Management",
+      href: "/projects/lmu-datathon",
+    },
+  ],
+};
+
+const chamberGPT = {
+  title: "ChamberGPT",
+  outcome:
+    "Member and Guest facing support chatbot for the SF Chamber of Commerce. Built on voiceflow. $0 Budget, intern run, high forecasted impact.",
+  category: "AI · Workflows · Automation",
+  year: "Spring 2025",
+  href: "/projects/chambergpt",
+};
+
+const fillmoreEcosystem = {
+  title: "Fillmore Ecosystem",
+  outcome:
+    "Community-based research into SF's Lower Fillmore food and pharmacy desert after the Safeway closure.",
+  category: "Research · Market Research · Community Centric",
+  year: "Fall 2025",
+  href: "/projects/fillmore",
+};
+
+const vibeCoding = {
+  title: "Vibe Coding",
+  outcome:
+    "Exploring agentic coding. VSCode. ClaudeCode. Building and learning for fun, constantly experimenting with new Repos & MCPs.",
+  category: "AI assisted SWE/SWD, *WIP*",
+  year: "2025–ongoing",
+  href: "/projects/vibe-coding",
+};
 
 export default function Home() {
   return (
     <>
-      <Navbar />
-
-      <main className="pt-16 sm:pt-20">
+      <main id="main-content" className="pt-16 sm:pt-20">
         <Hero />
+
+        {/* Proof strip — 4 outcomes anchoring the hero claim */}
+        <ProofStrip />
 
         {/* About */}
         <AboutStrip />
@@ -99,29 +102,44 @@ export default function Home() {
         {/* Featured projects — Tier 1 */}
         <section
           id="work"
-          className="w-full py-16 md:py-24 px-6 sm:px-8 lg:px-12"
-          style={{ backgroundColor: "#F7F3EC" }}
+          className="w-full py-16 md:py-24 px-6 sm:px-8 lg:px-12 bg-background"
         >
           <div className="max-w-7xl mx-auto">
-            <h2
-              className="text-2xl md:text-3xl font-medium mb-10"
-              style={{ fontFamily: "var(--font-fraunces)", color: "#1F2A23" }}
-            >
+            <h2 className="font-heading text-2xl md:text-3xl font-medium mb-10 text-primary">
               Featured work
             </h2>
-            <div className="flex flex-col gap-6">
-              {featuredProjects.map((project) => (
-                <FeaturedCard key={project.href} {...project} />
-              ))}
+            <div className="flex flex-col gap-0 rule-h">
+              {/* 1 — Malloy Group */}
+              <div className="rule-h-faint">
+                <GroupedFeaturedCard {...malloyGroup} />
+              </div>
+
+              {/* 2 — Data Projects (grouped, inline accordion) */}
+              <div className="rule-h-faint">
+                <GroupedFeaturedCard {...dataProjects} />
+              </div>
+
+              {/* 3 — ChamberGPT */}
+              <div className="rule-h-faint">
+                <FeaturedCard {...chamberGPT} />
+              </div>
+
+              {/* 4 — Fillmore Ecosystem */}
+              <div className="rule-h-faint">
+                <FeaturedCard {...fillmoreEcosystem} />
+              </div>
+
+              {/* 5 — Vibe Coding */}
+              <div className="rule-h-faint">
+                <FeaturedCard {...vibeCoding} />
+              </div>
             </div>
           </div>
         </section>
-
-        {/* Secondary projects — Tier 2 */}
-        <ProjectGrid projects={secondaryProjects} heading="More work" />
       </main>
 
       <Footer />
     </>
   );
+
 }

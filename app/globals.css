@@ -4,24 +4,27 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* ─── Earth-tone palette tokens ─── */
+/* ─── Field Journal palette tokens ─── */
 @theme inline {
   /* Fonts */
-  --font-sans: var(--font-inter);
-  --font-heading: var(--font-fraunces);
-  --font-mono: var(--font-geist-mono);
+  --font-sans:    var(--font-newsreader);
+  --font-serif:   var(--font-newsreader);
+  --font-mono:    var(--font-space-grotesk);
+  --font-heading: var(--font-newsreader);
 
-  /* Brand colors */
-  --color-bg:           #F7F3EC;   /* warm off-white */
-  --color-branch:       #6B8A66;   /* sage green */
-  --color-branch-dark:  #3E5641;   /* deep olive */
-  --color-fruit:        #C97B4A;   /* terracotta */
-  --color-fruit-warm:   #E2B25A;   /* ochre */
-  --color-ink:          #1F2A23;   /* deep forest */
-  --color-ink-muted:    #4A5C4E;   /* muted forest */
-  --color-parchment:    #EDE8DF;   /* slightly darker bg for cards */
+  /* Field-journal palette */
+  --color-paper:           #FAF9F5;
+  --color-paper-low:       #F4F4F0;
+  --color-paper-container: #EFEEEA;
+  --color-paper-dim:       #DBDAD6;
+  --color-paper-white:     #FFFFFF;
+  --color-ink:             #1B1C1A;
+  --color-forest:          #173809;
+  --color-forest-soft:     #2D4F1E;
+  --color-rule:            #C3C8BB;
+  --color-edge:            #73796D;
 
-  /* shadcn tokens mapped to earth-tones */
+  /* shadcn tokens mapped to field-journal palette */
   --color-background:           var(--background);
   --color-foreground:           var(--foreground);
   --color-card:                 var(--card);
@@ -63,51 +66,90 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* ─── Earth-tone shadcn overrides ─── */
+/* ─── Field-journal shadcn overrides ─── */
 :root {
-  --background:           oklch(0.966 0.012 84);   /* #F7F3EC */
-  --foreground:           oklch(0.197 0.036 148);  /* #1F2A23 */
-  --card:                 oklch(0.942 0.014 84);   /* #EDE8DF */
-  --card-foreground:      oklch(0.197 0.036 148);
-  --popover:              oklch(0.942 0.014 84);
-  --popover-foreground:   oklch(0.197 0.036 148);
-  --primary:              oklch(0.38 0.065 145);   /* #3E5641 branch-dark */
-  --primary-foreground:   oklch(0.966 0.012 84);
-  --secondary:            oklch(0.57 0.055 142);   /* #6B8A66 branch */
-  --secondary-foreground: oklch(0.966 0.012 84);
-  --muted:                oklch(0.93 0.014 84);
-  --muted-foreground:     oklch(0.42 0.04 148);    /* #4A5C4E */
-  --accent:               oklch(0.64 0.11 55);     /* #C97B4A fruit */
-  --accent-foreground:    oklch(0.966 0.012 84);
-  --destructive:          oklch(0.577 0.245 27.325);
-  --border:               oklch(0.88 0.02 84);
-  --input:                oklch(0.88 0.02 84);
-  --ring:                 oklch(0.57 0.055 142);
-  --chart-1:              oklch(0.64 0.11 55);
-  --chart-2:              oklch(0.77 0.10 80);
-  --chart-3:              oklch(0.57 0.055 142);
-  --chart-4:              oklch(0.38 0.065 145);
-  --chart-5:              oklch(0.197 0.036 148);
-  --radius: 0.5rem;
-  --sidebar:              oklch(0.942 0.014 84);
-  --sidebar-foreground:   oklch(0.197 0.036 148);
-  --sidebar-primary:      oklch(0.38 0.065 145);
-  --sidebar-primary-foreground: oklch(0.966 0.012 84);
-  --sidebar-accent:       oklch(0.64 0.11 55);
-  --sidebar-accent-foreground: oklch(0.966 0.012 84);
-  --sidebar-border:       oklch(0.88 0.02 84);
-  --sidebar-ring:         oklch(0.57 0.055 142);
+  --background:           oklch(0.974 0.005 95);
+  --foreground:           oklch(0.18  0.005 120);
+  --card:                 oklch(0.96  0.004 95);
+  --card-foreground:      oklch(0.18  0.005 120);
+  --popover:              oklch(1     0     0);
+  --popover-foreground:   oklch(0.18  0.005 120);
+  --primary:              oklch(0.30  0.09  140);
+  --primary-foreground:   oklch(1     0     0);
+  --secondary:            oklch(0.36  0.07  140);
+  --secondary-foreground: oklch(1     0     0);
+  --muted:                oklch(0.94  0.004 95);
+  --muted-foreground:     oklch(0.42  0.01  120);
+  --accent:               oklch(0.30  0.09  140);
+  --accent-foreground:    oklch(1     0     0);
+  --destructive:          oklch(0.48  0.18  27);
+  --border:               oklch(0.81  0.01  120);
+  --input:                oklch(0.81  0.01  120);
+  --ring:                 oklch(0.36  0.07  140);
+  --radius:               0.125rem;
+  --sidebar:              oklch(0.96  0.004 95);
+  --sidebar-foreground:   oklch(0.18  0.005 120);
+  --sidebar-primary:      oklch(0.30  0.09  140);
+  --sidebar-primary-foreground: oklch(1   0     0);
+  --sidebar-accent:       oklch(0.30  0.09  140);
+  --sidebar-accent-foreground: oklch(1    0     0);
+  --sidebar-border:       oklch(0.81  0.01  120);
+  --sidebar-ring:         oklch(0.36  0.07  140);
+  --chart-1:              oklch(0.30  0.09  140);
+  --chart-2:              oklch(0.36  0.07  140);
+  --chart-3:              oklch(0.42  0.05  140);
+  --chart-4:              oklch(0.55  0.04  120);
+  --chart-5:              oklch(0.18  0.005 120);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+  button, input, select, textarea, [class*="shadcn"] {
+    box-shadow: none;
+  }
   body {
     @apply bg-background text-foreground;
-    font-family: var(--font-sans, system-ui, sans-serif);
+    font-family: var(--font-sans, Georgia, serif);
+    line-height: 1.7;
+    font-kerning: normal;
+    font-feature-settings: 'kern' 1, 'liga' 1;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading, Georgia, serif);
+    letter-spacing: -0.01em;
+    font-feature-settings: 'kern' 1, 'liga' 1;
   }
+  a {
+    color: var(--primary);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer utilities {
+  .rule-h       { border-top: 1px solid var(--color-rule); }
+  .rule-h-faint { border-top: 1px solid color-mix(in oklch, var(--color-rule) 50%, transparent); }
+  .annotation   {
+    font-family: var(--font-mono, sans-serif);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    color: var(--muted-foreground);
+    text-transform: uppercase;
+  }
+  /* Fluid display heading — use on hero h1 and large display text */
+  .text-display {
+    font-size: clamp(3rem, 5.5vw + 1.25rem, 6rem);
+  }
+  .mega-margin  { margin-block: 64px; }
 }

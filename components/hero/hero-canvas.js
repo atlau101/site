@@ -49,7 +49,7 @@ export function init(canvasId) {
   if (!canvas) return () => {};
   const ctx = canvas.getContext("2d");
 
-  const H   = 420;
+  let H     = canvas.clientHeight || 420;
   const R   = 120;
   // Cap DPR at 2: on 3× phones this halves backing-store pixels with no visible loss.
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -92,7 +92,7 @@ export function init(canvasId) {
     actx.scale(dpr, dpr);
     actx.clearRect(0, 0, totalW, totalH);
     actx.filter    = `blur(${SPRITE_BLUR}px)`;
-    actx.fillStyle = "#8A9E7A";
+    actx.fillStyle = "#C3C8BB";
 
     for (let i = 0; i < SPRITE_BUCKETS.length; i++) {
       const cx = i * spriteSize + spriteSize / 2;
@@ -109,8 +109,10 @@ export function init(canvasId) {
   let w = 0;
   function resize() {
     const newW = canvas.clientWidth;
-    if (newW === 0) return;
+    const newH = canvas.clientHeight;
+    if (newW === 0 || newH === 0) return;
     w = newW;
+    H = newH;
     canvas.width  = w * dpr;
     canvas.height = H * dpr;
     ctx.setTransform(1, 0, 0, 1, 0, 0);
@@ -246,7 +248,7 @@ export function init(canvasId) {
     }
 
     // 4. Draw — background
-    ctx.fillStyle = "#F5F0E8";
+    ctx.fillStyle = "#FAF9F5";
     ctx.fillRect(0, 0, w, H);
 
     // Pass A — noise dots via pre-blurred sprite atlas (no per-frame filter)
@@ -264,7 +266,7 @@ export function init(canvasId) {
     }
 
     // Pass B — signal dots: crisp, unfiltered arc
-    ctx.fillStyle = "#2D5016";
+    ctx.fillStyle = "#173809";
     for (let i = 0; i < n; i++) {
       const d = dots[i];
       if (d.t <= 0.01) continue;
@@ -310,8 +312,7 @@ export function init(canvasId) {
   function onVisibilityChange() { lastT = null; }
 
   // ─── Init ─────────────────────────────────────────────────────────────────────
-  canvas.style.height = H + "px";
-  resize();   // sets w, DPR, builds atlas, caches rect
+  resize();   // sets w, H, DPR, builds atlas, caches rect
   seedDots();
 
   addListener(canvas,   "mousemove",        onMouseMove);

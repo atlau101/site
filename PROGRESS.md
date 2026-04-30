@@ -8,31 +8,32 @@
 
 ## Current State
 
-The site lives in `site/`. The homepage scaffold is complete with real project data wired in. The hero renders a vanilla JS canvas animation (`hero-canvas.js`) via `components/hero/Hero.tsx`, which is wired into `app/page.tsx`. `HeroPlaceholder.tsx` has been deleted. `BranchingGraph.tsx` still exists in the repo but is no longer active.
+The "Curated Field Journal" design system (DESIGN.md) has been fully applied. The site uses Noto Serif for display and body, IBM Plex Mono for annotations/labels, cream paper (#FAF9F5) background, forest green (#173809) primary, and ruled-line separators throughout. All inline hex values have been removed from components — everything uses semantic tokens. Hero canvas recolored to match. BranchingGraph.tsx deleted. Project detail pages are the active next step.
 
 ### What's built
 
 | Area | Status | File(s) |
 |------|--------|---------|
-| Global layout, fonts | Done | `app/layout.tsx` |
+| Global layout/fonts | Done — Noto Serif + IBM Plex Mono via next/font | `app/layout.tsx` |
 | Navbar (sticky, scroll-aware) | Done | `components/sections/Nav.tsx` |
 | Hero placeholder (orb + text) | Deleted | — |
-| BranchingGraph animation | Retired (historical) | `components/hero/BranchingGraph.tsx` |
+| BranchingGraph animation | Deleted | — |
 | hero-canvas.js — "Reveal the Signal" | Live on homepage | `components/hero/hero-canvas.js` |
 | About strip | Done | `components/sections/AboutStrip.tsx` |
 | Featured project cards (Tier 1 × 3) | Done | `components/sections/FeaturedCard.tsx` |
+| Grouped featured card (Data Projects accordion) | Done 2026-04-15 | `components/sections/GroupedFeaturedCard.tsx` |
 | Project grid (Tier 2 × 6) | Done | `components/sections/ProjectGrid.tsx` |
 | Footer | Done | `components/sections/Footer.tsx` |
 | Homepage wiring | Done | `app/page.tsx` |
-| Design system master | Done | `design-system/andrew-lau-portfolio/MASTER.md` |
+| Design system master | Done — see DESIGN.md (MASTER.md deleted, was stale) | `DESIGN.md` |
 | Individual project pages | Not started | `app/projects/[slug]/` |
 
 ### Projects mapped
 
-**Tier 1 (Featured Cards):** Malloy Group · B2B Sales Pipeline Analytics · AUGMENT  
-**Tier 2 (Grid):** Fillmore Ecosystem · Uber India Analytics · Wildfire Proximity ML · LMU EMS Datathon · ChamberGPT · AI Investment Bubble
+**Tier 1 (Featured Cards):** Malloy Group · Data Projects (grouped: B2B Sales · Uber India · Wildfire ML) · ChamberGPT  
+**Tier 2 (Grid):** Fillmore Ecosystem · Vibe Coding (WIP) · LMU EMS Datathon · AI Investment Bubble
 
-- Note: Featured should be: ChamberGPT, MG, Something data related. Placeholder maybe LMU.
+- Tier 1 restructured 2026-04-15: Malloy Group · Data Projects · ChamberGPT. AUGMENT replaced by Vibe Coding (WIP) in Tier 2.
 
 ---
 
@@ -159,7 +160,7 @@ Content for all 9 projects exists as raw notes in `drive-exports/`. Each project
 |---------|-----------|----------|------------|
 | Malloy Group | Yes (`drive-exports/MALLOY GROUP/`) | No | No |
 | B2B Sales Analytics | Yes (`drive-exports/BUS315/`) | No | No |
-| AUGMENT | No (likely in Figma/Obsidian) | No | No |
+| Vibe Coding | WIP — no raw notes yet | No | No |
 | Fillmore Ecosystem | Yes (`drive-exports/BUSCAPSTONE/`) | No | No |
 | Uber India Analytics | Yes (`drive-exports/BUS340/`) | No | No |
 | Wildfire Proximity ML | Partial (`drive-exports/BUS411/`) | No | No |
@@ -177,7 +178,7 @@ Content for all 9 projects exists as raw notes in `drive-exports/`. Each project
 | BranchingGraph not wired to homepage | Moot — BranchingGraph retired | `app/page.tsx` |
 | Hero canvas sitting behind fixed Navbar (no top padding on main) | Fixed 2026-04-15 — `pt-16 sm:pt-20` added to `<main>` | `app/page.tsx` |
 | `HeroPlaceholder` was an unused infinite animation | Deleted | — |
-| Design system master uses different color palette than actual code | Noted | `design-system/MASTER.md` uses #18181B; code uses #1F2A23 etc. Align before project pages. |
+| Design system master uses different color palette than actual code | Fixed — DESIGN.md applied 2026-04-15 | `DESIGN.md` |
 
 ---
 
@@ -188,8 +189,36 @@ Content for all 9 projects exists as raw notes in `drive-exports/`. Each project
 | 1 | Homepage scaffold + real data | Done |
 | 2 | BranchingGraph prototype | Done (fixed) |
 | 3 | Hero visual quality pass — "Reveal the Signal" canvas | Done |
+| 3.5 | "Curated Field Journal" design system applied — Noto Serif + IBM Plex Mono, cream/forest palette, zero shadows, ruled lines, 2px radius | Done |
 | 4 | About section revision | After Phase 3 |
 | 5 | Project write-ups (9 projects) | Parallel / async |
 | 6 | Project page template + first 3 builds | After write-ups |
 | 7 | Remaining 6 project pages | After Phase 6 |
 | 8 | Final polish, performance, deploy | Last |
+
+---
+
+## Project Pages — Next Steps
+
+### Plan
+Build one template page at `app/projects/[slug]/page.tsx`, verify it looks right, then clone and replace content for each project.
+
+### Grouping on homepage
+Data projects should be grouped together. Proposed Tier 2 grouping:
+- **Data / Analytics cluster:** B2B Sales Analytics · Uber India Analytics · Wildfire Proximity ML · LMU EMS Datathon · AI Investment Bubble
+- \*\*Tier 2 remaining:\*\* Fillmore Ecosystem · Vibe Coding (WIP) · LMU EMS Datathon · AI Investment Bubble
+
+### Featured (Tier 1) — confirmed & implemented 2026-04-15
+Implemented: Malloy Group · Data Projects (grouped accordion) · ChamberGPT  
+Proposed: ChamberGPT · Malloy Group · [data project TBD]
+
+### Template structure (per page)
+```
+/projects/[slug]
+├── Hero: project title + category + year (large, left-aligned serif)
+├── Context strip: one-sentence problem framing
+├── Process section: what happened — honest, not polished
+├── Outcome section: what changed / what was learned
+├── Reflection callout: "what I'd do differently"
+├── Back arrow → homepage
+```

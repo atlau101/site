@@ -1,18 +1,23 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { Fraunces } from "next/font/google";
+import Script from "next/script";
+import { Newsreader, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import { Navbar } from "@/components/sections/Nav";
+import { PageTransition } from "./providers";
+import { MalloyShell } from "@/components/project/MalloyShell";
 
-const inter = Inter({
-  variable: "--font-inter",
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
-  axes: ["opsz", "SOFT", "WONK"],
+  weight: ["400", "500"],
   display: "swap",
 });
 
@@ -29,11 +34,16 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${fraunces.variable} h-full antialiased`}
+      className={`${newsreader.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        {children}
-      </body>
+        <Navbar />
+        <MalloyShell />
+        <PageTransition>{children}</PageTransition>
+              {/* impeccable-live-start */}
+<script src="http://localhost:8400/live.js"></script>
+{/* impeccable-live-end */}
+</body>
     </html>
   );
 }

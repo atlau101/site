@@ -9,78 +9,55 @@ export function Hero() {
   useEffect(() => {
     let destroy: (() => void) | undefined;
     (async () => {
-      const mod = await import("./hero-canvas.js");
+      const mod = await import("./hero-graph.js");
       destroy = mod.init("hero-scatter-canvas");
     })();
     return () => destroy?.();
   }, []);
 
   return (
-    <section
-      className="relative w-full overflow-hidden"
-      style={{ backgroundColor: "#F5F0E8" }}
-    >
-      {/* Canvas background */}
+    <section className="relative w-full min-h-[85vh] bg-background">
+      {/* Canvas background — fills full section */}
       <canvas
         id="hero-scatter-canvas"
         ref={canvasRef}
-        className="block w-full"
-        style={{ height: 420 }}
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full block"
       />
 
-      {/* Text overlay — bottom-left, absolutely positioned over canvas */}
-      <div className="absolute inset-0 z-10 flex flex-col justify-end px-6 sm:px-8 lg:px-12 pb-12 pointer-events-none">
-        <div className="max-w-7xl w-full mx-auto">
+      {/* Text overlay */}
+      <div className="absolute inset-0 z-10 flex flex-col justify-between px-6 sm:px-8 lg:px-12 py-16 md:py-24 pointer-events-none">
+        <div className="max-w-7xl w-full mx-auto flex flex-col justify-between h-full flex-1">
+          {/* Name — top left */}
           <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-sm tracking-widest uppercase mb-5"
-            style={{ color: "#C97B4A" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="font-heading italic text-lg text-foreground"
           >
-            Problem Solver · Analyst · Tinkerer
+            Andrew Lau
           </motion.p>
 
+          {/* CTA heading — center */}
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.55, ease: "easeOut" }}
-            className="text-6xl sm:text-7xl md:text-8xl lg:text-[7rem] font-medium leading-[0.9] tracking-tight"
-            style={{
-              color: "#1F2A23",
-              fontFamily: "var(--font-fraunces)",
-            }}
+            transition={{ duration: 0.8, delay: 0.45, ease: "easeOut" }}
+            className="font-heading font-semibold text-primary my-8 md:my-12 max-w-full md:max-w-[55%]"
+            style={{ letterSpacing: '-0.009em', fontSize: 'clamp(1.875rem, 4vw + 1rem, 4.5rem)', lineHeight: 1.05 }}
           >
-            Andrew
-            <br />
-            Lau.
+            I untangle ambiguous questions and turn them into something actionable.
           </motion.h1>
 
+          {/* Role — bottom left */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 1.0 }}
-            className="mt-6 text-lg md:text-xl max-w-sm"
-            style={{ color: "#4A5C4E" }}
+            transition={{ duration: 0.6, delay: 0.9 }}
+            className="annotation"
           >
-            Prefers the problems where the question isn&apos;t obvious yet.
+            —— PROBLEM SOLVER · ANALYST · TINKERER
           </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 1.5 }}
-            className="mt-8 flex items-center gap-2 text-sm"
-            style={{ color: "#6B8A66" }}
-          >
-            <span>Scroll to explore</span>
-            <motion.span
-              animate={{ y: [0, 4, 0] }}
-              transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-            >
-              ↓
-            </motion.span>
-          </motion.div>
         </div>
       </div>
     </section>
