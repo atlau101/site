@@ -13,7 +13,7 @@ export function Footer({ name = "Andrew Lau" }: FooterProps) {
     },
     {
       label: "LINKEDIN",
-      display: "atlau04",
+      display: "atlau101",
       href: "https://www.linkedin.com/in/atlau101/",
     },
     {

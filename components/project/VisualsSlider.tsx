@@ -52,7 +52,7 @@ export const VisualsSlider: React.FC<VisualsSliderProps> = ({ visuals }) => {
         </button>
 
         <div
-          className="relative w-96 sm:w-[30rem] aspect-video bg-paper-dim overflow-hidden"
+          className="relative flex-1 min-w-0 aspect-video bg-paper-dim overflow-hidden"
           style={{ transition: 'opacity 0.15s ease', opacity: fading ? 0 : 1 }}
         >
           <Image
@@ -60,7 +60,7 @@ export const VisualsSlider: React.FC<VisualsSliderProps> = ({ visuals }) => {
             src={current.src}
             alt={current.caption}
             fill
-            sizes="480px"
+            sizes="(max-width: 640px) calc(100vw - 112px), (max-width: 1024px) calc(100vw - 200px), 800px"
             className="object-contain"
           />
         </div>
