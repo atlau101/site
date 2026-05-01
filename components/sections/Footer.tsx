@@ -1,10 +1,29 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface FooterProps {
   name?: string;
 }
 
+type FormStatus = "idle" | "submitting" | "success" | "error";
+
 export function Footer({ name = "Andrew Lau" }: FooterProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [status, setStatus] = useState<FormStatus>("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [form, setForm] = useState({ name: "", email: "", message: "", _hp: "" });
+  const formRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isOpen && formRef.current) {
+      setTimeout(() => {
+        formRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }, 50); // small delay lets framer-motion start the height animation first
+    }
+  }, [isOpen]);
+
   const contactRows = [
     {
       label: "EMAIL",
@@ -22,6 +41,38 @@ export function Footer({ name = "Andrew Lau" }: FooterProps) {
       href: "https://github.com/atlau101",
     },
   ];
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setStatus("submitting");
+    setErrorMsg("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+
+      if (!res.ok || !data.ok) {
+        throw new Error(data.error ?? "Something went wrong");
+      }
+
+      setStatus("success");
+      setTimeout(() => {
+        setIsOpen(false);
+        setStatus("idle");
+        setForm({ name: "", email: "", message: "", _hp: "" });
+      }, 2500);
+    } catch (err) {
+      setStatus("error");
+      setErrorMsg(err instanceof Error ? err.message : "Something went wrong");
+    }
+  }
+
+  const inputBase =
+    "w-full bg-transparent border-b border-border font-heading text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-foreground transition-colors duration-150 py-2";
 
   return (
     <footer id="contact" className="w-full bg-paper-dim text-foreground">
@@ -65,7 +116,7 @@ export function Footer({ name = "Andrew Lau" }: FooterProps) {
             work together, I&apos;d love to chat.
           </p>
 
-          {/* Contact rows */}
+          {/* Contact rows + email form */}
           <div className="flex flex-col min-w-[260px]">
             {contactRows.map((row, i) => (
               <a
@@ -73,8 +124,9 @@ export function Footer({ name = "Andrew Lau" }: FooterProps) {
                 href={row.href}
                 target={row.href.startsWith("mailto") ? undefined : "_blank"}
                 rel="noopener noreferrer"
-                className={`flex items-center justify-between gap-8 py-4 no-underline group transition-opacity duration-200 hover:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded-sm ${i < contactRows.length - 1 ? "border-b border-border" : ""
-                  }`}
+                className={`flex items-center justify-between gap-8 py-4 no-underline group transition-opacity duration-200 hover:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded-sm ${
+                  i < contactRows.length - 1 ? "border-b border-border" : ""
+                }`}
               >
                 <span className="annotation text-xs text-muted-foreground tracking-widest uppercase shrink-0">
                   {row.label}
@@ -84,6 +136,107 @@ export function Footer({ name = "Andrew Lau" }: FooterProps) {
                 </span>
               </a>
             ))}
+
+            {/* Send email toggle */}
+            <div className="mt-6">
+              {status !== "success" ? (
+                <button
+                  onClick={() => setIsOpen((v) => !v)}
+                  className="annotation text-xs tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors duration-150 focus-visible:outline-none"
+                >
+                  {isOpen ? "— Close" : "Send me an email →"}
+                </button>
+              ) : (
+                <p className="annotation text-xs tracking-widest uppercase text-muted-foreground">
+                  Thanks — I&apos;ll be in touch.
+                </p>
+              )}
+
+              <AnimatePresence>
+                {isOpen && status !== "success" && (
+                  <motion.div
+                    ref={formRef}
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                    className="overflow-hidden"
+                  >
+                    <form onSubmit={handleSubmit} className="pt-6 flex flex-col gap-5">
+                      {/* Honeypot — hidden from real users */}
+                      <input
+                        type="text"
+                        name="_hp"
+                        value={form._hp}
+                        onChange={(e) => setForm((f) => ({ ...f, _hp: e.target.value }))}
+                        tabIndex={-1}
+                        aria-hidden="true"
+                        className="hidden"
+                      />
+
+                      <div className="flex flex-col gap-1">
+                        <label className="annotation text-xs tracking-widest uppercase text-muted-foreground">
+                          Name
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          maxLength={200}
+                          value={form.name}
+                          onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                          placeholder="Your name"
+                          className={inputBase}
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1">
+                        <label className="annotation text-xs tracking-widest uppercase text-muted-foreground">
+                          Email
+                        </label>
+                        <input
+                          type="email"
+                          required
+                          maxLength={320}
+                          value={form.email}
+                          onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
+                          placeholder="you@example.com"
+                          className={inputBase}
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1">
+                        <label className="annotation text-xs tracking-widest uppercase text-muted-foreground">
+                          Message
+                        </label>
+                        <textarea
+                          required
+                          maxLength={5000}
+                          rows={4}
+                          value={form.message}
+                          onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
+                          placeholder="What would you like to discuss?"
+                          className={`${inputBase} resize-none`}
+                        />
+                      </div>
+
+                      {status === "error" && (
+                        <p className="annotation text-xs text-red-600 normal-case">
+                          {errorMsg}
+                        </p>
+                      )}
+
+                      <button
+                        type="submit"
+                        disabled={status === "submitting"}
+                        className="annotation text-xs tracking-widest uppercase text-foreground border border-border py-3 px-4 hover:bg-foreground hover:text-background transition-colors duration-150 focus-visible:outline-none disabled:opacity-40 disabled:cursor-not-allowed"
+                      >
+                        {status === "submitting" ? "Sending…" : "Send →"}
+                      </button>
+                    </form>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
         </div>
       </div>

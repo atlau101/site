@@ -33,7 +33,13 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="font-heading italic text-lg text-foreground"
+            className="font-heading italic text-foreground"
+            style={{
+              fontSize: 'clamp(1.75rem, 3.5vw + 0.75rem, 3.5rem)',
+              fontWeight: 400,
+              letterSpacing: '-0.015em',
+              lineHeight: 1,
+            }}
           >
             Andrew Lau
           </motion.p>
