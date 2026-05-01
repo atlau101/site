@@ -4,6 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { ViewTransition } from "react";
 
 interface FeaturedCardProps {
   title: string;
@@ -26,6 +27,8 @@ export const FeaturedCard: React.FC<FeaturedCardProps> = ({
   imageSrc,
   imageAlt,
 }) => {
+  const slug = href.split("/").pop() ?? "card";
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 14 }}
@@ -33,22 +36,24 @@ export const FeaturedCard: React.FC<FeaturedCardProps> = ({
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
     >
-    <Link href={href} className="block w-full cursor-pointer group no-underline">
+    <Link href={href} transitionTypes={["forward"]} className="block w-full cursor-pointer group no-underline">
       <div className="bg-card overflow-hidden">
         <div className="bg-popover grid md:grid-cols-3 gap-0">
           {/* Left — content (2/3) */}
           <div className="md:col-span-2 flex flex-col justify-center space-y-5 p-8 md:p-12">
             <span className="annotation text-muted-foreground">{category}</span>
 
-            <h3 className="font-heading text-3xl md:text-4xl font-medium leading-tight text-foreground group-hover:text-primary transition-colors duration-300">
-              {title}
-              <span
-                className="inline-block ml-2 opacity-0 -translate-x-1 group-hover:opacity-100 group-focus-within:opacity-100 group-hover:translate-x-0 group-focus-within:translate-x-0 transition-all duration-200 font-normal"
-                aria-hidden="true"
-              >
-                →
-              </span>
-            </h3>
+            <ViewTransition name={`project-title-${slug}`}>
+              <h3 className="font-heading text-3xl md:text-4xl font-medium leading-tight text-foreground group-hover:text-primary transition-colors duration-300">
+                {title}
+                <span
+                  className="inline-block ml-2 opacity-0 -translate-x-1 group-hover:opacity-100 group-focus-within:opacity-100 group-hover:translate-x-0 group-focus-within:translate-x-0 transition-all duration-200 font-normal"
+                  aria-hidden="true"
+                >
+                  →
+                </span>
+              </h3>
+            </ViewTransition>
 
             <p className="text-base md:text-lg text-foreground/75">
               {outcome}

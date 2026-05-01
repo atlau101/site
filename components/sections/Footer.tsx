@@ -15,12 +15,14 @@ export function Footer({ name = "Andrew Lau" }: FooterProps) {
   const [errorMsg, setErrorMsg] = useState("");
   const [form, setForm] = useState({ name: "", email: "", message: "", _hp: "" });
   const formRef = useRef<HTMLDivElement>(null);
+  const nameInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (isOpen && formRef.current) {
+    if (isOpen) {
       setTimeout(() => {
         formRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
-      }, 50); // small delay lets framer-motion start the height animation first
+        nameInputRef.current?.focus();
+      }, 50);
     }
   }, [isOpen]);
 
@@ -60,11 +62,7 @@ export function Footer({ name = "Andrew Lau" }: FooterProps) {
       }
 
       setStatus("success");
-      setTimeout(() => {
-        setIsOpen(false);
-        setStatus("idle");
-        setForm({ name: "", email: "", message: "", _hp: "" });
-      }, 2500);
+      setForm({ name: "", email: "", message: "", _hp: "" });
     } catch (err) {
       setStatus("error");
       setErrorMsg(err instanceof Error ? err.message : "Something went wrong");
@@ -142,14 +140,22 @@ export function Footer({ name = "Andrew Lau" }: FooterProps) {
               {status !== "success" ? (
                 <button
                   onClick={() => setIsOpen((v) => !v)}
-                  className="annotation text-xs tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors duration-150 focus-visible:outline-none"
+                  className="annotation text-xs tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors duration-150 focus-visible:outline-none focus-visible:underline"
                 >
-                  {isOpen ? "— Close" : "Send me an email →"}
+                  {isOpen ? "Close" : "Send me an email →"}
                 </button>
               ) : (
-                <p className="annotation text-xs tracking-widest uppercase text-muted-foreground">
-                  Thanks — I&apos;ll be in touch.
-                </p>
+                <div className="flex flex-col gap-2">
+                  <p className="annotation text-xs tracking-widest uppercase text-muted-foreground">
+                    Thanks. I&apos;ll be in touch.
+                  </p>
+                  <button
+                    onClick={() => { setStatus("idle"); setIsOpen(false); }}
+                    className="annotation text-xs tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors duration-150 focus-visible:outline-none focus-visible:underline self-start"
+                  >
+                    Close
+                  </button>
+                </div>
               )}
 
               <AnimatePresence>
@@ -175,10 +181,12 @@ export function Footer({ name = "Andrew Lau" }: FooterProps) {
                       />
 
                       <div className="flex flex-col gap-1">
-                        <label className="annotation text-xs tracking-widest uppercase text-muted-foreground">
+                        <label htmlFor="contact-name" className="annotation text-xs tracking-widest uppercase text-muted-foreground">
                           Name
                         </label>
                         <input
+                          ref={nameInputRef}
+                          id="contact-name"
                           type="text"
                           required
                           maxLength={200}
@@ -190,10 +198,11 @@ export function Footer({ name = "Andrew Lau" }: FooterProps) {
                       </div>
 
                       <div className="flex flex-col gap-1">
-                        <label className="annotation text-xs tracking-widest uppercase text-muted-foreground">
+                        <label htmlFor="contact-email" className="annotation text-xs tracking-widest uppercase text-muted-foreground">
                           Email
                         </label>
                         <input
+                          id="contact-email"
                           type="email"
                           required
                           maxLength={320}
@@ -205,10 +214,11 @@ export function Footer({ name = "Andrew Lau" }: FooterProps) {
                       </div>
 
                       <div className="flex flex-col gap-1">
-                        <label className="annotation text-xs tracking-widest uppercase text-muted-foreground">
+                        <label htmlFor="contact-message" className="annotation text-xs tracking-widest uppercase text-muted-foreground">
                           Message
                         </label>
                         <textarea
+                          id="contact-message"
                           required
                           maxLength={5000}
                           rows={4}
@@ -220,15 +230,23 @@ export function Footer({ name = "Andrew Lau" }: FooterProps) {
                       </div>
 
                       {status === "error" && (
-                        <p className="annotation text-xs text-red-600 normal-case">
-                          {errorMsg}
-                        </p>
+                        <div className="flex flex-col gap-1" role="alert">
+                          <p className="annotation text-xs text-destructive normal-case">
+                            {errorMsg || "Something went wrong. Try again or email me directly."}
+                          </p>
+                          <a
+                            href="mailto:andrew.t.lau101@gmail.com"
+                            className="annotation text-xs text-muted-foreground underline normal-case hover:text-foreground transition-colors duration-150"
+                          >
+                            andrew.t.lau101@gmail.com
+                          </a>
+                        </div>
                       )}
 
                       <button
                         type="submit"
                         disabled={status === "submitting"}
-                        className="annotation text-xs tracking-widest uppercase text-foreground border border-border py-3 px-4 hover:bg-foreground hover:text-background transition-colors duration-150 focus-visible:outline-none disabled:opacity-40 disabled:cursor-not-allowed"
+                        className="annotation text-xs tracking-widest uppercase text-foreground border border-border py-3 px-4 hover:bg-foreground hover:text-background transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-40 disabled:cursor-not-allowed"
                       >
                         {status === "submitting" ? "Sending…" : "Send →"}
                       </button>

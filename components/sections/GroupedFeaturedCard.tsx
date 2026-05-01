@@ -3,6 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
+import { ViewTransition } from "react";
 import { ChevronDown } from "lucide-react";
 
 export interface SubProject {
@@ -65,9 +66,17 @@ export const GroupedFeaturedCard: React.FC<GroupedFeaturedCardProps> = ({
           <span className="annotation text-muted-foreground">{category}</span>
 
           <div className="flex items-start justify-between gap-6">
-            <h3 className="font-heading text-3xl md:text-4xl font-medium leading-tight text-foreground flex-1">
-              {title}
-            </h3>
+            {href ? (
+              <ViewTransition name={`project-group-${href.split("/").pop()}`}>
+                <h3 className="font-heading text-3xl md:text-4xl font-medium leading-tight text-foreground flex-1">
+                  {title}
+                </h3>
+              </ViewTransition>
+            ) : (
+              <h3 className="font-heading text-3xl md:text-4xl font-medium leading-tight text-foreground flex-1">
+                {title}
+              </h3>
+            )}
             <div className="pt-2 flex-shrink-0">
               <motion.div
                 animate={{ rotate: isOpen ? 180 : 0 }}
@@ -122,6 +131,7 @@ export const GroupedFeaturedCard: React.FC<GroupedFeaturedCardProps> = ({
                     <motion.div key="hub-link" variants={rowVariants}>
                       <Link
                         href={href}
+                        transitionTypes={["forward"]}
                         className="flex items-center justify-between px-8 md:px-12 py-6 bg-paper-low hover:bg-paper-container transition-colors duration-200 group no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
                       >
                         <div className="flex flex-col gap-1">
@@ -138,26 +148,32 @@ export const GroupedFeaturedCard: React.FC<GroupedFeaturedCardProps> = ({
                       </Link>
                     </motion.div>
                   )}
-                  {projects.map((project) => (
-                    <motion.div key={project.href} variants={rowVariants}>
-                      <Link
-                        href={project.href}
-                        className="flex items-center justify-between px-8 md:px-12 py-5 hover:bg-paper-container transition-colors duration-200 group no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
-                      >
-                        <div className="flex flex-col gap-1">
-                          <span className="font-heading text-lg md:text-xl font-medium text-foreground group-hover:underline underline-offset-2">
-                            {project.title}
+                  {projects.map((project) => {
+                    const pSlug = project.href.split("/").pop() ?? project.href;
+                    return (
+                      <motion.div key={project.href} variants={rowVariants}>
+                        <Link
+                          href={project.href}
+                          transitionTypes={["forward"]}
+                          className="flex items-center justify-between px-8 md:px-12 py-5 hover:bg-paper-container transition-colors duration-200 group no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
+                        >
+                          <div className="flex flex-col gap-1">
+                            <ViewTransition name={`project-title-${pSlug}`}>
+                              <span className="font-heading text-lg md:text-xl font-medium text-foreground group-hover:underline underline-offset-2">
+                                {project.title}
+                              </span>
+                            </ViewTransition>
+                            <span className="annotation text-muted-foreground">
+                              {project.category}
+                            </span>
+                          </div>
+                          <span className="text-foreground/40 group-hover:text-foreground transition-colors ml-4 flex-shrink-0">
+                            →
                           </span>
-                          <span className="annotation text-muted-foreground">
-                            {project.category}
-                          </span>
-                        </div>
-                        <span className="text-foreground/40 group-hover:text-foreground transition-colors ml-4 flex-shrink-0">
-                          →
-                        </span>
-                      </Link>
-                    </motion.div>
-                  ))}
+                        </Link>
+                      </motion.div>
+                    );
+                  })}
                 </motion.div>
               </div>
             </motion.div>

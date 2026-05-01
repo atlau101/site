@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ViewTransition } from "react";
 import { Footer } from "@/components/sections/Footer";
 
 const PROJECTS = [
@@ -38,6 +39,7 @@ export default function MalloyHubPage() {
             <div className="mb-8">
               <Link
                 href="/#work"
+                transitionTypes={["backward"]}
                 className="annotation text-muted-foreground hover:text-foreground transition-colors duration-200 no-underline"
               >
                 ← Back to work
@@ -45,9 +47,11 @@ export default function MalloyHubPage() {
             </div>
 
             <div className="rule-h pb-16">
-              <p className="annotation text-muted-foreground mb-6">
-                THE MALLOY GROUP · 2024–2025 · CONSULTING
-              </p>
+              <ViewTransition name="project-group-malloy">
+                <p className="annotation text-muted-foreground mb-6">
+                  THE MALLOY GROUP · 2024–2025 · CONSULTING
+                </p>
+              </ViewTransition>
 
               <h1
                 className="font-heading text-display font-semibold leading-[1.05] text-primary mb-10"
@@ -93,45 +97,51 @@ export default function MalloyHubPage() {
               <div className="border-b border-border" />
 
               <div>
-                {PROJECTS.map((project) => (
-                  <Link
-                    key={project.href}
-                    href={project.href}
-                    className="group flex items-start gap-7 md:gap-10 py-10 border-b border-border/50 hover:bg-paper-low transition-colors duration-200 no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                  >
-                    {/* Oversized number — typographic anchor */}
-                    <span
-                      className="font-heading text-5xl md:text-6xl font-semibold leading-none tabular-nums shrink-0 pt-1 text-primary/20 group-hover:text-primary/50 transition-colors duration-200"
-                      style={{ width: "3rem" }}
-                      aria-hidden="true"
+                {PROJECTS.map((project) => {
+                  const pSlug = project.href.split("/").pop() ?? project.href;
+                  return (
+                    <Link
+                      key={project.href}
+                      href={project.href}
+                      transitionTypes={["forward"]}
+                      className="group flex items-start gap-7 md:gap-10 py-10 border-b border-border/50 hover:bg-paper-low transition-colors duration-200 no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     >
-                      {project.num}
-                    </span>
+                      {/* Oversized number — typographic anchor */}
+                      <span
+                        className="font-heading text-5xl md:text-6xl font-semibold leading-none tabular-nums shrink-0 pt-1 text-primary/20 group-hover:text-primary/50 transition-colors duration-200"
+                        style={{ width: "3rem" }}
+                        aria-hidden="true"
+                      >
+                        {project.num}
+                      </span>
 
-                    {/* Content */}
-                    <div className="flex-1 min-w-0 space-y-2.5">
-                      <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3 flex-wrap">
-                        <h3 className="font-heading text-xl md:text-2xl font-medium text-foreground group-hover:underline underline-offset-2 decoration-foreground/30 leading-snug">
-                          {project.title}
-                        </h3>
-                        <span className="annotation text-muted-foreground shrink-0">
-                          {project.client} · {project.date}
-                        </span>
+                      {/* Content */}
+                      <div className="flex-1 min-w-0 space-y-2.5">
+                        <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3 flex-wrap">
+                          <ViewTransition name={`project-title-${pSlug}`}>
+                            <h3 className="font-heading text-xl md:text-2xl font-medium text-foreground group-hover:underline underline-offset-2 decoration-foreground/30 leading-snug">
+                              {project.title}
+                            </h3>
+                          </ViewTransition>
+                          <span className="annotation text-muted-foreground shrink-0">
+                            {project.client} · {project.date}
+                          </span>
+                        </div>
+                        <p className="text-base text-foreground/65 leading-relaxed max-w-[58ch]">
+                          {project.summary}
+                        </p>
                       </div>
-                      <p className="text-base text-foreground/65 leading-relaxed max-w-[58ch]">
-                        {project.summary}
-                      </p>
-                    </div>
 
-                    {/* Arrow */}
-                    <span
-                      className="font-heading text-xl text-foreground/20 group-hover:text-foreground/60 group-hover:translate-x-1 transition-all duration-200 shrink-0 pt-2"
-                      aria-hidden="true"
-                    >
-                      →
-                    </span>
-                  </Link>
-                ))}
+                      {/* Arrow */}
+                      <span
+                        className="font-heading text-xl text-foreground/20 group-hover:text-foreground/60 group-hover:translate-x-1 transition-all duration-200 shrink-0 pt-2"
+                        aria-hidden="true"
+                      >
+                        →
+                      </span>
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           </div>

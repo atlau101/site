@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { ViewTransition } from "react";
 import { ProjectData } from "@/lib/projects/types";
 
 interface ProjectHeroProps {
@@ -16,6 +17,7 @@ export const ProjectHero: React.FC<ProjectHeroProps> = ({ project }) => {
         <div className="mb-8">
           <Link
             href="/#work"
+            transitionTypes={["backward"]}
             className="annotation text-muted-foreground hover:text-foreground transition-colors duration-200 no-underline"
           >
             ← Back to work
@@ -24,15 +26,17 @@ export const ProjectHero: React.FC<ProjectHeroProps> = ({ project }) => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 rule-h pb-12">
           {/* Left column: Project title */}
           <div className="md:col-span-7">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-              className="font-heading text-display font-semibold leading-[1.05] text-primary"
-              style={{ letterSpacing: "-0.02em" }}
-            >
-              {project.title}
-            </motion.h1>
+            <ViewTransition name={`project-title-${project.slug}`}>
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+                className="font-heading text-display font-semibold leading-[1.05] text-primary"
+                style={{ letterSpacing: "-0.02em" }}
+              >
+                {project.title}
+              </motion.h1>
+            </ViewTransition>
           </div>
 
           {/* Right column: Metadata sidebar */}

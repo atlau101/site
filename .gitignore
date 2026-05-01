@@ -3,6 +3,9 @@
 .env
 .env.local
 
+.playwright 
+.playwright-cli
+oldprogress.md
 
 # dependencies
 /node_modules
