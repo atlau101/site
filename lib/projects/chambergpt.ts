@@ -9,8 +9,9 @@ export const chambergptProject: ProjectData = {
   tagline: 'A member/guest-facing support chatbot for the SF Chamber of Commerce, built on Voiceflow with $0 budget.',
   description: `Led an end-to-end project for the San Francisco Chamber of Commerce's Business Development team, building a member & guest-facing chatbot designed to answer questions across four knowledge domains: General Services, Marketing, Small Business Development, and Public Policy Advocacy. The bot was projected to reduce inbound inquiries by 20–30% and increase membership conversion by 5–10%, all on a zero budget. I also developed a detailed handoff memo for whoever inherited the project, covering full workflow documentation, known issues, platform limitations, and future ideas.`,
   outputs: [
-    { label: 'Target Impact', value: '20–30% reduction in inbound inquiries' },
-    { label: 'Projected Conversion', value: '5–10% increase in membership' },
+    { label: 'Support Coverage', value: '4 recurring member-service domains in one bot flow' },
+    { label: 'Projected Inquiry Deflection', value: '20–30% fewer repetitive inbound questions' },
+    { label: 'Projected Membership Lift', value: '5–10% increase in membership conversion' },
   ],
   visuals: [
     {

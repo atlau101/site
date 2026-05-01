@@ -9,9 +9,9 @@ export const bus315Project: ProjectData = {
   tagline: 'Applied k-prototypes clustering to a mock B2B CRM to surface pipeline segments from messy, mixed-type data.',
   description: `For my Data Mining course, I applied three core techniques — classification, clustering, and association rule mining — to a domain I actually wanted to work in: B2B SaaS sales. The dataset was a mock CRM with four relational tables (leads, accounts, products, sales agents) that I merged into a single analysis-ready master table using R. The bulk of the work was data engineering: catching key discrepancies, handling NAs intelligently rather than just dropping rows, and engineering derived features like \`days_to_close\` and binary missing-value flags so the clustering algorithm could run without throwing errors. I ran k-prototypes clustering — chosen over standard k-means because the dataset had both numeric and categorical variables — landed on k=5 as the optimal cluster size, and mapped aggregate profiles for each cluster. The dataset was mock, the scale was modest, and this was a class project — but it's an honest demonstration of data thinking applied to a problem I genuinely care about.`,
   outputs: [
-    { label: 'Tables Merged', value: '4 relational CRM tables' },
-    { label: 'Optimal Clusters', value: 'k=5' },
-    { label: 'Within-Cluster SS', value: '116B → 88B (k=3 to k=5)' },
+    { label: 'Sales Motion', value: 'Mapped the full B2B sales motion from prospecting through close' },
+    { label: 'Pipeline Segmentation', value: '5 distinct deal/customer segments surfaced from CRM behavior and firmographics' },
+    { label: 'Business Use', value: 'Built to support lead prioritization, sales cadence, and cross-sell planning' },
   ],
   lessons: [
     {

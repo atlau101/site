@@ -9,9 +9,9 @@ export const uberAnalyticsProject: ProjectData = {
   tagline: 'Interactive Tableau dashboard testing three business hypotheses against Uber India ride data — two confirmed, one rejected.',
   description: `Built an interactive Tableau dashboard to analyze Uber India ride data, framed around three testable business hypotheses: whether driver wait time drives cancellations, whether premium vehicles generate higher booking values and ratings, and whether digital payments dominate revenue. All three produced definitive answers — two confirmed, one rejected. The final dashboard was published to Tableau Public with vehicle-type and payment-method filters. The most important finding came from the rejected hypothesis: premium vehicles didn't outperform. UberXL had the lowest typical booking values of any tier, and customer ratings were effectively flat across all vehicle types. The visualization that surfaced this also went through the most revision — and catching that wrong chart was where the real analytical work happened.`,
   outputs: [
-    { label: 'Hypotheses Tested', value: '3 (2 confirmed, 1 rejected)' },
-    { label: 'Max Wait Threshold', value: '15.1 min cancellation cliff' },
-    { label: 'UPI Revenue', value: '~$23M+ (dominant payment method)' },
+    { label: 'Ride Value Visualized', value: 'Rs51.8M in bookings across the analyzed rides' },
+    { label: 'Business Questions Framed', value: '3 decision-oriented views built from one ride dataset' },
+    { label: 'Operational Risk Isolated', value: 'Cancellation threshold identified at the trip level (15.1 min)' },
   ],
   lessons: [
     {

@@ -9,10 +9,9 @@ export const wildfireMLProject: ProjectData = {
   tagline: 'Survival analysis predicting the probability a wildfire reaches an evacuation zone across four time horizons, from just 5 hours of early perimeter data.',
   description: `Performed a survival analysis in a Kaggle datathon, predicting the probability that a wildfire comes within 5km of an evacuation zone across four time horizons (12h, 24h, 48h, 72h) using early fire perimeter data from the first 5 hours after ignition. The dataset had 30+ features — fire growth metrics, centroid movement and direction, distance dynamics relative to evac zones, and temporal reliability flags marking which fires had sparse or unreliable observations. The outcome was right-censored: fires that didn't reach an evac zone within 72 hours had unknown time-to-hit values. My team's best score was 0.96157, ranking 627 out of 1,256. Not an impressive score — but the lessons from this project have been among the most durable ones I've picked up.`,
   outputs: [
-    { label: 'Competition Score', value: '0.96157' },
-    { label: 'Rank', value: '627 / 1,256' },
-    { label: 'Features', value: '30+ across 6 categories' },
-    { label: 'Time Horizons', value: '12h, 24h, 48h, 72h' },
+    { label: 'Decision Window', value: 'Forecasted risk 12–72 hours out from just 5 hours of fire data' },
+    { label: 'Prediction Target', value: 'Probability a fire reaches within 5 km of an evacuation zone' },
+    { label: 'Use Case', value: 'Supports earlier evacuation-risk triage and resource prioritization' },
   ],
   lessons: [
     {

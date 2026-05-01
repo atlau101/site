@@ -9,10 +9,9 @@ export const lmuDatathonProject: ProjectData = {
   tagline: 'A 4-hour datathon on EMS meal-break compliance that turned into one of my clearest lessons on scope, dependencies, and baseline-first execution.',
   description: `Participated in LMU's datathon, where teams had 4 hours to analyze an air medical transport company's operations and answer a board-level question: if California meal-break requirements were enforced for 24-hour shift nurses, how often would the company be in violation, and what would reassignment do to response times? We moved fast enough to clean the data, characterize base-level operations, estimate break-violation exposure, and frame a reassignment scenario. The more durable value, though, came from the post-mortem. This project gave me one of the cleanest examples of how decent instincts and real effort can still create avoidable drag when the approach is wrong.`,
   outputs: [
-    { label: 'Time Limit', value: '4 hours' },
-    { label: 'Baseline Violation Rate', value: '8.5% of calls' },
-    { label: 'Recommended Scenario', value: 'Hybrid staggered breaks + rerouting' },
-    { label: 'Main Takeaway', value: 'Baseline first, branches second, dependencies last' },
+    { label: 'Time Constraint', value: '4 hours from raw data to final recommendation' },
+    { label: 'Durable Lessons', value: '3 takeaways: baseline first, remove dependencies, branch later' },
+    { label: 'Peak Unavailability', value: 'Cut from 100% to 33% in our recommendations' },
   ],
   lessons: [
     {

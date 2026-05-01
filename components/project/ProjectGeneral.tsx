@@ -68,7 +68,7 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
                 key={idx}
                 className={`py-6 ${idx > 0 ? 'border-t border-rule/50 md:border-t-0 md:pl-8' : ''}`}
               >
-                <p className="annotation text-muted-foreground mb-2">
+                <p className="font-heading text-sm md:text-base font-medium text-muted-foreground mb-2">
                   {output.label}
                 </p>
                 <p className="font-heading text-lg md:text-xl font-normal italic text-foreground">

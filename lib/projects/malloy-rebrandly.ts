@@ -9,9 +9,9 @@ export const malloyRebrandlyProject: ProjectData = {
   tagline: 'A 28-page competitive analysis for Rebrandly, a link-management SaaS — evaluating market position against 6 competitors and delivering brand repositioning recommendations.',
   description: `Evaluated Rebrandly's market position against 6 competitors using an 8-point rubric covering core features, usability, pricing, and SEO health (keyword decay, backlink quality). Deliverable: a 28-page Canva research deck with a market overview, SWOT analysis, and brand positioning recommendations. This was my first client-facing project — prior, everything I'd done was coursework or personal projects with no real stakes.`,
   outputs: [
-    { label: 'Competitors Analyzed', value: '6 tools across the link-management category' },
-    { label: 'Rubric', value: '8-point weighted framework; Pricing & Usability weighted 30% each' },
-    { label: 'Deliverable', value: '28-page research deck with SWOT + positioning recommendations' },
+    { label: 'Recommendation Tracks', value: '3 high-priority tracks: pricing, UX, and SEO' },
+    { label: 'High-Impact Fixes', value: 'Pricing page restructure, dashboard simplification, and backlink recovery' },
+    { label: 'Strategic Direction', value: 'Shift from generic link tooling toward a clearer premium/security story' },
   ],
   visuals: [
     {

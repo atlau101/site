@@ -9,9 +9,9 @@ export const malloyAmalProject: ProjectData = {
   tagline: 'A 5-pillar feasibility study on NFC-based smart attendance for Amal & Company — and why the original market was the wrong one.',
   description: `Conducted a feasibility study on whether an NFC-based smart attendance system could work in higher education. Built a 5-pillar evaluation framework from scratch: Assessment (market demand, competitive landscape), Stakeholders (who pays, who pushes back), Legal Requirements (FERPA, privacy law, institutional policy), Onboarding & Management (IT integration, cybersecurity, training), and Platform Components (hardware, software, logistics). Ran the framework across 8+ markets. The research systematically disqualified the original target and pointed toward Blue Ocean opportunities the client hadn't considered.`,
   outputs: [
-    { label: 'Framework', value: '5-pillar evaluation applied across 8+ markets' },
-    { label: 'Markets Mapped', value: 'Universities, K-12, events, senior living, hospitals, warehouses, retail, gyms' },
-    { label: 'Finding', value: 'Higher ed is a Red Ocean — policy and privacy barriers block adoption regardless of tech' },
+    { label: 'Markets Reframed', value: 'Redirected the product toward higher-fit care and facility use cases' },
+    { label: 'Adoption Risks Flagged', value: 'Privacy, policy, and integration barriers mapped before launch' },
+    { label: 'Expansion Paths', value: 'Senior living and hospitals surfaced as the strongest next markets' },
   ],
   visuals: [
     {
