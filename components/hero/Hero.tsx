@@ -7,8 +7,12 @@ type HeroEntropyController = {
   setPaused: (paused: boolean) => void;
 };
 
+const HERO_HEADLINE =
+  "I untangle ambiguous questions and turn them into something actionable.";
+
 export function Hero() {
   const textRef = useRef<HTMLDivElement>(null);
+  const headlineRef = useRef<HTMLHeadingElement>(null);
   const controllerRef = useRef<HeroEntropyController | null>(null);
   const [isPaused, setIsPaused] = useState(false);
 
@@ -16,7 +20,11 @@ export function Hero() {
     let controller: HeroEntropyController | undefined;
     (async () => {
       const mod = await import("./hero-entropy.js");
-      controller = mod.init("hero-entropy-canvas", textRef.current);
+      controller = mod.init(
+        "hero-entropy-canvas",
+        textRef.current,
+        headlineRef.current,
+      );
       controllerRef.current = controller ?? null;
     })();
     return () => {
@@ -47,7 +55,7 @@ export function Hero() {
         <span className="annotation">{isPaused ? "Resume" : "Pause"}</span>
       </button>
 
-      {/* Text overlay — opacity driven by signal strength from canvas */}
+      {/* Text overlay — revealed by the hero coherence cycle */}
       <div
         ref={textRef}
         className="absolute inset-0 z-10 flex flex-col justify-between px-6 sm:px-8 lg:px-12 py-16 md:py-24 pointer-events-none"
@@ -56,12 +64,14 @@ export function Hero() {
         <div className="max-w-7xl w-full mx-auto flex flex-col justify-between h-full flex-1">
           {/* Name — top left */}
           <p
+            data-hero-aux
             className="font-heading italic text-foreground"
             style={{
               fontSize: "clamp(1.75rem, 3.5vw + 0.75rem, 3.5rem)",
               fontWeight: 400,
               letterSpacing: "-0.015em",
               lineHeight: 1,
+              opacity: 0,
             }}
           >
             Andrew Lau
@@ -69,18 +79,21 @@ export function Hero() {
 
           {/* Headline — center */}
           <h1
-            className="font-heading font-semibold text-primary my-8 md:my-12 max-w-full md:max-w-[55%]"
+            ref={headlineRef}
+            className="pointer-events-auto font-heading font-semibold text-primary my-8 md:my-12 max-w-full md:max-w-[55%]"
             style={{
               letterSpacing: "-0.009em",
               fontSize: "clamp(1.875rem, 4vw + 1rem, 4.5rem)",
               lineHeight: 1.05,
             }}
           >
-            I untangle ambiguous questions and turn them into something actionable.
+            {HERO_HEADLINE}
           </h1>
 
           {/* Role — bottom left */}
-          <p className="annotation">—— PROBLEM SOLVER · ANALYST · TINKERER</p>
+          <p data-hero-aux className="annotation" style={{ opacity: 0 }}>
+            —— PROBLEM SOLVER · ANALYST · TINKERER
+          </p>
         </div>
       </div>
 
