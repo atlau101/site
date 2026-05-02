@@ -7,6 +7,8 @@
 .playwright-cli
 oldprogress.md
 
+HERO_HANDOFF.md
+
 # dependencies
 /node_modules
 /.pnp
