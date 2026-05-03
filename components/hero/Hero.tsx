@@ -38,68 +38,68 @@ export function Hero() {
   }, [isPaused]);
 
   return (
-    <section className="relative w-full min-h-[100svh] md:min-h-[85vh] bg-background">
-      {/* WebGL canvas — transparent, particles render over cream bg */}
+    <section className="relative w-full min-h-[100svh] bg-background md:min-h-[85vh]">
       <canvas
         id="hero-entropy-canvas"
         aria-hidden="true"
-        className="absolute inset-0 w-full h-full block"
+        className="absolute inset-0 block h-full w-full"
       />
 
       <button
         type="button"
         aria-pressed={isPaused}
         onClick={() => setIsPaused((paused) => !paused)}
-        className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 inline-flex h-11 items-center justify-center border border-border bg-background/80 px-3 sm:px-4 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring active:bg-muted/80"
+        className="absolute right-4 top-4 z-20 inline-flex h-10 items-center justify-center border border-foreground/20 bg-background/82 px-3 text-foreground/68 transition-colors hover:bg-card hover:text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring active:bg-card sm:right-6 sm:top-6 sm:px-4"
       >
-        <span className="annotation">{isPaused ? "Resume" : "Pause"}</span>
+        <span className="annotation" style={{ letterSpacing: "0.12em" }}>
+          {isPaused ? "Resume" : "Pause"}
+        </span>
       </button>
 
-      {/* Text overlay — revealed by the hero coherence cycle */}
       <div
         ref={textRef}
-        className="absolute inset-0 z-10 flex flex-col justify-between px-6 sm:px-8 lg:px-12 py-16 md:py-24 pointer-events-none"
+        className="pointer-events-none absolute inset-0 z-10 flex flex-col justify-between px-6 py-16 sm:px-8 lg:px-12 md:py-24"
         style={{ opacity: 0 }}
       >
-        <div className="max-w-7xl w-full mx-auto flex flex-col justify-between h-full flex-1">
-          {/* Name — top left */}
+        <div className="mx-auto flex h-full w-full max-w-7xl flex-1 flex-col justify-between">
           <p
             data-hero-aux
-            className="font-heading italic text-foreground"
+            className="font-serif italic text-foreground"
             style={{
-              fontSize: "clamp(1.75rem, 3.5vw + 0.75rem, 3.5rem)",
+              fontSize: "clamp(1.85rem, 3.8vw + 0.75rem, 4.2rem)",
               fontWeight: 400,
-              letterSpacing: "-0.015em",
+              letterSpacing: "-0.02em",
               lineHeight: 1,
               opacity: 0,
             }}
           >
-
+            Andrew Lau
           </p>
 
-          {/* Headline — center */}
           <h1
             ref={headlineRef}
-            className="pointer-events-auto font-heading font-semibold text-primary my-8 md:my-12 max-w-full md:max-w-[55%]"
+            className="pointer-events-auto my-8 max-w-full font-serif font-semibold text-primary md:my-12 md:max-w-[60%]"
             style={{
-              letterSpacing: "-0.009em",
-              fontSize: "clamp(1.875rem, 4vw + 1rem, 4.5rem)",
-              lineHeight: 1.05,
+              letterSpacing: "-0.028em",
+              fontSize: "clamp(2.25rem, 4.8vw + 0.9rem, 5.55rem)",
+              lineHeight: 1.02,
             }}
           >
             {HERO_HEADLINE}
           </h1>
 
-          {/* Role — bottom left */}
-          <p data-hero-aux className="annotation" style={{ opacity: 0 }}>
-            —— PROBLEM SOLVER · ANALYST · TINKERER
+          <p
+            data-hero-aux
+            className="annotation text-foreground/72"
+            style={{ opacity: 0, fontSize: "0.72rem", letterSpacing: "0.08em" }}
+          >
+            Problem solver · analyst · tinkerer
           </p>
         </div>
       </div>
 
-      {/* Cursor hint — visible briefly before first interaction */}
       <p
-        className="absolute bottom-5 md:bottom-3 xl:bottom-8 left-1/2 -translate-x-1/2 z-20 w-full max-w-[18rem] px-6 text-center annotation pointer-events-none select-none"
+        className="pointer-events-none absolute bottom-5 left-1/2 z-20 w-full max-w-[18rem] -translate-x-1/2 px-6 text-center annotation select-none md:bottom-3 xl:bottom-8"
         style={{
           opacity: 0.38,
           letterSpacing: "0.12em",

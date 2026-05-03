@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown } from "lucide-react";
 import { ProjectData } from "@/lib/projects/types";
 import { RichProjectText } from "./RichProjectText";
 
@@ -10,86 +8,173 @@ interface ProjectTakeawaysProps {
   project: ProjectData;
 }
 
-export const ProjectTakeaways: React.FC<ProjectTakeawaysProps> = ({ project }) => {
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+const palette = {
+  base: "oklch(0.9337 0.004688 142)",
+  paper: "oklch(0.978 0.002 106)",
+  paperShadow: "oklch(0.905 0.006 100)",
+  green: "oklch(0.31 0.082 142)",
+  ink: "oklch(0.19 0.016 35)",
+  line: "oklch(0.79 0.008 110)",
+  ruleBlue: "oklch(0.78 0.02 235)",
+};
+
+function TakeawaySheet({
+  title,
+  summary,
+  body,
+  index,
+}: {
+  title: string;
+  summary: string;
+  body: string;
+  index: number;
+}) {
+  const [open, setOpen] = useState(index === 0);
 
   return (
-    <section className="w-full py-20 px-6 sm:px-8 lg:px-12 bg-background">
-      <div className="max-w-4xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-12"
+    <article className="relative">
+      <div
+        className="relative overflow-hidden border"
+        style={{
+          background: palette.paper,
+          borderColor: palette.line,
+          boxShadow: `7px 7px 0 ${palette.paperShadow}`,
+        }}
+      >
+        <div
+          className="absolute inset-y-0 left-0 w-[4.6rem] border-r"
+          style={{
+            borderColor: palette.line,
+            background: "rgba(255, 255, 255, 0.48)",
+          }}
+        />
+        <div
+          className="pointer-events-none absolute inset-y-0 left-[4.6rem] w-[2px]"
+          style={{ background: palette.green }}
+        />
+        <div className="pointer-events-none absolute left-[1.38rem] top-[2.15rem] flex flex-col gap-[4.45rem]">
+          {[0, 1, 2].map((item) => (
+            <span
+              key={item}
+              className="h-5 w-5 rounded-full border"
+              style={{
+                background: palette.base,
+                borderColor: palette.line,
+              }}
+            />
+          ))}
+        </div>
+
+        <button
+          type="button"
+          aria-expanded={open}
+          onClick={() => setOpen((value) => !value)}
+          className="relative flex w-full items-start justify-between gap-6 px-6 py-6 pl-[6.25rem] pr-8 text-left transition-transform duration-200 ease-out hover:translate-y-[1px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+          style={{
+            color: palette.ink,
+            borderColor: palette.green,
+            outlineColor: palette.green,
+          }}
         >
-          <h2 className="font-heading text-3xl sm:text-4xl font-medium text-primary mb-2">
+          <div className="space-y-4">
+            <div
+              className="font-mono text-[10px] uppercase tracking-[0.22em]"
+              style={{ color: palette.green }}
+            >
+              Note {String(index + 1).padStart(2, "0")}
+            </div>
+            <h3
+              className="text-[1.85rem] leading-[1.02] md:text-[2.35rem]"
+              style={{
+                color: palette.ink,
+                fontFamily: '"Marker Felt", "Bradley Hand", cursive',
+              }}
+            >
+              {title}
+            </h3>
+            <p
+              className="max-w-[42rem] text-[1.02rem] leading-[2.1rem]"
+              style={{ color: palette.ink }}
+            >
+              {summary}
+            </p>
+          </div>
+
+          <div
+            className="mt-1 shrink-0 text-[1.45rem] leading-none"
+            style={{
+              color: palette.green,
+              fontFamily: "Arial Black, Impact, sans-serif",
+            }}
+          >
+            {open ? "−" : "+"}
+          </div>
+        </button>
+
+        <div
+          className="grid transition-[grid-template-rows] duration-300 ease-out"
+          style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
+        >
+          <div className="overflow-hidden">
+            <div
+              className="border-t px-6 pb-8 pl-[6.25rem] pr-8 pt-6"
+              style={{
+                borderColor: palette.line,
+                backgroundImage: `repeating-linear-gradient(to bottom, transparent 0, transparent 2.08rem, ${palette.ruleBlue} 2.08rem, ${palette.ruleBlue} 2.15rem)`,
+                backgroundPositionY: "0.5rem",
+              }}
+            >
+              <RichProjectText
+                text={body}
+                className="max-w-[44rem] space-y-4"
+                paragraphClassName="text-[1.02rem] leading-[2.08rem] text-foreground"
+                strongClassName="font-semibold text-foreground"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+export const ProjectTakeaways: React.FC<ProjectTakeawaysProps> = ({ project }) => {
+  return (
+    <section
+      className="w-full px-6 py-20 sm:px-8 lg:px-12"
+      style={{ background: palette.base }}
+    >
+      <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[20rem_1fr] lg:gap-12">
+        <div className="space-y-3 lg:pt-2">
+          <p
+            className="annotation"
+            style={{ color: palette.green }}
+          >
+            POST-PROJECT REFLECTION
+          </p>
+          <h2
+            className="font-heading text-3xl font-medium leading-[0.98] sm:text-4xl md:text-5xl"
+            style={{ color: palette.ink }}
+          >
             What I Took Away
           </h2>
-          <p className="annotation text-muted-foreground">POST-PROJECT REFLECTION</p>
-        </motion.div>
+          <p
+            className="max-w-[16rem] text-[0.92rem] uppercase leading-[2.05] tracking-[0.08em]"
+            style={{ color: palette.ink, opacity: 0.68 }}
+          >
+            Reflection opens up here. Structure stays hard, voice gets more personal.
+          </p>
+        </div>
 
-        <div className="space-y-0">
+        <div className="space-y-8">
           {project.lessons.map((lesson, idx) => (
-            <motion.div
+            <TakeawaySheet
               key={idx}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{
-                duration: 0.45,
-                ease: [0.22, 1, 0.36, 1],
-                delay: idx * 0.06,
-              }}
-              className={idx > 0 ? "rule-h-faint pt-6" : ""}
-            >
-              <div className="pb-6">
-                <button
-                  onClick={() => setExpandedIndex(expandedIndex === idx ? null : idx)}
-                  className="w-full text-left flex items-start gap-3 cursor-pointer group transition-opacity hover:opacity-75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded-sm"
-                  aria-expanded={expandedIndex === idx}
-                >
-                  <motion.div
-                    animate={{ rotate: expandedIndex === idx ? 0 : 180 }}
-                    transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-                    className="mt-1 flex-shrink-0"
-                  >
-                    <ChevronDown size={20} className="text-foreground" aria-hidden="true" />
-                  </motion.div>
-
-                  <div className="flex-1">
-                    <h3 className="font-heading text-xl font-semibold leading-snug text-primary mb-2">
-                      {lesson.title}
-                    </h3>
-                    <p className="max-w-3xl text-[1.02rem] leading-7 text-foreground/80">
-                      {lesson.summary}
-                    </p>
-                  </div>
-                </button>
-
-                <AnimatePresence>
-                  {expandedIndex === idx && (
-                    <motion.div
-                      initial={{ opacity: 0, gridTemplateRows: "0fr" }}
-                      animate={{ opacity: 1, gridTemplateRows: "1fr" }}
-                      exit={{ opacity: 0, gridTemplateRows: "0fr", transition: { duration: 0.18, ease: "easeIn" } }}
-                      transition={{ duration: 0.28, ease: [0.33, 1, 0.68, 1] }}
-                      style={{ display: "grid", overflow: "hidden" }}
-                    >
-                      <div style={{ minHeight: 0 }}>
-                        <div className="mt-5 ml-8 border-t border-rule/60 pt-5 pb-1">
-                          <RichProjectText
-                            text={lesson.full}
-                            className="space-y-4 max-w-3xl"
-                            paragraphClassName="text-[1.02rem] leading-8 text-foreground"
-                          />
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            </motion.div>
+              title={lesson.title}
+              summary={lesson.summary}
+              body={lesson.full}
+              index={idx}
+            />
           ))}
         </div>
       </div>

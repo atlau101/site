@@ -7,6 +7,11 @@
 .playwright-cli
 oldprogress.md
 
+project-notes-directions
+project-notes-interactions
+visual-directions
+PROJECT_PAGES_NOTES_HANDOFF.md
+
 PRODUCT.MD
 HERO_HANDOFF.md
 
@@ -50,3 +55,4 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 node_modules
+PROJECT_PAGE_NOTES_HANDOFF.md

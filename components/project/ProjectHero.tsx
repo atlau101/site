@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { ViewTransition } from "react";
 import { ProjectData } from "@/lib/projects/types";
+import { ReturnHomeAnchorLink } from "@/components/sections/ReturnHomeAnchorLink";
 
 interface ProjectHeroProps {
   project: ProjectData;
@@ -12,55 +12,60 @@ interface ProjectHeroProps {
 
 export const ProjectHero: React.FC<ProjectHeroProps> = ({ project }) => {
   return (
-    <section className="w-full py-24 px-6 sm:px-8 lg:px-12 bg-background">
-      <div className="max-w-7xl mx-auto">
+    <section className="w-full bg-background px-6 py-24 sm:px-8 lg:px-12">
+      <div className="mx-auto max-w-7xl">
         <div className="mb-8">
-          <Link
-            href="/#work"
-            transitionTypes={["backward"]}
-            className="annotation text-muted-foreground hover:text-foreground transition-colors duration-200 no-underline"
+          <ReturnHomeAnchorLink
+            targetId="work"
+            className="inline-flex border-[3px] border-foreground bg-card px-4 py-3 text-[0.72rem] font-bold uppercase tracking-[0.16em] text-foreground transition-colors duration-200 hover:bg-primary hover:text-primary-foreground"
           >
-            ← Back to work
-          </Link>
+            Back to work
+          </ReturnHomeAnchorLink>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 rule-h pb-12">
-          {/* Left column: Project title */}
-          <div className="md:col-span-7">
+
+        <div className="grid grid-cols-1 gap-0 border-y-[3px] border-foreground pb-0 md:grid-cols-12">
+          <div className="border-b-[3px] border-foreground px-5 py-8 md:col-span-7 md:border-b-0 md:px-8 md:py-10">
+            <p className="annotation text-secondary">Project / {project.year}</p>
             <ViewTransition name={`project-title-${project.slug}`}>
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-                className="font-heading text-display font-semibold leading-[1.05] text-primary"
-                style={{ letterSpacing: "-0.02em" }}
+                className="mt-6 font-heading text-display font-black uppercase text-foreground"
               >
                 {project.title}
               </motion.h1>
             </ViewTransition>
           </div>
 
-          {/* Right column: Metadata sidebar */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-            className="md:col-span-5 bg-primary px-6 py-8 md:px-8 md:py-10"
+            className="bg-primary md:col-span-5 md:border-l-[3px] md:border-foreground"
           >
-            <div className="grid grid-cols-2 gap-4 pb-5">
-              <span className="font-mono text-xs tracking-[0.05em] uppercase text-primary-foreground/55">YEAR</span>
-              <p className="font-heading text-lg italic text-primary-foreground">{project.year}</p>
+            <div className="grid grid-cols-2 gap-4 border-b-[3px] border-foreground px-5 py-5 md:px-7">
+              <span className="annotation text-primary-foreground/72">Year</span>
+              <p className="font-heading text-lg font-black uppercase tracking-[-0.03em] text-primary-foreground">
+                {project.year}
+              </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 py-5 border-t border-primary-foreground/15">
-              <span className="font-mono text-xs tracking-[0.05em] uppercase text-primary-foreground/55">TYPE</span>
-              <p className="font-heading text-lg italic text-primary-foreground">{project.type}</p>
+            <div className="grid grid-cols-2 gap-4 border-b-[3px] border-foreground px-5 py-5 md:px-7">
+              <span className="annotation text-primary-foreground/72">Type</span>
+              <p className="font-heading text-lg font-black uppercase tracking-[-0.03em] text-primary-foreground">
+                {project.type}
+              </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 pt-5 border-t border-primary-foreground/15">
-              <span className="font-mono text-xs tracking-[0.05em] uppercase text-primary-foreground/55">SKILLS</span>
-              <div className="space-y-1">
+            <div className="grid grid-cols-2 gap-4 px-5 py-5 md:px-7">
+              <span className="annotation text-primary-foreground/72">Skills</span>
+              <div className="space-y-2">
                 {project.skills.map((skill, i) => (
-                  <p key={i} className="font-heading text-base italic text-primary-foreground leading-snug">
+                  <p
+                    key={i}
+                    className="font-heading text-sm font-black uppercase tracking-[0.02em] text-primary-foreground md:text-base"
+                  >
                     {skill}
                   </p>
                 ))}

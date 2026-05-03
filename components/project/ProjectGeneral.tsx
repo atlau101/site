@@ -7,35 +7,63 @@ interface ProjectGeneralProps {
   project: ProjectData;
 }
 
+const palette = {
+  base: 'oklch(0.9337 0.004688 142)',
+  paper: 'oklch(0.978 0.002 106)',
+  paperInset: 'oklch(0.949 0.004 108)',
+  green: 'oklch(0.31 0.082 142)',
+  ink: 'oklch(0.19 0.016 35)',
+  line: 'oklch(0.79 0.008 110)',
+};
+
 export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
   return (
-    <section className="w-full py-20 px-6 sm:px-8 lg:px-12 bg-background">
+    <section
+      className="w-full px-6 py-20 sm:px-8 lg:px-12"
+      style={{ background: palette.base }}
+    >
       <div className="max-w-7xl mx-auto">
-        {/* Section heading */}
-        <h2 className="font-heading text-3xl sm:text-4xl font-medium text-primary mb-2">
+        <h2
+          className="mb-2 font-heading text-3xl font-medium sm:text-4xl"
+          style={{ color: palette.green }}
+        >
           What I Built
         </h2>
-        <div className="rule-h mb-12" />
+        <div
+          className="mb-12 h-px w-full"
+          style={{ background: palette.line }}
+        />
 
-        {/* Two-column layout: tagline (left) + description + image (right) */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 mb-16">
-          {/* Left: 1-sentence tagline in mono */}
           <div className="md:col-span-3">
-            <p className="annotation text-muted-foreground leading-loose">
+            <p
+              className="annotation leading-[2.05] text-[0.92rem]"
+              style={{ color: palette.ink, opacity: 0.72 }}
+            >
               {project.tagline}
             </p>
           </div>
 
-          {/* Right: description + image + visuals in paper-container panel */}
-          <div className="md:col-span-9 bg-paper-container p-8 md:p-12">
-            <p className="font-heading text-lg md:text-xl font-normal leading-relaxed text-foreground mb-8">
+          <div
+            className="md:col-span-9 border p-8 md:p-10"
+            style={{ background: palette.paper, borderColor: palette.line }}
+          >
+            <p
+              className="mb-8 font-heading text-lg font-normal leading-relaxed md:text-xl"
+              style={{ color: palette.ink }}
+            >
               {project.description}
             </p>
 
-            {/* Image with caption */}
             {project.image && (
               <div className="mt-8">
-                <div className="relative aspect-video bg-paper-dim overflow-hidden">
+                <div
+                  className="relative aspect-video overflow-hidden border"
+                  style={{
+                    background: palette.paperInset,
+                    borderColor: palette.line,
+                  }}
+                >
                   <Image
                     src={project.image}
                     alt={project.imageCaption || project.title}
@@ -44,34 +72,48 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
                   />
                 </div>
                 {project.imageCaption && (
-                  <p className="annotation text-muted-foreground mt-3">
+                  <p
+                    className="annotation mt-4 text-[0.8rem]"
+                    style={{ color: palette.ink, opacity: 0.72 }}
+                  >
                     {project.imageCaption}
                   </p>
                 )}
               </div>
             )}
 
-            {/* Visuals slider — embedded in panel */}
             {project.visuals && project.visuals.length > 0 && (
-              <div className="mt-8 pt-8 border-t border-rule/50">
+              <div
+                className="mt-8 border-t pt-8"
+                style={{ borderColor: palette.line }}
+              >
                 <VisualsSlider visuals={project.visuals} />
               </div>
             )}
           </div>
         </div>
 
-        {/* Output stats strip below description */}
         {project.outputs && project.outputs.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-0 rule-h">
+          <div
+            className="grid grid-cols-1 gap-0 border-y md:grid-cols-3"
+            style={{ borderColor: palette.line }}
+          >
             {project.outputs.map((output, idx) => (
               <div
                 key={idx}
-                className={`py-6 ${idx > 0 ? 'border-t border-rule/50 md:border-t-0 md:pl-8' : ''}`}
+                className={`py-6 ${idx > 0 ? 'border-t md:border-t-0 md:pl-8' : ''}`}
+                style={idx > 0 ? { borderColor: palette.line } : undefined}
               >
-                <p className="font-heading text-sm md:text-base font-medium text-muted-foreground mb-2">
+                <p
+                  className="mb-2 font-heading text-sm font-medium md:text-base"
+                  style={{ color: palette.ink, opacity: 0.68 }}
+                >
                   {output.label}
                 </p>
-                <p className="font-heading text-lg md:text-xl font-normal italic text-foreground">
+                <p
+                  className="font-heading text-lg font-normal italic md:text-xl"
+                  style={{ color: palette.ink }}
+                >
                   {output.value}
                 </p>
               </div>

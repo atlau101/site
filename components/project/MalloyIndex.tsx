@@ -16,74 +16,69 @@ interface MalloyIndexProps {
 export const MalloyIndex: React.FC<MalloyIndexProps> = ({ currentSlug }) => {
   return (
     <>
-      {/* Desktop: fixed left sidebar */}
       <nav
         aria-label="Malloy Group projects"
-        className="hidden lg:flex fixed left-[clamp(16px,3vw,40px)] top-1/2 -translate-y-1/2 z-40 flex-col gap-5"
+        className="fixed left-[clamp(16px,3vw,40px)] top-1/2 z-40 hidden -translate-y-1/2 lg:flex"
       >
-        {currentSlug !== "malloy" && (
-          <Link
-            href="/projects/malloy"
-            className="annotation text-[10px] tracking-widest text-muted-foreground hover:text-foreground transition-colors no-underline"
-          >
-            ← MALLOY GROUP
-          </Link>
-        )}
-        <div className="flex flex-col gap-3 border-t border-border pt-4">
+        <div className="overflow-hidden border-[3px] border-foreground bg-card">
+          <div className="flex flex-col">
+            {currentSlug !== "malloy" && (
+              <Link
+                href="/projects/malloy"
+                className="border-b-[3px] border-foreground bg-primary px-4 py-3 text-[0.68rem] font-bold uppercase tracking-[0.16em] text-primary-foreground no-underline transition-colors hover:bg-accent"
+              >
+                Malloy group
+              </Link>
+            )}
+            <div className="flex flex-col">
+              {MALLOY_PROJECTS.map(({ num, label, slug }) => {
+                const isCurrent = slug === currentSlug;
+                return (
+                  <Link
+                    key={slug}
+                    href={`/projects/${slug}`}
+                    className={`px-4 py-3 text-[0.68rem] font-bold uppercase tracking-[0.16em] no-underline transition-colors ${
+                      isCurrent
+                        ? "bg-accent text-accent-foreground"
+                        : "text-foreground hover:bg-muted"
+                    }`}
+                  >
+                    {num} {label}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <div className="fixed left-0 right-0 top-16 z-30 border-b-[3px] border-foreground bg-card px-6 py-2.5 sm:top-20 sm:px-8 lg:hidden">
+        <nav
+          aria-label="Malloy Group projects"
+          className="flex flex-wrap items-center gap-2"
+        >
+          {currentSlug !== "malloy" && (
+            <Link
+              href="/projects/malloy"
+              className="bg-primary px-3 py-2 text-[0.68rem] font-bold uppercase tracking-[0.16em] text-primary-foreground no-underline"
+            >
+              Malloy group
+            </Link>
+          )}
           {MALLOY_PROJECTS.map(({ num, label, slug }) => {
             const isCurrent = slug === currentSlug;
             return (
               <Link
                 key={slug}
                 href={`/projects/${slug}`}
-                className={`annotation text-[10px] tracking-widest no-underline transition-colors ${
+                className={`px-3 py-2 text-[0.68rem] font-bold uppercase tracking-[0.16em] no-underline ${
                   isCurrent
-                    ? "text-foreground font-semibold"
-                    : "text-muted-foreground hover:text-foreground"
+                    ? "bg-accent text-accent-foreground"
+                    : "bg-background text-foreground"
                 }`}
               >
                 {num} {label}
               </Link>
-            );
-          })}
-        </div>
-      </nav>
-
-      {/* Mobile/tablet: fixed strip just below the navbar */}
-      <div className="lg:hidden fixed top-16 sm:top-20 left-0 right-0 z-30 bg-background/95 backdrop-blur-sm border-b border-border/40 px-6 sm:px-8 py-2.5">
-        <nav
-          aria-label="Malloy Group projects"
-          className="flex items-center gap-4 flex-wrap"
-        >
-          {currentSlug !== "malloy" && (
-            <>
-              <Link
-                href="/projects/malloy"
-                className="annotation text-[10px] tracking-widest text-muted-foreground hover:text-foreground transition-colors no-underline"
-              >
-                ← MALLOY GROUP
-              </Link>
-              <span className="text-border" aria-hidden="true">·</span>
-            </>
-          )}
-          {MALLOY_PROJECTS.map(({ num, label, slug }, i) => {
-            const isCurrent = slug === currentSlug;
-            return (
-              <React.Fragment key={slug}>
-                <Link
-                  href={`/projects/${slug}`}
-                  className={`annotation text-[10px] tracking-widest no-underline transition-colors ${
-                    isCurrent
-                      ? "text-foreground font-semibold"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {num} {label}
-                </Link>
-                {i < MALLOY_PROJECTS.length - 1 && (
-                  <span className="text-border" aria-hidden="true">·</span>
-                )}
-              </React.Fragment>
             );
           })}
         </nav>

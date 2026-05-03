@@ -4,6 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { motion, useScroll } from "framer-motion";
 import { usePathname } from "next/navigation";
+import { ReturnHomeAnchorLink } from "./ReturnHomeAnchorLink";
 
 interface NavbarProps {
   name?: string;
@@ -46,15 +47,6 @@ export const Navbar: React.FC<NavbarProps> = ({
   const pathname = usePathname();
   const isHome = pathname === "/";
 
-  // On non-home pages, prefix anchor hrefs with "/" so they navigate home then scroll
-  const resolvedLinks = links.map((link) => ({
-    ...link,
-    href:
-      !isHome && link.href.startsWith("#") && link.href !== "#contact"
-        ? `/${link.href}`
-        : link.href,
-  }));
-
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [sfTime, setSfTime] = React.useState("");
   const { scrollY } = useScroll();
@@ -92,7 +84,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       e.preventDefault();
       const target = document.getElementById(href.slice(1));
       if (target) {
-        const top = target.getBoundingClientRect().top + window.scrollY - 80;
+        const top = target.getBoundingClientRect().top + window.scrollY - 88;
         window.scrollTo({ top, behavior: "smooth" });
       }
     }
@@ -102,48 +94,52 @@ export const Navbar: React.FC<NavbarProps> = ({
     <motion.nav
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 bg-background/95 transition-all duration-300 ${isScrolled ? "border-b border-border" : ""
-        }`}
+      transition={{ duration: 0.55, ease: "easeOut" }}
+      className={`fixed left-0 right-0 top-0 z-50 border-b-[3px] border-foreground bg-card/95 transition-all duration-300 ${
+        isScrolled ? "shadow-[0_8px_0_var(--color-paper-container)]" : ""
+      }`}
     >
       <a
         href="#main-content"
-        className="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:top-4 focus-visible:left-4 focus-visible:z-[100] focus-visible:px-4 focus-visible:py-2 focus-visible:bg-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:rounded-sm focus-visible:text-sm focus-visible:font-medium"
+        className="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:left-4 focus-visible:top-4 focus-visible:z-[100] focus-visible:border-[3px] focus-visible:border-foreground focus-visible:bg-primary focus-visible:px-4 focus-visible:py-2 focus-visible:text-xs focus-visible:font-bold focus-visible:uppercase focus-visible:tracking-[0.16em] focus-visible:text-primary-foreground focus-visible:outline-none"
       >
         Skip to content
       </a>
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="flex items-center justify-between h-16 sm:h-20">
+      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+        <div className="flex h-16 items-center justify-between gap-4 sm:h-20">
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.55, ease: "easeOut" }}
           >
             <Link
               href="/"
               transitionTypes={!isHome ? ["backward"] : undefined}
-              className="nav-kinetic-link nav-kinetic-link--name font-heading text-xl sm:text-2xl font-medium tracking-tight text-foreground no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded-sm"
+              className="nav-kinetic-link nav-kinetic-link--name font-heading text-[0.88rem] font-black uppercase tracking-[0.18em] text-foreground no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card sm:text-[0.98rem]"
             >
               <NavLabel text={name} />
             </Link>
           </motion.div>
 
-          <div className="flex items-center gap-6 sm:gap-8">
+          <div className="flex items-center gap-3 sm:gap-5">
             <div
               aria-label={sfTime ? `San Francisco time ${sfTime}` : "San Francisco time"}
-              className="hidden md:flex items-center gap-2.5 text-muted-foreground"
+              className="hidden border-[3px] border-foreground bg-background px-3 py-2 md:flex md:items-center md:gap-3"
             >
-              <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-primary/80" />
-              <span className="annotation text-foreground/80">
+              <span aria-hidden className="h-2.5 w-2.5 bg-primary" />
+              <span className="annotation text-foreground">
                 SF {sfTime || "--:-- --"}
               </span>
             </div>
-            {resolvedLinks.map((link, index) => {
-              const isLocalAnchor = link.href.startsWith("#");
-              const itemClassName =
-                "nav-kinetic-link annotation text-muted-foreground no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded-sm";
 
-              if (isLocalAnchor) {
+            {links.map((link, index) => {
+              const isLocalAnchor = link.href.startsWith("#");
+              const isReturnToLandingSection =
+                !isHome && isLocalAnchor && link.href !== "#contact";
+              const itemClassName =
+                "nav-kinetic-link annotation text-foreground/72 no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card";
+
+              if (isHome && isLocalAnchor) {
                 return (
                   <motion.a
                     key={link.href}
@@ -153,13 +149,35 @@ export const Navbar: React.FC<NavbarProps> = ({
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{
-                      duration: 0.5,
-                      delay: 0.2 + index * 0.1,
+                      duration: 0.45,
+                      delay: 0.18 + index * 0.08,
                       ease: "easeOut",
                     }}
                   >
                     <NavLabel text={link.label} />
                   </motion.a>
+                );
+              }
+
+              if (isReturnToLandingSection) {
+                return (
+                  <motion.div
+                    key={link.href}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.45,
+                      delay: 0.18 + index * 0.08,
+                      ease: "easeOut",
+                    }}
+                  >
+                    <ReturnHomeAnchorLink
+                      targetId={link.href.slice(1)}
+                      className={itemClassName}
+                    >
+                      <NavLabel text={link.label} />
+                    </ReturnHomeAnchorLink>
+                  </motion.div>
                 );
               }
 
@@ -169,8 +187,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{
-                    duration: 0.5,
-                    delay: 0.2 + index * 0.1,
+                    duration: 0.45,
+                    delay: 0.18 + index * 0.08,
                     ease: "easeOut",
                   }}
                 >

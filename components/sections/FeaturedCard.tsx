@@ -16,8 +16,6 @@ interface FeaturedCardProps {
   imageAlt?: string;
 }
 
-const LINE_COUNT = 15;
-
 export const FeaturedCard: React.FC<FeaturedCardProps> = ({
   title,
   outcome,
@@ -36,75 +34,58 @@ export const FeaturedCard: React.FC<FeaturedCardProps> = ({
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
     >
-    <Link href={href} transitionTypes={["forward"]} className="block w-full cursor-pointer group no-underline">
-      <div className="bg-card overflow-hidden">
-        <div className="bg-popover grid md:grid-cols-3 gap-0">
-          {/* Left — content (2/3) */}
-          <div className="md:col-span-2 flex flex-col justify-center space-y-5 p-8 md:p-12">
-            <span className="annotation text-muted-foreground">{category}</span>
+      <Link
+        href={href}
+        transitionTypes={["forward"]}
+        className="group block w-full cursor-pointer no-underline"
+      >
+        <div className="brutalist-panel overflow-hidden transition-transform duration-200 group-hover:-translate-y-[3px] group-hover:translate-x-[3px]">
+          <div className="grid gap-0 md:grid-cols-3">
+            <div className="flex flex-col justify-between gap-6 px-6 py-6 md:col-span-2 md:px-8 md:py-8">
+              <span className="annotation text-secondary">{category}</span>
 
-            <ViewTransition name={`project-title-${slug}`}>
-              <h3 className="font-heading text-3xl md:text-4xl font-medium leading-tight text-foreground group-hover:text-primary transition-colors duration-300">
-                {title}
-                <span
-                  className="inline-block ml-2 opacity-0 -translate-x-1 group-hover:opacity-100 group-focus-within:opacity-100 group-hover:translate-x-0 group-focus-within:translate-x-0 transition-all duration-200 font-normal"
-                  aria-hidden="true"
-                >
-                  →
-                </span>
-              </h3>
-            </ViewTransition>
+              <ViewTransition name={`project-title-${slug}`}>
+                <h3 className="font-heading text-3xl font-black leading-[0.95] text-foreground transition-colors duration-200 group-hover:text-primary md:text-5xl">
+                  {title}
+                </h3>
+              </ViewTransition>
 
-            <p className="text-base md:text-lg text-foreground/75">
-              {outcome}
-            </p>
+              <p className="max-w-[38rem] text-base leading-8 text-foreground/78 md:text-lg">
+                {outcome}
+              </p>
 
-            <span className="annotation">{year}</span>
-          </div>
-
-          {/* Right — image or ruled-paper placeholder (1/3) */}
-          <div className="relative aspect-[4/3] md:aspect-auto md:min-h-[300px] overflow-hidden">
-            {imageSrc ? (
-              <Image
-                src={imageSrc}
-                alt={imageAlt ?? title}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-              />
-            ) : (
-              <div className="relative w-full h-full min-h-[240px] bg-paper-low">
-                {/* Ruled notebook lines — field journal metaphor */}
-                <svg
-                  className="absolute inset-0 w-full h-full"
-                  aria-hidden="true"
-                  preserveAspectRatio="none"
-                >
-                  {Array.from({ length: LINE_COUNT }, (_, i) => (
-                    <line
-                      key={i}
-                      x1="0"
-                      y1={`${((i + 1) / (LINE_COUNT + 1)) * 100}%`}
-                      x2="100%"
-                      y2={`${((i + 1) / (LINE_COUNT + 1)) * 100}%`}
-                      stroke="var(--color-rule)"
-                      strokeWidth="0.75"
-                      opacity="0.45"
-                    />
-                  ))}
-                </svg>
-                {/* Category label — bottom-left, like a page caption */}
-                <div className="absolute inset-0 flex items-end justify-start p-6">
-                  <span className="annotation text-muted-foreground/60 tracking-widest">
-                    {category}
-                  </span>
-                </div>
+              <div className="inline-flex w-fit border-[3px] border-foreground bg-primary px-3 py-2 text-[0.72rem] font-bold uppercase tracking-[0.16em] text-primary-foreground">
+                {year}
               </div>
-            )}
+            </div>
+
+            <div className="relative min-h-[240px] overflow-hidden border-t-[3px] border-foreground bg-muted md:min-h-[300px] md:border-l-[3px] md:border-t-0">
+              {imageSrc ? (
+                <>
+                  <Image
+                    src={imageSrc}
+                    alt={imageAlt ?? title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 bg-card/92 p-4">
+                    <span className="annotation text-secondary">{category}</span>
+                  </div>
+                </>
+              ) : (
+                <div className="relative h-full w-full">
+                  <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_0,transparent_2.4rem,var(--color-rule)_2.4rem,var(--color-rule)_2.55rem)] bg-[length:100%_2.55rem]" />
+                  <div className="absolute inset-x-5 top-5 h-16 border-[3px] border-foreground bg-primary" />
+                  <div className="absolute bottom-5 left-5 right-5 border-[3px] border-foreground bg-card px-4 py-3">
+                    <span className="annotation text-secondary">{category}</span>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    </Link>
+      </Link>
     </motion.div>
   );
 };

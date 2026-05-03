@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ViewTransition } from "react";
 import { Footer } from "@/components/sections/Footer";
+import { ReturnHomeAnchorLink } from "@/components/sections/ReturnHomeAnchorLink";
 
 const PROJECTS = [
   {
@@ -37,13 +38,12 @@ export default function MalloyHubPage() {
         <section className="w-full py-24 px-6 sm:px-8 lg:px-12 bg-background">
           <div className="max-w-4xl mx-auto">
             <div className="mb-8">
-              <Link
-                href="/#work"
-                transitionTypes={["backward"]}
+              <ReturnHomeAnchorLink
+                targetId="work"
                 className="annotation text-muted-foreground hover:text-foreground transition-colors duration-200 no-underline"
               >
                 ← Back to work
-              </Link>
+              </ReturnHomeAnchorLink>
             </div>
 
             <div className="rule-h pb-16">

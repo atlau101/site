@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { Newsreader, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/sections/Nav";
@@ -17,7 +16,7 @@ const newsreader = Newsreader({
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400", "500", "700"],
   display: "swap",
 });
 

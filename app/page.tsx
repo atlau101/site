@@ -4,6 +4,7 @@ import { AboutStrip } from "@/components/sections/AboutStrip";
 import { FeaturedCard } from "@/components/sections/FeaturedCard";
 import { GroupedFeaturedCard } from "@/components/sections/GroupedFeaturedCard";
 import { Footer } from "@/components/sections/Footer";
+import { LandingScrollRestorer } from "@/components/sections/LandingScrollRestorer";
 
 // ─── Tier 1: featured projects ────────────────────────────────────────────────
 const malloyGroup = {
@@ -91,6 +92,7 @@ export default function Home() {
   return (
     <>
       <main id="main-content" className="pt-16 sm:pt-20">
+        <LandingScrollRestorer />
         <Hero />
 
         {/* Proof strip — 4 outcomes anchoring the hero claim */}
@@ -105,9 +107,12 @@ export default function Home() {
           className="w-full py-16 md:py-24 px-6 sm:px-8 lg:px-12 bg-background"
         >
           <div className="max-w-7xl mx-auto">
-            <h2 className="font-heading text-2xl md:text-3xl font-medium mb-10 text-primary">
-              Featured work
-            </h2>
+            <div className="mb-10 space-y-3">
+              <p className="annotation text-secondary">Featured work / 02</p>
+              <h2 className="font-heading text-4xl md:text-5xl font-black uppercase leading-[0.94] text-foreground">
+                Featured work
+              </h2>
+            </div>
             <div className="flex flex-col gap-0 rule-h">
               {/* 1 — Malloy Group */}
               <div className="rule-h-faint">

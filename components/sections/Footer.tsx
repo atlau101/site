@@ -70,199 +70,180 @@ export function Footer({ name = "Andrew Lau" }: FooterProps) {
   }
 
   const inputBase =
-    "w-full bg-transparent border-b border-border font-heading text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-foreground transition-colors duration-150 py-2";
+    "w-full border-b-[3px] border-foreground bg-transparent py-3 text-sm text-foreground placeholder:text-foreground/42 focus:border-primary focus:outline-none transition-colors duration-150";
 
   return (
-    <footer id="contact" className="w-full bg-paper-dim text-foreground">
-      {/* ── CTA section ───────────────────────────────────────────── */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 pt-16 md:pt-24 pb-16 md:pb-20">
-        {/* Label */}
-        <p className="annotation text-muted-foreground mb-10 md:mb-14 text-xs tracking-widest uppercase">
-          Get in touch · 04
-        </p>
+    <footer id="contact" className="w-full bg-background text-foreground">
+      <div className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-12 md:py-24">
+        <div className="overflow-hidden border-[3px] border-foreground bg-card">
+          <div className="grid gap-0 lg:grid-cols-[1.08fr_0.92fr]">
+            <div className="border-b-[3px] border-foreground px-6 py-6 lg:border-b-0 lg:border-r-[3px] md:px-8 md:py-8">
+              <p className="annotation text-secondary">Get in touch / 04</p>
 
-        {/* Headline */}
-        <div className="mb-16 md:mb-24">
-          <h2
-            className="font-heading font-medium text-foreground leading-[1.05]"
-            style={{
-              fontSize: "clamp(2.25rem, 6vw, 4.5rem)",
-            }}
-          >
-            Looking for client-facing,
-            <br />
-            data-focused roles
-          </h2>
-          <p
-            className="font-heading font-medium italic text-primary leading-[1.05] mt-1"
-            style={{
-              fontSize: "clamp(2.25rem, 6vw, 4.5rem)",
-            }}
-          >
-            where flexible thinking
-            <br />
-            and communication matters.
-          </p>
-        </div>
-
-        {/* Bottom: blurb + contact rows */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-10 md:gap-16">
-          <p className="annotation normal-case text-muted-foreground text-sm leading-relaxed max-w-xs">
-            GTM, Sales, Analytics, or anything in between.
-            <br />
-            If you&apos;re hiring for a role where ideas and data
-            work together, I&apos;d love to chat.
-          </p>
-
-          {/* Contact rows + email form */}
-          <div className="flex flex-col min-w-[260px]">
-            {contactRows.map((row, i) => (
-              <a
-                key={row.label}
-                href={row.href}
-                target={row.href.startsWith("mailto") ? undefined : "_blank"}
-                rel="noopener noreferrer"
-                className={`flex items-center justify-between gap-8 py-4 no-underline group transition-opacity duration-200 hover:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:rounded-sm ${
-                  i < contactRows.length - 1 ? "border-b border-border" : ""
-                }`}
-              >
-                <span className="annotation text-xs text-muted-foreground tracking-widest uppercase shrink-0">
-                  {row.label}
-                </span>
-                <span className="font-heading text-base font-medium text-foreground text-right">
-                  {row.display}
-                </span>
-              </a>
-            ))}
-
-            {/* Send email toggle */}
-            <div className="mt-6">
-              {status !== "success" ? (
-                <button
-                  onClick={() => setIsOpen((v) => !v)}
-                  className="annotation text-xs tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors duration-150 focus-visible:outline-none focus-visible:underline"
+              <div className="mt-10">
+                <h2
+                  className="font-heading font-black uppercase leading-[0.92] text-foreground"
+                  style={{ fontSize: "clamp(2.7rem, 6vw, 5.6rem)" }}
                 >
-                  {isOpen ? "Close" : "Send me an email →"}
-                </button>
-              ) : (
-                <div className="flex flex-col gap-2">
-                  <p className="annotation text-xs tracking-widest uppercase text-muted-foreground">
-                    Thanks. I&apos;ll be in touch.
-                  </p>
+                  Looking for
+                  <br />
+                  client-facing,
+                  <br />
+                  data-focused roles
+                </h2>
+                <p className="mt-6 max-w-[33rem] text-base leading-8 text-foreground/78 md:text-lg">
+                  GTM, sales, analytics, or anything in between. If you&apos;re hiring for a role where ideas and data work together, I&apos;d love to chat.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-muted px-6 py-6 md:px-8 md:py-8">
+              <div className="space-y-0">
+                {contactRows.map((row, i) => (
+                  <a
+                    key={row.label}
+                    href={row.href}
+                    target={row.href.startsWith("mailto") ? undefined : "_blank"}
+                    rel="noopener noreferrer"
+                    className={`group flex items-center justify-between gap-8 py-4 no-underline transition-colors duration-200 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-muted ${
+                      i < contactRows.length - 1 ? "border-b-[3px] border-foreground" : ""
+                    }`}
+                  >
+                    <span className="annotation text-secondary">{row.label}</span>
+                    <span className="font-heading text-base font-black uppercase tracking-[-0.03em] text-right text-foreground md:text-lg">
+                      {row.display}
+                    </span>
+                  </a>
+                ))}
+              </div>
+
+              <div className="mt-8">
+                {status !== "success" ? (
                   <button
-                    onClick={() => { setStatus("idle"); setIsOpen(false); }}
-                    className="annotation text-xs tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors duration-150 focus-visible:outline-none focus-visible:underline self-start"
+                    onClick={() => setIsOpen((v) => !v)}
+                    className="brutalist-button px-4 py-3 text-[0.72rem] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-muted"
                   >
-                    Close
+                    {isOpen ? "Close form" : "Send an email"}
                   </button>
-                </div>
-              )}
-
-              <AnimatePresence>
-                {isOpen && status !== "success" && (
-                  <motion.div
-                    ref={formRef}
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                    className="overflow-hidden"
-                  >
-                    <form onSubmit={handleSubmit} className="pt-6 flex flex-col gap-5">
-                      {/* Honeypot — hidden from real users */}
-                      <input
-                        type="text"
-                        name="_hp"
-                        value={form._hp}
-                        onChange={(e) => setForm((f) => ({ ...f, _hp: e.target.value }))}
-                        tabIndex={-1}
-                        aria-hidden="true"
-                        className="hidden"
-                      />
-
-                      <div className="flex flex-col gap-1">
-                        <label htmlFor="contact-name" className="annotation text-xs tracking-widest uppercase text-muted-foreground">
-                          Name
-                        </label>
-                        <input
-                          ref={nameInputRef}
-                          id="contact-name"
-                          type="text"
-                          required
-                          maxLength={200}
-                          value={form.name}
-                          onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
-                          placeholder="Your name"
-                          className={inputBase}
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1">
-                        <label htmlFor="contact-email" className="annotation text-xs tracking-widest uppercase text-muted-foreground">
-                          Email
-                        </label>
-                        <input
-                          id="contact-email"
-                          type="email"
-                          required
-                          maxLength={320}
-                          value={form.email}
-                          onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
-                          placeholder="you@example.com"
-                          className={inputBase}
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1">
-                        <label htmlFor="contact-message" className="annotation text-xs tracking-widest uppercase text-muted-foreground">
-                          Message
-                        </label>
-                        <textarea
-                          id="contact-message"
-                          required
-                          maxLength={5000}
-                          rows={4}
-                          value={form.message}
-                          onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
-                          placeholder="What would you like to discuss?"
-                          className={`${inputBase} resize-none`}
-                        />
-                      </div>
-
-                      {status === "error" && (
-                        <div className="flex flex-col gap-1" role="alert">
-                          <p className="annotation text-xs text-destructive normal-case">
-                            {errorMsg || "Something went wrong. Try again or email me directly."}
-                          </p>
-                          <a
-                            href="mailto:andrew.t.lau101@gmail.com"
-                            className="annotation text-xs text-muted-foreground underline normal-case hover:text-foreground transition-colors duration-150"
-                          >
-                            andrew.t.lau101@gmail.com
-                          </a>
-                        </div>
-                      )}
-
-                      <button
-                        type="submit"
-                        disabled={status === "submitting"}
-                        className="annotation text-xs tracking-widest uppercase text-foreground border border-border py-3 px-4 hover:bg-foreground hover:text-background transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-40 disabled:cursor-not-allowed"
-                      >
-                        {status === "submitting" ? "Sending…" : "Send →"}
-                      </button>
-                    </form>
-                  </motion.div>
+                ) : (
+                  <div className="flex flex-col gap-3">
+                    <p className="annotation text-secondary">Thanks. I&apos;ll be in touch.</p>
+                    <button
+                      onClick={() => {
+                        setStatus("idle");
+                        setIsOpen(false);
+                      }}
+                      className="brutalist-button w-fit px-4 py-3 text-[0.72rem] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-muted"
+                    >
+                      Close
+                    </button>
+                  </div>
                 )}
-              </AnimatePresence>
+
+                <AnimatePresence>
+                  {isOpen && status !== "success" && (
+                    <motion.div
+                      ref={formRef}
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-5 border-t-[3px] border-foreground pt-6">
+                        <input
+                          type="text"
+                          name="_hp"
+                          value={form._hp}
+                          onChange={(e) => setForm((f) => ({ ...f, _hp: e.target.value }))}
+                          tabIndex={-1}
+                          aria-hidden="true"
+                          className="hidden"
+                        />
+
+                        <div className="flex flex-col gap-1">
+                          <label htmlFor="contact-name" className="annotation text-secondary">
+                            Name
+                          </label>
+                          <input
+                            ref={nameInputRef}
+                            id="contact-name"
+                            type="text"
+                            required
+                            maxLength={200}
+                            value={form.name}
+                            onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                            placeholder="Your name"
+                            className={inputBase}
+                          />
+                        </div>
+
+                        <div className="flex flex-col gap-1">
+                          <label htmlFor="contact-email" className="annotation text-secondary">
+                            Email
+                          </label>
+                          <input
+                            id="contact-email"
+                            type="email"
+                            required
+                            maxLength={320}
+                            value={form.email}
+                            onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
+                            placeholder="you@example.com"
+                            className={inputBase}
+                          />
+                        </div>
+
+                        <div className="flex flex-col gap-1">
+                          <label htmlFor="contact-message" className="annotation text-secondary">
+                            Message
+                          </label>
+                          <textarea
+                            id="contact-message"
+                            required
+                            maxLength={5000}
+                            rows={4}
+                            value={form.message}
+                            onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
+                            placeholder="What would you like to discuss?"
+                            className={`${inputBase} resize-none`}
+                          />
+                        </div>
+
+                        {status === "error" && (
+                          <div className="flex flex-col gap-1" role="alert">
+                            <p className="annotation text-destructive normal-case">
+                              {errorMsg || "Something went wrong. Try again or email me directly."}
+                            </p>
+                            <a
+                              href="mailto:andrew.t.lau101@gmail.com"
+                              className="annotation text-secondary normal-case underline underline-offset-4"
+                            >
+                              andrew.t.lau101@gmail.com
+                            </a>
+                          </div>
+                        )}
+
+                        <button
+                          type="submit"
+                          disabled={status === "submitting"}
+                          className="brutalist-button w-fit px-4 py-3 text-[0.72rem] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-muted disabled:cursor-not-allowed disabled:opacity-40"
+                        >
+                          {status === "submitting" ? "Sending" : "Send"}
+                        </button>
+                      </form>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* ── Footer strip ──────────────────────────────────────────── */}
-      <div className="border-t border-border px-6 sm:px-8 lg:px-12 py-5">
-        <div className="max-w-7xl mx-auto annotation normal-case text-muted-foreground text-xs">
-          © {new Date().getFullYear()} {name}. All rights reserved.
+      <div className="border-t-[3px] border-foreground bg-accent px-6 py-5 sm:px-8 lg:px-12">
+        <div className="mx-auto max-w-7xl text-[0.72rem] font-bold uppercase tracking-[0.16em] text-accent-foreground">
+          {name} 2026
         </div>
       </div>
     </footer>

@@ -6,12 +6,12 @@ const proofItems = [
   {
     label: "Malloy Group · Consulting",
     outcome:
-      "Competitive analysis, feasibility study, and GTM strategy — three real client engagements across three semesters.",
+      "Competitive analysis, feasibility study, and GTM strategy, three real client engagements across three semesters.",
   },
   {
     label: "ChamberGPT · SFCC Internship",
     outcome:
-      "Production chatbot built on $0 budget. Projected 20–30% reduction in inbound member inquiries.",
+      "Production chatbot built on $0 budget. Projected 20 to 30 percent reduction in inbound member inquiries.",
   },
   {
     label: "Fillmore Ecosystem · BUS496",
@@ -27,9 +27,9 @@ const proofItems = [
 
 export function ProofStrip() {
   return (
-    <section className="w-full py-10 px-6 sm:px-8 lg:px-12 bg-primary overflow-hidden">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
+    <section className="w-full overflow-hidden bg-background px-6 py-10 sm:px-8 lg:px-12">
+      <div className="mx-auto max-w-7xl">
+        <div className="grid grid-cols-1 gap-0 border-[3px] border-foreground sm:grid-cols-2 lg:grid-cols-4">
           {proofItems.map((item, idx) => (
             <motion.div
               key={item.label}
@@ -41,11 +41,16 @@ export function ProofStrip() {
                 ease: [0.22, 1, 0.36, 1],
                 delay: idx * 0.09,
               }}
+              className={[
+                "px-5 py-5 md:px-6 md:py-6",
+                idx > 0 ? "border-t-[3px] border-foreground sm:border-t-0" : "",
+                idx % 2 === 1 ? "bg-card" : "bg-muted",
+                idx === 1 ? "sm:border-l-[3px] sm:border-foreground lg:border-l-0" : "",
+                idx > 1 ? "lg:border-l-[3px] lg:border-foreground" : "",
+              ].join(" ")}
             >
-              <span className="font-mono text-xs tracking-[0.05em] uppercase text-primary-foreground/55">
-                {item.label}
-              </span>
-              <p className="font-heading text-base mt-3 text-primary-foreground leading-snug">
+              <span className="annotation text-secondary">{item.label}</span>
+              <p className="mt-3 font-heading text-[1.02rem] leading-snug text-foreground md:text-[1.08rem]">
                 {item.outcome}
               </p>
             </motion.div>
