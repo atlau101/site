@@ -74,7 +74,7 @@ export function Hero() {
               opacity: 0,
             }}
           >
-            Andrew Lau
+
           </p>
 
           {/* Headline — center */}

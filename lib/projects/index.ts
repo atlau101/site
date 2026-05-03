@@ -8,6 +8,7 @@ import { malloyRebrandlyProject } from './malloy-rebrandly';
 import { malloyAmalProject } from './malloy-amal';
 import { malloyNobleNoteProject } from './malloy-noble-note';
 import { lmuDatathonProject } from './lmu-datathon';
+import { vibeCodingProject } from './vibe-coding';
 
 export const projectRegistry: Record<string, ProjectData> = {
   chambergpt: chambergptProject,
@@ -16,6 +17,7 @@ export const projectRegistry: Record<string, ProjectData> = {
   'uber-analytics': uberAnalyticsProject,
   'wildfire-ml': wildfireMLProject,
   'lmu-datathon': lmuDatathonProject,
+  'vibe-coding': vibeCodingProject,
   'malloy-rebrandly': malloyRebrandlyProject,
   'malloy-amal': malloyAmalProject,
   'malloy-noble-note': malloyNobleNoteProject,

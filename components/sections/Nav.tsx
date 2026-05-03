@@ -23,7 +23,10 @@ export const Navbar: React.FC<NavbarProps> = ({
   // On non-home pages, prefix anchor hrefs with "/" so they navigate home then scroll
   const resolvedLinks = links.map((link) => ({
     ...link,
-    href: !isHome && link.href.startsWith("#") ? `/${link.href}` : link.href,
+    href:
+      !isHome && link.href.startsWith("#") && link.href !== "#contact"
+        ? `/${link.href}`
+        : link.href,
   }));
 
   const [isScrolled, setIsScrolled] = React.useState(false);
@@ -40,7 +43,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string
   ) => {
-    if (isHome && href.startsWith("#")) {
+    if (href.startsWith("#")) {
       e.preventDefault();
       const target = document.getElementById(href.slice(1));
       if (target) {
