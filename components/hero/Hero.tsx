@@ -58,31 +58,17 @@ export function Hero() {
 
       <div
         ref={textRef}
-        className="pointer-events-none absolute inset-0 z-10 flex flex-col justify-between px-6 py-16 sm:px-8 lg:px-12 md:py-24"
+        className="pointer-events-none absolute inset-0 z-10 flex flex-col justify-center px-6 py-16 sm:px-8 lg:px-12 md:py-24"
         style={{ opacity: 0 }}
       >
-        <div className="mx-auto flex h-full w-full max-w-7xl flex-1 flex-col justify-between">
-          <p
-            data-hero-aux
-            className="font-serif italic text-foreground"
-            style={{
-              fontSize: "clamp(1.85rem, 3.8vw + 0.75rem, 4.2rem)",
-              fontWeight: 400,
-              letterSpacing: "-0.02em",
-              lineHeight: 1,
-              opacity: 0,
-            }}
-          >
-            Andrew Lau
-          </p>
-
+        <div className="mx-auto w-full max-w-7xl">
           <h1
             ref={headlineRef}
-            className="pointer-events-auto my-8 max-w-full font-serif font-semibold text-primary md:my-12 md:max-w-[60%]"
+            className="pointer-events-auto max-w-full font-heading font-black uppercase text-primary md:max-w-[65%]"
             style={{
-              letterSpacing: "-0.028em",
-              fontSize: "clamp(2.25rem, 4.8vw + 0.9rem, 5.55rem)",
-              lineHeight: 1.02,
+              letterSpacing: "-0.02em",
+              fontSize: "clamp(1.6rem, 2.8vw + 0.5rem, 3.2rem)",
+              lineHeight: 1.05,
             }}
           >
             {HERO_HEADLINE}
@@ -90,7 +76,7 @@ export function Hero() {
 
           <p
             data-hero-aux
-            className="annotation text-foreground/72"
+            className="annotation mt-4 text-foreground/72"
             style={{ opacity: 0, fontSize: "0.72rem", letterSpacing: "0.08em" }}
           >
             Problem solver · analyst · tinkerer

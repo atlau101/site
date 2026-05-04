@@ -39,7 +39,7 @@ export default function MalloyHubPage() {
           <div className="max-w-4xl mx-auto">
             <div className="mb-8">
               <ReturnHomeAnchorLink
-                targetId="work"
+                targetId="project-malloy-group"
                 className="annotation text-muted-foreground hover:text-foreground transition-colors duration-200 no-underline"
               >
                 ← Back to work

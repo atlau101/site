@@ -121,7 +121,7 @@ export const GroupedFeaturedCard: React.FC<GroupedFeaturedCardProps> = ({
           >
             <div style={{ minHeight: 0 }}>
               <motion.div
-                className="divide-y-[3px] divide-foreground"
+                className="divide-y divide-foreground/40"
                 variants={listVariants}
                 initial="hidden"
                 animate="visible"

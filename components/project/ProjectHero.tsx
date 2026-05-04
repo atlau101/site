@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ViewTransition } from "react";
 import { ProjectData } from "@/lib/projects/types";
+import { getLandingAnchorId } from "@/lib/projects/navigation";
 import { ReturnHomeAnchorLink } from "@/components/sections/ReturnHomeAnchorLink";
 
 interface ProjectHeroProps {
@@ -16,7 +17,7 @@ export const ProjectHero: React.FC<ProjectHeroProps> = ({ project }) => {
       <div className="mx-auto max-w-7xl">
         <div className="mb-8">
           <ReturnHomeAnchorLink
-            targetId="work"
+            targetId={getLandingAnchorId(project.slug)}
             className="inline-flex border-[3px] border-foreground bg-card px-4 py-3 text-[0.72rem] font-bold uppercase tracking-[0.16em] text-foreground transition-colors duration-200 hover:bg-primary hover:text-primary-foreground"
           >
             Back to work

@@ -1,5 +1,19 @@
 import { getProject, projectRegistry } from "./index";
 
+const DATA_SLUGS = [
+  "bus315-data-mining",
+  "uber-analytics",
+  "wildfire-ml",
+  "lmu-datathon",
+] as const;
+
+/** Maps a project slug to the element ID on the landing page that represents it. */
+export function getLandingAnchorId(slug: string): string {
+  if (slug === "malloy" || slug.startsWith("malloy-")) return "project-malloy-group";
+  if ((DATA_SLUGS as readonly string[]).includes(slug)) return "project-data";
+  return `project-${slug}`;
+}
+
 export interface ProjectNavItem {
   href: string;
   eyebrow: string;

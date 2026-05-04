@@ -115,27 +115,27 @@ export default function Home() {
             </div>
             <div className="flex flex-col gap-0 rule-h">
               {/* 1 — Malloy Group */}
-              <div className="rule-h-faint">
+              <div id="project-malloy-group" className="rule-h-faint">
                 <GroupedFeaturedCard {...malloyGroup} />
               </div>
 
               {/* 2 — Data Projects (grouped, inline accordion) */}
-              <div className="rule-h-faint">
+              <div id="project-data" className="rule-h-faint">
                 <GroupedFeaturedCard {...dataProjects} />
               </div>
 
               {/* 3 — ChamberGPT */}
-              <div className="rule-h-faint">
+              <div id="project-chambergpt" className="rule-h-faint">
                 <FeaturedCard {...chamberGPT} />
               </div>
 
               {/* 4 — Fillmore Ecosystem */}
-              <div className="rule-h-faint">
+              <div id="project-fillmore" className="rule-h-faint">
                 <FeaturedCard {...fillmoreEcosystem} />
               </div>
 
               {/* 5 — Vibe Coding */}
-              <div className="rule-h-faint">
+              <div id="project-vibe-coding" className="rule-h-faint">
                 <FeaturedCard {...vibeCoding} />
               </div>
             </div>

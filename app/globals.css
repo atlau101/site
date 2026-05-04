@@ -229,6 +229,16 @@ html {
     text-transform: uppercase;
     font-weight: 700;
     letter-spacing: 0.14em;
+    box-shadow: 4px 4px 0 var(--color-ink);
+    transition: transform 150ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .brutalist-button:hover:not(:disabled) {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--color-ink);
+  }
+  .brutalist-button:active:not(:disabled) {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--color-ink);
   }
   .nav-kinetic-link {
     position: relative;

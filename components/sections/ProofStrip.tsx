@@ -42,9 +42,8 @@ export function ProofStrip() {
                 delay: idx * 0.09,
               }}
               className={[
-                "px-5 py-5 md:px-6 md:py-6",
+                "bg-card px-5 py-5 md:px-6 md:py-6",
                 idx > 0 ? "border-t-[3px] border-foreground sm:border-t-0" : "",
-                idx % 2 === 1 ? "bg-card" : "bg-muted",
                 idx === 1 ? "sm:border-l-[3px] sm:border-foreground lg:border-l-0" : "",
                 idx > 1 ? "lg:border-l-[3px] lg:border-foreground" : "",
               ].join(" ")}
