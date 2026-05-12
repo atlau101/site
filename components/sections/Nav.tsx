@@ -134,8 +134,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             {links.map((link, index) => {
               const isLocalAnchor = link.href.startsWith("#");
-              const isReturnToLandingSection =
-                !isHome && isLocalAnchor && link.href !== "#contact";
+              const isReturnToLandingSection = !isHome && isLocalAnchor;
               const itemClassName =
                 "nav-kinetic-link annotation text-foreground/72 no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card";
 
