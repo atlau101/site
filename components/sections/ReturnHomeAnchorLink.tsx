@@ -24,12 +24,16 @@ export function ReturnHomeAnchorLink({
     } else {
       sessionStorage.removeItem("accordionOpenForSlug");
     }
+    // At the top of the page the hero is in-viewport, so the shared-element
+    // title morph fires cleanly. When scrolled, suppress the morph and use a
+    // plain crossfade to avoid snapshot-position artifacts.
+    const vtTypes = window.scrollY < 20 ? ["backward"] : ["backward-scrolled"];
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const vt = (document as any).startViewTransition;
     if (vt) {
       vt.call(document, {
         update: () => router.push("/", { scroll: false }),
-        types: ["backward"],
+        types: vtTypes,
       });
     } else {
       router.push("/", { scroll: false });
