@@ -2,7 +2,7 @@
 
 ## Design.md
 
-Read at: ~/Projects/Portfolio Project/site/DESIGN.md
+Read at: '/Users/andrew/Projects/Portfolio Project/site/DESIGN.md'
 
 ## Register
 

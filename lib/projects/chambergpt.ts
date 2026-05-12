@@ -43,7 +43,7 @@ export const chambergptProject: ProjectData = {
     {
       title: 'Scoping is half the work.',
       summary: 'An open brief is a test — you need to interview stakeholders to understand what matters.',
-      full: 'Dylan\'s brief was deliberately open — that was the test. My first pass was too broad: basically an AI assistant that could answer anything about SF business. To narrow it down, I had to interview department heads to understand what questions members actually asked. That process took longer than I expected. It also produced better results than any of my initial ideas would have.',
+      full: 'The project brief I was originally handed was broad: create a general purpose tool centered around AI for members. Due to this, my first pass was too broad: basically an AI assistant that could answer anything about SF business. To narrow it down, I had to interview department heads to understand what questions members actually asked. That process took longer than I expected. It also produced better results than any of my initial ideas would have.',
     },
     {
       title: 'A $0 budget is a design constraint, not a footnote.',

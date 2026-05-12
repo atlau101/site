@@ -10,7 +10,7 @@ const palette = {
   base: 'oklch(0.9337 0.004688 142)',
   paper: 'oklch(0.978 0.002 106)',
   paperShadow: 'oklch(0.905 0.006 100)',
-  burgundy: 'oklch(0.34 0.12 12)',
+  contrast: 'oklch(0.30 0.075 348)',
   ink: 'oklch(0.19 0.016 35)',
   line: 'oklch(0.79 0.008 110)',
   ruleBlue: 'oklch(0.78 0.02 235)',
@@ -26,7 +26,7 @@ export const ProjectRedos: React.FC<ProjectRedosProps> = ({ project }) => {
     >
       <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[20rem_1fr] lg:gap-12">
         <div className="space-y-3 lg:pt-2">
-          <p className="annotation" style={{ color: palette.burgundy }}>
+          <p className="annotation" style={{ color: palette.contrast }}>
             POST-PROJECT REFLECTION
           </p>
           <h2
@@ -63,7 +63,7 @@ export const ProjectRedos: React.FC<ProjectRedosProps> = ({ project }) => {
                 />
                 <div
                   className="pointer-events-none absolute inset-y-0 left-[4.6rem] w-[2px]"
-                  style={{ background: palette.burgundy }}
+                  style={{ background: palette.contrast }}
                 />
                 <div className="pointer-events-none absolute left-[1.38rem] top-[2.15rem] flex flex-col gap-[4.45rem]">
                   {[0, 1, 2].map((item) => (
@@ -87,7 +87,7 @@ export const ProjectRedos: React.FC<ProjectRedosProps> = ({ project }) => {
                 >
                   <div
                     className="font-mono text-[10px] uppercase tracking-[0.22em]"
-                    style={{ color: palette.burgundy }}
+                    style={{ color: palette.contrast }}
                   >
                     Redo {String(idx + 1).padStart(2, '0')}
                   </div>

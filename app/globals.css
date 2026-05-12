@@ -15,8 +15,8 @@
   /* Brutalist palette */
   --color-paper: oklch(0.978 0.002 106);
   --color-paper-low: oklch(0.952 0.01 96);
-  --color-paper-container: oklch(0.895 0.018 64);
-  --color-paper-dim: oklch(0.865 0.022 60);
+  --color-paper-container: oklch(0.895 0.008 90);
+  --color-paper-dim: oklch(0.865 0.008 90);
   --color-paper-white: oklch(0.988 0.002 100);
   --color-ink: oklch(0.18 0.018 35);
   --color-forest: oklch(0.31 0.082 142);
@@ -77,11 +77,11 @@
   --popover-foreground: oklch(0.18 0.018 35);
   --primary: oklch(0.31 0.082 142);
   --primary-foreground: oklch(0.97 0.004 105);
-  --secondary: oklch(0.34 0.12 12);
+  --secondary: oklch(0.30 0.075 348);
   --secondary-foreground: oklch(0.97 0.004 105);
-  --muted: oklch(0.895 0.018 64);
+  --muted: oklch(0.895 0.005 90);
   --muted-foreground: oklch(0.38 0.024 35);
-  --accent: oklch(0.34 0.12 12);
+  --accent: oklch(0.2834 0.075 360);
   --accent-foreground: oklch(0.97 0.004 105);
   --destructive: oklch(0.48 0.18 27);
   --border: oklch(0.23 0.018 35);
@@ -92,12 +92,12 @@
   --sidebar-foreground: oklch(0.18 0.018 35);
   --sidebar-primary: oklch(0.31 0.082 142);
   --sidebar-primary-foreground: oklch(0.97 0.004 105);
-  --sidebar-accent: oklch(0.34 0.12 12);
+  --sidebar-accent: oklch(0.30 0.075 348);
   --sidebar-accent-foreground: oklch(0.97 0.004 105);
   --sidebar-border: oklch(0.23 0.018 35);
   --sidebar-ring: oklch(0.31 0.082 142);
   --chart-1: oklch(0.31 0.082 142);
-  --chart-2: oklch(0.34 0.12 12);
+  --chart-2: oklch(0.30 0.075 348);
   --chart-3: oklch(0.57 0.08 60);
   --chart-4: oklch(0.43 0.04 220);
   --chart-5: oklch(0.18 0.018 35);
