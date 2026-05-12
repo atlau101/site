@@ -154,6 +154,21 @@
   }
 }
 
+/* ── Vibe Hub: tab and project content enter ────────────────────────── */
+
+.vibe-content-enter {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 260ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  @starting-style {
+    opacity: 0;
+    transform: translateY(0.6rem);
+  }
+}
+
 /* ── View Transitions: Settled Paper ───────────────────────────────── */
 
 /* Lock the html background so no white flash bleeds through during snapshot capture */

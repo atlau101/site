@@ -1,10 +1,11 @@
-export type VibeTabId = "story" | "environment" | "projects";
+export type VibeTabId = "story" | "environment" | "projects" | "watched";
 export type VibeProjectSlug = "drift" | "workbench" | "augment";
 
 export const vibeTabs: Array<{ id: VibeTabId; label: string; href: string }> = [
   { id: "story", label: "Story", href: "/projects/vibe-coding?tab=story" },
   { id: "environment", label: "Environment", href: "/projects/vibe-coding?tab=environment" },
   { id: "projects", label: "Projects", href: "/projects/vibe-coding?tab=projects" },
+  { id: "watched", label: "Watched", href: "/projects/vibe-coding?tab=watched" },
 ];
 
 export const workflowNotes = [
@@ -116,10 +117,34 @@ export const vibeProjects = [
   },
 ] as const;
 
+export const vibeWatched = [
+  {
+    name: "hermes-agent",
+    owner: "nousresearch",
+    url: "https://github.com/nousresearch/hermes-agent",
+    intent: "Agent design I want to study",
+    body: "Nous Research's take on agent architecture. I'm reading through it to understand patterns I haven't tried yet — how their loop differs from what I've been running.",
+  },
+  {
+    name: "huashu-design",
+    owner: "alchaincyf",
+    url: "https://github.com/alchaincyf/huashu-design",
+    intent: "Visual exploration",
+    body: "Watching for visual and design ideas. Design choices baked into a repo are usually more honest than what makes it into a marketing site.",
+  },
+  {
+    name: "qsv",
+    owner: "dathere",
+    url: "https://github.com/dathere/qsv",
+    intent: "Data tooling to try",
+    body: "Rust CLI for fast CSV work. On the list for the next time I need to manipulate a large dataset without spinning up pandas.",
+  },
+];
+
 export function getVibeProject(slug: string) {
   return vibeProjects.find((project) => project.slug === slug) ?? null;
 }
 
 export function isVibeTabId(value: string): value is VibeTabId {
-  return value === "story" || value === "environment" || value === "projects";
+  return value === "story" || value === "environment" || value === "projects" || value === "watched";
 }
