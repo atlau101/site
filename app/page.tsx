@@ -80,11 +80,11 @@ const fillmoreEcosystem = {
 };
 
 const vibeCoding = {
-  title: "Vibe Coding",
+  title: "Agentic AI Coding",
   outcome:
     "A working lab for AI-assisted iteration, source-control save points, watched open-source tools, and unfinished product ideas.",
-  category: "Agentic SWE · Workflow · WIP",
-  year: "2025–ongoing",
+  category: "Agentic SWE · Entrepreneurship · Product Management",
+  year: "2026–ongoing",
   href: "/projects/vibe-coding",
 };
 

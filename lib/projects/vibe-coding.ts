@@ -2,9 +2,9 @@ import { ProjectData } from "./types";
 
 export const vibeCodingProject: ProjectData = {
   slug: "vibe-coding",
-  title: "Vibe Coding",
+  title: "Agentic AI Coding",
   year: "2025–ongoing",
-  type: "AI-Assisted SWE · Tooling · WIP",
+  type: "Agentic SWE · Entrepreneurship · Product Management",
   skills: [
     "Agentic Coding",
     "Rapid Iteration & Prototyping",

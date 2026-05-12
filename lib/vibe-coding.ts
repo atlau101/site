@@ -11,19 +11,19 @@ export const vibeTabs: Array<{ id: VibeTabId; label: string; href: string }> = [
 export const workflowNotes = [
   {
     label: "My introduction",
-    body: "I picked up Claude Code two months ago with no plan. Just an idea for a calendar app and enough curiosity to see what would break first.",
+    body: "I picked up Claude Code two months ago with no plan. Just an idea for a calendar app and enough curiosity to learn and try.",
   },
   {
     label: "Notice the hidden work",
-    body: "Drift made Google Calendar look like witchcraft. A timer, a saved event, a login — every one of those is a thing someone had to actually write.",
+    body: "Every interaction, button, UX element, design, etc. on an app is something you need to code in. Drift made Google Calendar look like witchcraft. A timer, a saved event, a login — every one of those are things I took for granted before I started building.",
   },
   {
     label: "Git as a save file",
-    body: "Before I touch anything risky, I always commit. Same instinct as saving before a legendary Pokémon encounter — if I accidentally faint it, I can just roll back.",
+    body: "Before I touch anything, risky or not, I always commit or branch. Same instinct as saving before a legendary Pokémon encounter — if I accidentally faint it, I can just roll back.",
   },
   {
-    label: "Critique that builds",
-    body: "At Rebrandly, constantly critiquing the client almost cost me the contract. Now that critique can become a wireframe. Same eye, finally something to do with it.",
+    label: "Critique as Product Development",
+    body: "At Rebrandly, constantly critiquing the client was counterproductive. Yet now, that critique can become a wireframe. Same eye, but now, software is democratized.",
   },
 ];
 
@@ -122,15 +122,15 @@ export const vibeWatched = [
     name: "hermes-agent",
     owner: "nousresearch",
     url: "https://github.com/nousresearch/hermes-agent",
-    intent: "Agent design I want to study",
-    body: "Nous Research's take on agent architecture. I'm reading through it to understand patterns I haven't tried yet — how their loop differs from what I've been running.",
+    intent: "A constantly evolving agent.",
+    body: "OpenClaw but smarter, constantly growing with you by creating its own skills. Definitely want to set aside some tokens and see what this thing's made of.",
   },
   {
     name: "huashu-design",
     owner: "alchaincyf",
     url: "https://github.com/alchaincyf/huashu-design",
-    intent: "Visual exploration",
-    body: "Watching for visual and design ideas. Design choices baked into a repo are usually more honest than what makes it into a marketing site.",
+    intent: "Open Source, CLI-Based Design.",
+    body: "Open source version of Claude-Design. Utilizes CLI instead of Claude-Design's web focus. Makes it so you're not limited by the separate Design limits on Anthropic. Definitely on my list to try when the time arises.",
   },
   {
     name: "qsv",

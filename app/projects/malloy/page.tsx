@@ -41,9 +41,9 @@ export default function MalloyHubPage() {
               <ReturnHomeAnchorLink
                 targetId="project-malloy-group"
                 openSlug="malloy"
-                className="annotation text-muted-foreground hover:text-foreground transition-colors duration-200 no-underline"
+                className="inline-flex border-[3px] border-foreground bg-card px-4 py-3 text-[0.72rem] font-bold uppercase tracking-[0.16em] text-foreground transition-colors duration-200 hover:bg-primary hover:text-primary-foreground"
               >
-                ← Back to work
+                Back to work
               </ReturnHomeAnchorLink>
             </div>
 

@@ -78,7 +78,7 @@ function VibeHeader({ activeTab }: { activeTab: VibeTabId }) {
         <div className="mb-8">
           <ReturnHomeAnchorLink
             targetId="project-vibe-coding"
-            className="annotation text-muted-foreground transition-colors duration-200 hover:text-foreground"
+            className="inline-flex border-[3px] border-foreground bg-card px-4 py-3 text-[0.72rem] font-bold uppercase tracking-[0.16em] text-foreground transition-colors duration-200 hover:bg-primary hover:text-primary-foreground"
           >
             Back to work
           </ReturnHomeAnchorLink>
@@ -87,7 +87,7 @@ function VibeHeader({ activeTab }: { activeTab: VibeTabId }) {
         <div className="rule-h pb-10">
           <ViewTransition name="project-title-vibe-coding">
             <p className="annotation mb-6 text-muted-foreground">
-              VIBE CODING · 2025-ONGOING · AGENTIC SWE
+              AGENTIC SWE · ENTREPRENEURSHIP · PRODUCT MANAGEMENT
             </p>
           </ViewTransition>
 
@@ -97,15 +97,20 @@ function VibeHeader({ activeTab }: { activeTab: VibeTabId }) {
 
           <div className="max-w-[68ch] space-y-5 text-base leading-8 text-foreground/75 md:text-lg">
             <p>
-              I got into <strong>Agentic-coding</strong> — <strong>vibe-coding</strong> as it's better known — with <strong>Claude Code</strong>, not Lovable or Replit. Those are fine
-              for wireframes. But the second you need actual behavior — <strong>persistence,
-                state, a login flow that works</strong> — they fall apart. I wanted to build something real, not just a wireframe.
+              <strong>Vibe coding isn't one prompt</strong> and a finished product. It's a practice: <strong>knowing what you want, building it with agents, inspecting the result, and doing it again</strong>. I've been in this loop for the past two months, trying to <strong>actually understand what I'm building</strong>.
+            </p>
+            <p>This section maps the whole thing.</p>
+            <p>
+              <strong>Story</strong> is how it started and what I've learned.
             </p>
             <p>
-              <strong>Drift</strong>, my take on a productivity tool, was the first thing I tried to build. The <strong>experience of making it</strong> —
-              not the app itself — is what changed <strong>how I look at software</strong>. This section
-              is the story of that, the tools that came out of it, and the product ideas
-              I've been working on since.
+              <strong>Environment</strong> is the workflow and tools I've built around it.
+            </p>
+            <p>
+              <strong>Projects</strong> are the apps that came out of it.
+            </p>
+            <p>
+              <strong>Watched</strong> is what I'm reading right now. Everything here is still moving.
             </p>
           </div>
         </div>
@@ -138,9 +143,17 @@ function StoryTab() {
               tools have their own merit for wireframes and quick prototypes, they're <strong>cardboard houses built on shaky foundations</strong>.
             </p>
             <p>
-              <strong>Drift</strong> is where it clicked. I wanted a calendar app with a persistent
-              Pomodoro timer, and the second I started building it I ran into all the
-              work I didn't know existed. <strong>OAuth. Database state. Event persistence.</strong> The
+              <strong>Instead, I built my foundation on the stronger, SWE adjacent agent: Claude Code.</strong>
+            </p>
+            <p>
+              <em>(I started at a very quick
+                moving time — agents and agent-based productivity has made leaps and bounds in the months leading to me starting,
+                as well as currently.)</em>
+            </p>
+            <p>
+              <strong>Drift</strong> is where I first started, and where things started to click.
+              I wanted a calendar app with a persistent Pomodoro timer, and the second I started building
+              it I ran into all the work I didn't know existed. <strong>OAuth. Database state. Event persistence.</strong> The
               concept of storing something so it survives a page refresh. Every one of
               those felt <strong>obvious in hindsight</strong> and <strong>invisible before</strong>.
             </p>
@@ -183,7 +196,7 @@ function EnvironmentTab() {
         <div>
           <Eyebrow>Environment</Eyebrow>
           <h2 className="mt-4 font-heading text-4xl font-black uppercase leading-[0.94]" style={{ color: palette.ink }}>
-            Tuning the loadout like a co-op mission.
+            Tuning the Dev Environment like a loadout.
           </h2>
           <p className="mt-5 text-sm leading-7" style={{ color: palette.muted }}>
             I'm on GitHub basically every week looking at what <strong>new open-source tools</strong> are dropping — <strong>new agents, MCPs, context file formats, sub-agent harnesses</strong>. Optimizing the dev environment feels exactly like how I used to play co-op games. Same instinct: what's the <strong>fastest way through the mission</strong>, what's the <strong>best setup for the current task</strong>.
@@ -197,7 +210,7 @@ function EnvironmentTab() {
               Where my workflow lives.
             </h3>
             <p className="mt-4 max-w-[58ch] text-sm leading-7" style={{ color: palette.muted }}>
-              Personally love using google's VSCode Antigravity. Has all the knick knacks that makes VSCode so convenient, like file Explorer, Source Control, and various Extensions. Additionally, includes agent integrations with Gemini.
+              Personally love using google's VSCode Antigravity. Has all the knick knacks that makes VSCode so convenient, like file Explorer, Source Control, and various extensions while also including agent integrations with Gemini.
             </p>
             <div className="mt-6">
               <VisualSlot label="Antigravity screenshot" />
@@ -371,12 +384,16 @@ function WatchedTab() {
     <section className="vibe-content-enter px-6 py-16 sm:px-8 lg:px-12" style={{ background: palette.paperLow }}>
       <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[18rem_1fr]">
         <div>
-          <Eyebrow>Watched</Eyebrow>
+          <Eyebrow>For fellow devs.</Eyebrow>
           <h2 className="mt-4 font-heading text-4xl font-black uppercase leading-[0.94]" style={{ color: palette.ink }}>
-            Open source I'm reading.
+            What I'm Looking At.
           </h2>
           <p className="mt-5 text-sm leading-7" style={{ color: palette.muted }}>
-            These aren't my tools. They're open-source repos I'm currently watching, reading through, or planning to try. Building a habit of looking at what other people make is part of the loop.
+            Open source repos I'm watching, or looking to try soon.
+            <p>
+            </p>
+            <p>
+            </p><em>Ranges anywhere from agent Harnesses, to UX/UI tools, to data wrangling — the possibilities and lists go on and on. Seeing what other people make lets me optimize my workflow with their tools, while also providing inspiration.</em>
           </p>
         </div>
 
@@ -405,7 +422,7 @@ function WatchedTab() {
                   target="_blank"
                   rel="noreferrer"
                   className="mt-4 block break-all font-mono text-[11px] underline decoration-foreground/30 underline-offset-4"
-                  style={{ color: palette.contrast }}
+                  style={{ color: palette.green }}
                 >
                   {repo.url}
                 </a>
