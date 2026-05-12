@@ -82,8 +82,8 @@ const fillmoreEcosystem = {
 const vibeCoding = {
   title: "Vibe Coding",
   outcome:
-    "Exploring agentic coding. VSCode. ClaudeCode. Building and learning for fun, constantly experimenting with new Repos & MCPs.",
-  category: "AI assisted SWE/SWD, *WIP*",
+    "A working lab for AI-assisted iteration, source-control save points, watched open-source tools, and unfinished product ideas.",
+  category: "Agentic SWE · Workflow · WIP",
   year: "2025–ongoing",
   href: "/projects/vibe-coding",
 };

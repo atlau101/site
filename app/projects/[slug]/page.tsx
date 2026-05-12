@@ -14,9 +14,11 @@ interface ProjectPageProps {
 }
 
 export async function generateStaticParams() {
-  return getProjectSlugs().map((slug) => ({
-    slug,
-  }));
+  return getProjectSlugs()
+    .filter((slug) => slug !== 'vibe-coding')
+    .map((slug) => ({
+      slug,
+    }));
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
