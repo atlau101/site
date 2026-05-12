@@ -40,6 +40,7 @@ export default function MalloyHubPage() {
             <div className="mb-8">
               <ReturnHomeAnchorLink
                 targetId="project-malloy-group"
+                openSlug="malloy"
                 className="annotation text-muted-foreground hover:text-foreground transition-colors duration-200 no-underline"
               >
                 ← Back to work

@@ -18,6 +18,7 @@ export const ProjectHero: React.FC<ProjectHeroProps> = ({ project }) => {
         <div className="mb-8">
           <ReturnHomeAnchorLink
             targetId={getLandingAnchorId(project.slug)}
+            openSlug={project.slug}
             className="inline-flex border-[3px] border-foreground bg-card px-4 py-3 text-[0.72rem] font-bold uppercase tracking-[0.16em] text-foreground transition-colors duration-200 hover:bg-primary hover:text-primary-foreground"
           >
             Back to work

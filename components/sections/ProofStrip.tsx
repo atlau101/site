@@ -43,9 +43,12 @@ export function ProofStrip() {
               }}
               className={[
                 "bg-card px-5 py-5 md:px-6 md:py-6",
-                idx > 0 ? "border-t-[3px] border-foreground sm:border-t-0" : "",
-                idx === 1 ? "sm:border-l-[3px] sm:border-foreground lg:border-l-0" : "",
-                idx > 1 ? "lg:border-l-[3px] lg:border-foreground" : "",
+                // idx=1: mobile→top border; sm→swap to left border (right col of row 1); lg→left border persists
+                idx === 1 ? "border-t-[3px] border-foreground sm:border-t-0 sm:border-l-[3px]" : "",
+                // idx=2: mobile→top border; sm→top border stays (left col of row 2); lg→swap to left border
+                idx === 2 ? "border-t-[3px] border-foreground lg:border-t-0 lg:border-l-[3px]" : "",
+                // idx=3: mobile→top border; sm→top stays + add left border (right col of row 2); lg→left persists, drop top
+                idx === 3 ? "border-t-[3px] border-foreground sm:border-l-[3px] lg:border-t-0" : "",
               ].join(" ")}
             >
               <span className="annotation text-secondary">{item.label}</span>

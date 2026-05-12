@@ -52,7 +52,20 @@ export const GroupedFeaturedCard: React.FC<GroupedFeaturedCardProps> = ({
   projects,
   href,
 }) => {
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = React.useState(() => {
+    if (typeof window === "undefined") return false;
+    const slug = sessionStorage.getItem("accordionOpenForSlug");
+    if (!slug) return false;
+    const matchesProject = projects.some(
+      (p) => p.href.split("/").pop() === slug,
+    );
+    const matchesHub = href ? href.split("/").pop() === slug : false;
+    return matchesProject || matchesHub;
+  });
+
+  React.useEffect(() => {
+    sessionStorage.removeItem("accordionOpenForSlug");
+  }, []);
 
   return (
     <div className="brutalist-panel overflow-hidden">
@@ -109,7 +122,7 @@ export const GroupedFeaturedCard: React.FC<GroupedFeaturedCardProps> = ({
         </AnimatePresence>
       </button>
 
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, gridTemplateRows: "0fr" }}

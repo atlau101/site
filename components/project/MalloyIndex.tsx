@@ -22,7 +22,11 @@ export const MalloyIndex: React.FC<MalloyIndexProps> = ({ currentSlug }) => {
       >
         <div className="overflow-hidden border-[3px] border-foreground bg-card">
           <div className="flex flex-col">
-            {currentSlug !== "malloy" && (
+            {currentSlug === "malloy" ? (
+              <span className="border-b-[3px] border-foreground bg-primary px-4 py-3 text-[0.68rem] font-bold uppercase tracking-[0.16em] text-primary-foreground no-underline transition-colors hover:bg-accent">
+                Malloy group
+              </span>
+            ) : (
               <Link
                 href="/projects/malloy"
                 className="border-b-[3px] border-foreground bg-primary px-4 py-3 text-[0.68rem] font-bold uppercase tracking-[0.16em] text-primary-foreground no-underline transition-colors hover:bg-accent"
@@ -57,7 +61,11 @@ export const MalloyIndex: React.FC<MalloyIndexProps> = ({ currentSlug }) => {
           aria-label="Malloy Group projects"
           className="flex flex-wrap items-center gap-2"
         >
-          {currentSlug !== "malloy" && (
+          {currentSlug === "malloy" ? (
+            <span className="bg-primary px-3 py-2 text-[0.68rem] font-bold uppercase tracking-[0.16em] text-primary-foreground no-underline">
+              Malloy group
+            </span>
+          ) : (
             <Link
               href="/projects/malloy"
               className="bg-primary px-3 py-2 text-[0.68rem] font-bold uppercase tracking-[0.16em] text-primary-foreground no-underline"
