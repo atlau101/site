@@ -93,7 +93,7 @@ function TakeawaySheet({
               {title}
             </h3>
             <p
-              className="max-w-[42rem] text-[1.02rem] leading-[2.1rem]"
+              className="max-w-[42rem] text-[1.02rem] leading-[1.75rem]"
               style={{ color: palette.ink }}
             >
               {summary}
@@ -117,17 +117,19 @@ function TakeawaySheet({
         >
           <div className="overflow-hidden">
             <div
-              className="border-t px-6 pb-8 pl-[6.25rem] pr-8 pt-6"
+              className="border-t pl-[6.25rem] pr-8"
               style={{
                 borderColor: palette.line,
-                backgroundImage: `repeating-linear-gradient(to bottom, transparent 0, transparent 2.08rem, ${palette.ruleBlue} 2.08rem, ${palette.ruleBlue} 2.15rem)`,
-                backgroundPositionY: "0.5rem",
+                paddingTop: "1.75rem",
+                paddingBottom: "3.5rem",
+                backgroundImage: `repeating-linear-gradient(to bottom, transparent 0, transparent calc(1.75rem - 1px), ${palette.ruleBlue} calc(1.75rem - 1px), ${palette.ruleBlue} 1.75rem)`,
+                backgroundPositionY: "-0.3rem",
               }}
             >
               <RichProjectText
                 text={body}
-                className="max-w-[44rem] space-y-4"
-                paragraphClassName="text-[1.02rem] leading-[2.08rem] text-foreground"
+                className="max-w-[44rem] space-y-[1.75rem]"
+                paragraphClassName="text-[1.02rem] leading-[1.75rem] text-foreground"
                 strongClassName="font-semibold text-foreground"
               />
             </div>
