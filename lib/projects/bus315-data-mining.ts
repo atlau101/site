@@ -7,7 +7,8 @@ export const bus315Project: ProjectData = {
   type: 'Data Mining · ML · R',
   skills: ['R', 'dplyr', 'K-Prototypes Clustering', 'Data Engineering', 'Feature Engineering', 'CRM Analytics'],
   tagline: 'Applied k-prototypes clustering to a mock B2B CRM to surface pipeline segments from messy, mixed-type data.',
-  description: `For my Data Mining course, I applied three core techniques — classification, clustering, and association rule mining — to a domain I actually wanted to work in: B2B SaaS sales. The dataset was a mock CRM with four relational tables (leads, accounts, products, sales agents) that I merged into a single analysis-ready master table using R. The bulk of the work was data engineering: catching key discrepancies, handling NAs intelligently rather than just dropping rows, and engineering derived features like \`days_to_close\` and binary missing-value flags so the clustering algorithm could run without throwing errors. I ran k-prototypes clustering — chosen over standard k-means because the dataset had both numeric and categorical variables — landed on k=5 as the optimal cluster size, and mapped aggregate profiles for each cluster. The dataset was mock, the scale was modest, and this was a class project — but it's an honest demonstration of data thinking applied to a problem I genuinely care about.`,
+  description: `One of my earlier data projects. Part of my Data Mining course. Applied three core techniques — classification, clustering, and association rule mining — to a domain I actually wanted to work in: B2B SaaS sales. Took a mock CRM dataset with four relational tables (leads, accounts, products, sales agents) and merged them into a single analysis-ready master table using R. Performed significant data engineering & cleaning. Ran k-prototypes clustering and mapped aggregate profiles for each cluster. The dataset was mock, the scale was modest, and this was a class project — but it was a good experience to wrangling *somewhat* realistic data.
+  VISUALS & MODEL EVALS COMING SOON.`,
   outputs: [
     { label: 'Sales Motion', value: 'Mapped the full B2B sales motion from prospecting through close' },
     { label: 'Pipeline Segmentation', value: '5 distinct deal/customer segments surfaced from CRM behavior and firmographics' },
@@ -16,19 +17,12 @@ export const bus315Project: ProjectData = {
   lessons: [
     {
       title: 'Real ML starts with the data, not the model.',
-      summary: 'The vast majority of the time went to cleaning — naming mismatches, strategic NA handling, derived feature flags.',
+      summary: 'The vast majority of my time went to cleaning the data: naming mismatches, strategic NA handling, derived feature flags.',
       full: 'Real-world CRM data (even a mock one) is messy. A naming mismatch between tables ("GTXPro" vs. "GTX Pro") would have silently broken the product join. 1,425 NAs in firmographic columns all came from the same independent accounts — dropping them would have removed a legitimate segment. 500 NAs in engage_date all corresponded to prospecting-stage deals — dropping them would have deleted signal, not noise. Each of those required a judgment call, not a formula. The actual model ran in minutes. The cleaning and feature engineering ran for days.',
-    },
-    {
-      title: 'Knowing the domain makes you a better analyst.',
-      summary: 'B2B sales context told me why the signals were sparse and why standard k-means wouldn\'t work.',
-      full: 'This was the first time I applied ML techniques to something I was familiar with and interested in. Because I already understood B2B sales cycles, I could see why deal-stage features mattered more than company revenue, why days_to_close was meaningless for open deals, and why categorical variables like sector and product series were analytically critical — which meant standard k-means (numeric only) wouldn\'t cut it. Domain knowledge told me to reach for k-prototypes before I even opened the documentation. That\'s different from applying a technique because the lecture covered it.',
     },
   ],
   redos: [
-    `When I first did this project, it was part of a simple assignment for my data mining class. I was limited by both my ML knowledge at the time and the assignment requirements, and wasn't able to fully dive into what I would do if I were doing this for a real job. Recently looking back, I realized just what an interesting problem it was — **so I chose to redo it.**`,
-    `**The incomplete piece:** the cluster objects were joined back to sales_master, but segment naming and sales playbook mapping — the actual business deliverable — was left as a documented next step. If I ran this today, I'd take the k=5 cluster outputs, join them back to sales_master, and map actionable sales cadences per segment: which clusters warrant high-touch outreach, which are best handled programmatically, which are likely to churn. I still have the code. That's the next step.`,
-    `On the modeling side: **I'd also explore whether classification** (predicting won/lost from firmographic + behavioral features) adds anything beyond clustering for the playbook problem — and whether association rules surface any interesting product-pairing patterns worth surfacing to sales reps.`,
+    `When I first did this project, it was part of a simple assignment for my data mining class. I was limited by both my ML knowledge at the time and the assignment requirements, and wasn't able to fully dive into what I would do if I were doing this for a real job. Recently looking back, I realized just what an interesting problem it was, **so I chose to redo it.** \n\n **Coming soon.**`,
   ],
   specifics: `## The Four-Table CRM Schema
 

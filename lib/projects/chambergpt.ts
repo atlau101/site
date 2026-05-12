@@ -43,7 +43,7 @@ export const chambergptProject: ProjectData = {
     {
       title: 'Scoping is half the work.',
       summary: 'An open brief is a test — you need to interview stakeholders to understand what matters.',
-      full: 'The project brief I was originally handed was broad: create a general purpose tool centered around AI for members. Due to this, my first pass was too broad: basically an AI assistant that could answer anything about SF business. To narrow it down, I had to interview department heads to understand what questions members actually asked. That process took longer than I expected. It also produced better results than any of my initial ideas would have.',
+      full: 'The project brief I was originally handed was general: create a general purpose tool centered around AI for members. Due to this, my first pass was too broad: basically an AI assistant that could answer anything about SF business. \n\nTo narrow it down, I had to first ask myself: what\'s the purpose of this project? After answering that, I had to interview department heads to understand what questions members actually asked. That process took longer than I expected. However, it also produced better results than any of my initial ideas would have.',
     },
     {
       title: 'A $0 budget is a design constraint, not a footnote.',
@@ -51,19 +51,14 @@ export const chambergptProject: ProjectData = {
       full: 'I evaluated 15 platforms before landing on Voiceflow. Open-source options (Rasa, Botpress) were free but required Python I didn\'t have and server infrastructure the Chamber didn\'t have. No-code platforms had credit limits — and on Voiceflow\'s free plan, every single message costs a credit, AI or prewritten. That made every design decision (how many intro messages, how the loop worked) a cost decision. I wouldn\'t have thought that carefully about flow architecture if budget hadn\'t forced me to.',
     },
     {
-      title: 'Platform evaluation is its own skill.',
-      summary: 'Vendor comparison requires systematic analysis of tradeoffs.',
-      full: 'Before I built anything, I spent time working through Botpress, Rasa, Tidio, Intercom, Drift, HubSpot, ManyChat, Zendesk, Google Dialogflow, Microsoft Bot Framework, and several others. That was my first real vendor evaluation — comparing pricing models, deployment requirements, scalability tradeoffs. The research mattered: Voiceflow was the right call for the constraints.',
-    },
-    {
       title: 'Organizational dynamics shape a job.',
-      summary: 'You have to work within institutional dynamics, not around them.',
+      summary: 'You have to respect and work within institutional dynamics, not around them.',
       full: 'This was my first true internship, where I was employed and working in a functioning company. As a student, you\'re responsible for and allowed to make decisions end-to-end. However, in my first couple weeks, I had to learn to acknowledge organizational constraints. Outdated processes, layers of approval, etc. I learned to be wary of what I can control and what I can\'t, and to work with the constraints I was given.',
     },
   ],
   redos: [
-    `Nowadays, this project wouldn't be all that impressive given how much AI coding has improved in just the last year alone. **If I were given this project again with the tools I have now and the knowledge I have now I'd scrap Voiceflow entirely.** In my handoff memo, I listed a third option alongside Voiceflow and Botpress: build and host the chatbot yourself with Python and LLM API calls. I ruled it out because it was "best suited for someone with CS experience." That was true in Spring 2025. It isn't true now. AI-assisted development tools have closed the gap between what I can imagine and what I can actually build.`,
-    `**The custom solution I couldn't take then is the obvious choice today** — direct LLM API calls (Claude, GPT-4o, Gemini), a proper vector database (Pinecone, Supabase, Chroma) with separate namespaces per category, metadata filtering on queries. Handfuls of other issues I ran into with Voiceflow would be nonexistent now. And instead of 100 platform credits burning through in a few test conversations, LLM API calls for this kind of Q&A cost fractions of a cent.`,
+    `Nowadays, this project wouldn't be all that impressive given how much AI coding has improved in just the last year alone. **If I were given this project again with the tools I have now and the knowledge I have now I'd scrap Voiceflow entirely.** \n\nIn a handoff memo I made, I listed a third option alongside Voiceflow and Botpress: build and host the chatbot yourself with Python and LLM API calls. I ruled it out because it was "best suited for someone with CS experience." That was true in Spring 2025. It isn't true now. AI-assisted development tools have closed the gap between what I can imagine and what I can actually build.`,
+    `**The custom solution I couldn't take then is the obvious choice today** — direct LLM API calls (Claude, GPT-4o, Gemini), a proper vector database (Pinecone, Supabase, Chroma) with separate namespaces per category, metadata filtering on queries. Handfuls of other issues I ran into with Voiceflow would be nonexistent now. And instead of 100 platform credits burning through in a few test conversations, LLM API calls for this kind of Q&A cost fractions of the original cost.`,
     `**The bigger change is what the bot could actually do.** Every feature I hadn't added: capturing membership leads, routing inquiries to the right person, integrating with Salesforce — those are agentic workflows now. The passive FAQ tool becomes something that can take actions. That was imaginable then. Instead, it's buildable now.`,
   ],
   specifics: `## Chatbot Architecture

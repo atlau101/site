@@ -39,7 +39,7 @@ export const ProjectRedos: React.FC<ProjectRedosProps> = ({ project }) => {
             className="max-w-[16rem] text-[0.92rem] uppercase leading-[2.05] tracking-[0.08em]"
             style={{ color: palette.ink, opacity: 0.68 }}
           >
-            Same paper language, sharper edge. These stay open and direct.
+            Redos of project parts I was unsatisfied with, or simply things I would've done differently.
           </p>
         </div>
 
@@ -79,10 +79,12 @@ export const ProjectRedos: React.FC<ProjectRedosProps> = ({ project }) => {
                 </div>
 
                 <div
-                  className="px-6 py-6 pl-[6.25rem] pr-8"
+                  className="pl-[6.25rem] pr-8"
                   style={{
-                    backgroundImage: `repeating-linear-gradient(to bottom, transparent 0, transparent 2.08rem, ${palette.ruleBlue} 2.08rem, ${palette.ruleBlue} 2.15rem)`,
-                    backgroundPositionY: "2.05rem",
+                    paddingTop: "1.75rem",
+                    paddingBottom: "3.5rem",
+                    backgroundImage: `repeating-linear-gradient(to bottom, transparent 0, transparent calc(1.75rem - 1px), ${palette.ruleBlue} calc(1.75rem - 1px), ${palette.ruleBlue} 1.75rem)`,
+                    backgroundPositionY: "0.2rem",
                   }}
                 >
                   <div
@@ -93,8 +95,8 @@ export const ProjectRedos: React.FC<ProjectRedosProps> = ({ project }) => {
                   </div>
                   <RichProjectText
                     text={redo}
-                    className="mt-5 max-w-[44rem] space-y-4"
-                    paragraphClassName="text-[1.02rem] leading-[2.08rem] text-foreground"
+                    className="mt-5 max-w-[44rem] space-y-[1.75rem]"
+                    paragraphClassName="text-[1.02rem] leading-[1.75rem] text-foreground"
                     strongClassName="font-semibold text-foreground"
                   />
                 </div>

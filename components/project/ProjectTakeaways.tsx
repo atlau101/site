@@ -164,7 +164,7 @@ export const ProjectTakeaways: React.FC<ProjectTakeawaysProps> = ({ project }) =
             className="max-w-[16rem] text-[0.92rem] uppercase leading-[2.05] tracking-[0.08em]"
             style={{ color: palette.ink, opacity: 0.68 }}
           >
-            Reflection opens up here. Structure stays hard, voice gets more personal.
+            What I learned. Ranges anywhere from technical skills, to general lessons. <br></br><br></br>My goal is to always learn from an experience, no matter how big or small.
           </p>
         </div>
 
