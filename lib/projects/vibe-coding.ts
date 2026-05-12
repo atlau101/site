@@ -11,23 +11,22 @@ export const vibeCodingProject: ProjectData = {
     "Human-in-the-Loop Debugging",
   ],
   tagline:
-    "An ongoing body of experiments, projects, and workflow enhancements using coding agents, MCPs, and iterations to execute various ideas and increase productivity.",
+    "Two months in. Drift, Workbench, and Augment came out of it, and I'm still tuning the dev environment like a co-op mission loadout.",
   description:
-    "This page is intentionally a work in progress because the project itself still is. The through-line is straightforward: I'm highly involved in using agentic AI, constantly creating, testing, iterating, and discovering new tools. Planning on using this page to showcase my dev environment, repos I've been keeping an eye on, as well as some WIP projects that aren't quite strong enough to be standalone projects yet.",
+    "I picked up Claude Code two months ago starting with Drift, a calendar app idea. That first build taught me what software actually takes — OAuth, database state, UI behavior that doesn't just happen. Since then I've shipped a working Workbench MVP, been designing Augment with a Berkeley co-founder, and spent a lot of time on GitHub looking at what's new in open-source agent tooling. This page tracks all of it.",
   outputs: [
     {
       label: "Current Status",
-      value: "Ongoing, still consolidating the strongest examples",
+      value: "Drift unfinished. Workbench MVP working. Augment still concept-stage.",
     },
-
   ],
   lessons: [
     {
-      title: "WIP.",
+      title: "AI is an intern with all the knowledge in the world, but they're extremely stupid.",
       summary:
-        "WIP.",
+        "The value isn't one perfect prompt — it's knowing what you want, checking what came back, and running the loop again.",
       full:
-        "WIP.",
+        "My professors say it like this: if you put in slop, you get slop out. It took me building Drift to understand what that really means. The agent doesn't know what Drift is supposed to feel like. It doesn't know that the timer needs to stay visible across tab switches, or that the drag behavior should feel snappy, or that an OAuth error should tell the user something useful. I have to know those things, specify them, inspect the result, and iterate. The agent has all the knowledge. The direction has to come from me.",
     },
   ],
   redos: [],

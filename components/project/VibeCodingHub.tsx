@@ -16,7 +16,7 @@ const palette = {
   paperLow: "oklch(0.952 0.01 96)",
   ink: "oklch(0.18 0.018 35)",
   green: "oklch(0.31 0.082 142)",
-  contrast: "oklch(0.34 0.12 12)",
+
   line: "oklch(0.23 0.018 35)",
   muted: "oklch(0.38 0.024 35)",
 };
@@ -37,8 +37,8 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 function VisualSlot({ label }: { label: string }) {
   return (
     <div
-      className="flex min-h-[14rem] items-center justify-center border-[3px] px-5 text-center font-mono text-[10px] uppercase tracking-[0.18em]"
-      style={{ background: palette.base, borderColor: palette.line, color: palette.contrast }}
+      className="flex min-h-[14rem] items-center justify-center border px-5 text-center font-mono text-[10px] uppercase tracking-[0.18em]"
+      style={{ background: palette.base, borderColor: palette.line, color: palette.muted }}
     >
       {label} TBD
     </div>
@@ -90,19 +90,20 @@ function VibeHeader({ activeTab }: { activeTab: VibeTabId }) {
           </ViewTransition>
 
           <h1 className="mb-8 max-w-[12ch] font-heading text-6xl font-black uppercase leading-[0.9] text-primary md:text-8xl">
-            Building made the critique useful.
+            One calendar app, a lot of broken assumptions.
           </h1>
 
           <div className="max-w-[68ch] space-y-5 text-base leading-8 text-foreground/75 md:text-lg">
             <p>
-              I did not get into this by asking a one-prompt builder to make an app. I
-              got into it by trying to build Drift and realizing how much software hides
-              under normal interactions.
+              I got into Agentic-coding — vibe-coding as it's better known — with Claude Code, not Lovable or Replit. Those are fine
+              for wireframes. But the second you need actual behavior — persistence,
+              state, a login flow that works — they fall apart. I wanted to build something real, not just a wireframe.
             </p>
             <p>
-              This section is a live map of that loop: the first app that made software
-              feel real, the tools that became my loadout, and the product ideas that
-              came out of learning how to build with agents.
+              Drift, my take on a productivity tool, was the first thing I tried to build. The experience of making it (partially)—
+              not the app itself — is what changed how I look at software. This section
+              is the story of that, the tools that came out of it, and the product ideas
+              I've been working on since.
             </p>
           </div>
         </div>
@@ -122,28 +123,31 @@ function StoryTab() {
         <div>
           <Eyebrow>Story</Eyebrow>
           <h2 className="mt-4 font-heading text-4xl font-black uppercase leading-[0.94]" style={{ color: palette.ink }}>
-            Not one prompt. A loop.
+            An intern with all the knowledge in the world.
           </h2>
         </div>
         <div className="space-y-8">
-          <div className="space-y-5 text-lg leading-9" style={{ color: palette.ink }}>
+          <div className="max-w-[65ch] space-y-5 text-lg leading-9" style={{ color: palette.ink }}>
             <p>
-              A lot of the AI app-builder pitch feels fake to me. You can get a
-              wireframe fast, but the second you need actual behavior, persistence, or
-              taste, the shortcut starts showing.
+              A lot of people think vibe coding is just throwing a single prompt into
+              Lovable or Replit. I've tried both. The front end looks like AI-generated
+              slop — a bunch of emojis, no back end, nothing that holds up once you need
+              the app to actually do something. Same deal with Figma's AI features. While those
+              tools have their own merit for wireframes and quick prototypes, they're cardboard houses built on shaky foundations.
             </p>
             <p>
-              Drift was the first thing that cut through that. I wanted a calendar tool
-              with draggable tasks and a timer that kept me focused. Then the hidden
-              work showed up: OAuth, saved events, database state, timers, tiny UI
-              expectations I had never thought about because other products made them
-              feel automatic.
+              Drift is where it clicked. I wanted a calendar app with a persistent
+              Pomodoro timer, and the second I started building it I ran into all the
+              work I didn't know existed. OAuth. Database state. Event persistence. The
+              concept of storing something so it survives a page refresh. Every one of
+              those felt obvious in hindsight and invisible before.
             </p>
             <p>
-              That is where agentic coding became interesting. The agent is not magic.
-              It is more like an overpowered intern that still needs direction. The
-              intelligence is in knowing what you want, checking what came back, and
-              being willing to run the loop again.
+              That's what agentic coding is actually about for me. AI is like an intern
+              with all the knowledge in the world, but they're extremely stupid. If you have
+              no clue what you're trying to do, neither will the AI. Slop in, slop out.
+              The loop is: know what you want, inspect what came back, and do it again
+              until it's right.
             </p>
           </div>
 
@@ -177,24 +181,21 @@ function EnvironmentTab() {
         <div>
           <Eyebrow>Environment</Eyebrow>
           <h2 className="mt-4 font-heading text-4xl font-black uppercase leading-[0.94]" style={{ color: palette.ink }}>
-            The loadout became part of the craft.
+            Tuning the loadout like a co-op mission.
           </h2>
           <p className="mt-5 text-sm leading-7" style={{ color: palette.muted }}>
-            The original idea was a home tab for the tools I actually use. Antigravity
-            gets the big slot; the repos below explain what each tool does in the loop.
+            I'm on GitHub basically every week looking at what new open-source tools are dropping — new agents, MCPs, context file formats, sub-agent harnesses. Optimizing the dev environment feels exactly like how I used to play co-op games. Same instinct: what's the fastest way through the mission, what's the best setup for the current task.
           </p>
         </div>
 
         <div className="space-y-6">
-          <div className="border-[3px] p-5" style={{ background: palette.paper, borderColor: palette.line }}>
+          <div className="border p-5" style={{ background: palette.paper, borderColor: palette.line }}>
             <Eyebrow>Antigravity home base</Eyebrow>
             <h3 className="mt-4 font-heading text-4xl font-black uppercase leading-none" style={{ color: palette.ink }}>
-              Screenshot anchor
+              Where the workflow lives.
             </h3>
             <p className="mt-4 max-w-[58ch] text-sm leading-7" style={{ color: palette.muted }}>
-              This is where the main environment screenshot will go. The point is not to
-              show a tool for the sake of showing it, it is to show the actual surface
-              where the workflow happens.
+              The terminal, the MCP setup, the Claude Code config — this is the actual surface where a build session happens. Screenshot coming once the environment stabilizes enough to be worth showing.
             </p>
             <div className="mt-6">
               <VisualSlot label="Antigravity screenshot" />
@@ -203,18 +204,24 @@ function EnvironmentTab() {
 
           <div className="grid gap-3">
             {vibeTools.map((tool) => (
-              <details key={tool.url} className="group border-[3px] p-5" style={{ background: palette.paper, borderColor: palette.line }}>
+              <details key={tool.url} className="group border p-5" style={{ background: palette.paper, borderColor: palette.line }}>
                 <summary className="cursor-pointer list-none">
-                  <div className="flex flex-col gap-3 md:flex-row md:items-baseline md:justify-between">
+                  <div className="flex items-start justify-between gap-3">
                     <div>
                       <Eyebrow>{tool.owner}</Eyebrow>
                       <h3 className="mt-3 font-heading text-3xl font-black uppercase leading-none" style={{ color: palette.ink }}>
                         {tool.name}
                       </h3>
                     </div>
-                    <span className="font-mono text-[10px] uppercase tracking-[0.18em]" style={{ color: palette.contrast }}>
-                      {tool.role}
-                    </span>
+                    <div className="flex shrink-0 flex-col items-end gap-2 pt-0.5 md:flex-row md:items-center md:gap-4">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.18em]" style={{ color: palette.muted }}>
+                        {tool.role}
+                      </span>
+                      <span className="select-none font-mono text-base font-semibold leading-none" style={{ color: palette.green }}>
+                        <span className="group-open:hidden">+</span>
+                        <span className="hidden group-open:inline">−</span>
+                      </span>
+                    </div>
                   </div>
                 </summary>
                 <div className="mt-5 border-t pt-5" style={{ borderColor: palette.line }}>
@@ -226,7 +233,7 @@ function EnvironmentTab() {
                     target="_blank"
                     rel="noreferrer"
                     className="mt-4 block break-all font-mono text-[11px] underline decoration-foreground/30 underline-offset-4"
-                    style={{ color: palette.contrast }}
+                    style={{ color: palette.green }}
                   >
                     {tool.url}
                   </a>
@@ -247,11 +254,10 @@ function ProjectsTab({ activeProjectSlug }: { activeProjectSlug?: VibeProjectSlu
         <div>
           <Eyebrow>Projects</Eyebrow>
           <h2 className="mt-4 font-heading text-4xl font-black uppercase leading-[0.94]" style={{ color: palette.ink }}>
-            Separate pages, same section.
+            Three ideas the building turned up.
           </h2>
           <p className="mt-5 text-sm leading-7" style={{ color: palette.muted }}>
-            Drift and Workbench already have enough context to stand on their own.
-            Augment is still more speculative, but it belongs in the same family.
+            Drift came first and is still unfinished. Workbench is a working MVP. Augment is still mostly an idea — I've been working through it with a UC Berkeley co-founder who came at the same problem from a STEM angle.
           </p>
         </div>
 
@@ -273,7 +279,7 @@ function ProjectsTab({ activeProjectSlug }: { activeProjectSlug?: VibeProjectSlu
                     <h3 className="font-heading text-3xl font-black uppercase leading-none" style={{ color: palette.ink }}>
                       {project.title}
                     </h3>
-                    <span className="font-mono text-[10px] uppercase tracking-[0.18em]" style={{ color: palette.contrast }}>
+                    <span className="font-mono text-[10px] uppercase tracking-[0.18em]" style={{ color: palette.muted }}>
                       {project.status}
                     </span>
                   </div>
@@ -292,20 +298,20 @@ function ProjectsTab({ activeProjectSlug }: { activeProjectSlug?: VibeProjectSlu
 
 function ProjectSubnav({ activeProjectSlug }: { activeProjectSlug: VibeProjectSlug }) {
   return (
-    <section className="px-6 pt-12 sm:px-8 lg:px-12" style={{ background: palette.paperLow }}>
+    <section className="px-6 pt-10 sm:px-8 lg:px-12" style={{ background: palette.paperLow }}>
       <div className="mx-auto max-w-6xl">
-        <div className="flex flex-wrap gap-2 border-y py-3" style={{ borderColor: palette.line }}>
+        <div className="flex flex-wrap gap-1.5 border-b pb-3" style={{ borderColor: palette.line }}>
           {vibeProjects.map((project) => {
             const active = project.slug === activeProjectSlug;
             return (
               <Link
                 key={project.slug}
                 href={project.href}
-                className="border px-4 py-2 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors duration-200"
+                className="border px-3 py-1 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] transition-colors duration-200"
                 style={{
-                  borderColor: palette.line,
+                  borderColor: active ? palette.ink : "oklch(0.23 0.018 35 / 0.4)",
                   background: active ? palette.ink : "transparent",
-                  color: active ? palette.paper : palette.ink,
+                  color: active ? palette.paper : palette.muted,
                 }}
               >
                 {project.title}
@@ -336,14 +342,14 @@ function ProjectDetail({ slug }: { slug: VibeProjectSlug }) {
           <Link
             href="/projects/vibe-coding?tab=projects"
             className="mt-6 inline-block font-mono text-[11px] uppercase tracking-[0.18em] underline decoration-foreground/30 underline-offset-4"
-            style={{ color: palette.contrast }}
+            style={{ color: palette.green }}
           >
-            Back to project tabs
+            ← All projects
           </Link>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[1fr_18rem]">
-          <div className="space-y-5 text-lg leading-9" style={{ color: palette.ink }}>
+          <div className="max-w-[65ch] space-y-5 text-lg leading-9" style={{ color: palette.ink }}>
             {project.detailBody.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
