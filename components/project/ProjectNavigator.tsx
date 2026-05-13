@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ViewTransition } from "react";
 import { ProjectNavigation, ProjectNavItem } from "@/lib/projects/navigation";
 
 interface ProjectNavigatorProps {
@@ -10,10 +11,19 @@ interface NavActionProps {
   align: "left" | "right";
 }
 
+function getNavTransitionSlug(href: string) {
+  const trimmed = href.replace(/\/+$/, "");
+  const segments = trimmed.split("/");
+  const slug = segments[segments.length - 1];
+
+  return slug ? slug.split("?")[0] : "";
+}
+
 function NavAction({ item, align }: NavActionProps) {
   const isPrevious = item.direction === "previous";
   const alignmentClass = align === "right" ? "items-end text-right" : "items-start text-left";
   const arrow = isPrevious ? "←" : "→";
+  const transitionSlug = getNavTransitionSlug(item.href);
 
   return (
     <Link
@@ -26,7 +36,9 @@ function NavAction({ item, align }: NavActionProps) {
       </span>
       <span className="flex items-center gap-1.5 font-heading text-[0.88rem] font-black uppercase tracking-[0.01em] text-foreground sm:text-[0.96rem]">
         {isPrevious && <span aria-hidden="true">{arrow}</span>}
-        <span>{item.label}</span>
+        <ViewTransition name={`project-title-${transitionSlug}`}>
+          <span>{item.label}</span>
+        </ViewTransition>
         {!isPrevious && <span aria-hidden="true">{arrow}</span>}
       </span>
       {item.description && (

@@ -22,6 +22,29 @@ const palette = {
   muted: "oklch(0.38 0.024 35)",
 };
 
+const vibeKpis = [
+  {
+    value: "3",
+    label: "Product ideas advanced",
+    detail: "Drift, Workbench, and Augment moved from loose ideas into scoped product directions.",
+  },
+  {
+    value: "1",
+    label: "Shipped MVP",
+    detail: "Workbench reached a working MVP with the core reflection-first assistant loop in place. Drift, soon.",
+  },
+  {
+    value: "80+",
+    label: "GitHub commits in a month",
+    detail: "The learning showed up as repeated commits, branches, rollbacks, and rebuilds.",
+  },
+  {
+    value: "MANY",
+    label: "Repos Integrated or Watched",
+    detail: "Implemented a LOT of tools into the workflow. Even more starred for future exploration.Constantly on top of new tools.",
+  },
+];
+
 interface VibeCodingHubProps {
   activeTab?: VibeTabId;
   activeProjectSlug?: VibeProjectSlug;
@@ -42,6 +65,44 @@ function VisualSlot({ label }: { label: string }) {
       style={{ background: palette.base, borderColor: palette.line, color: palette.muted }}
     >
       {label} TBD
+    </div>
+  );
+}
+
+function ProofOfMotionBand() {
+  return (
+    <div className="border-y py-6" style={{ borderColor: palette.line }}>
+      <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <Eyebrow>Proof of motion</Eyebrow>
+          <h2 className="mt-3 font-heading text-3xl font-black uppercase leading-none" style={{ color: palette.ink }}>
+            What the loop produced.
+          </h2>
+        </div>
+        <p className="max-w-[30ch] text-sm leading-6" style={{ color: palette.muted }}>
+          Not traction. Practice volume, product judgment, and better taste under version control.
+        </p>
+      </div>
+
+      <dl className="divide-y" style={{ borderColor: palette.line }}>
+        {vibeKpis.map((kpi) => (
+          <div
+            key={kpi.label}
+            className="grid gap-3 py-5 sm:grid-cols-[5.5rem_12rem_1fr] sm:items-baseline"
+            style={{ borderColor: palette.line }}
+          >
+            <dt className="font-heading text-4xl font-black leading-none tabular-nums" style={{ color: palette.green }}>
+              {kpi.value}
+            </dt>
+            <dd className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em]" style={{ color: palette.ink }}>
+              {kpi.label}
+            </dd>
+            <dd className="text-sm leading-7" style={{ color: palette.muted }}>
+              {kpi.detail}
+            </dd>
+          </div>
+        ))}
+      </dl>
     </div>
   );
 }
@@ -115,6 +176,8 @@ function VibeHeader({ activeTab }: { activeTab: VibeTabId }) {
           </div>
         </div>
 
+        <ProofOfMotionBand />
+
         <div className="pt-8">
           <TabNav activeTab={activeTab} />
         </div>
@@ -161,7 +224,8 @@ function StoryTab() {
               That's what <strong>agentic coding</strong> is actually about for me. AI is like an <strong>intern </strong>
               with all the knowledge in the world, but they're <strong>extremely stupid</strong>. If you have
               no clue what you're trying to do, neither will the AI. <strong>Slop in, slop out. </strong>
-              The loop is: <strong>know what you want, inspect what came back, and do it again </strong>
+            </p>
+            <p>The loop is: <strong>know what you want, inspect what came back, and do it again </strong>
               until it's right.
             </p>
           </div>
@@ -185,7 +249,7 @@ function StoryTab() {
           </div>
         </div>
       </div>
-    </section>
+    </section >
   );
 }
 
