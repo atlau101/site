@@ -82,7 +82,7 @@ const fillmoreEcosystem = {
 const vibeCoding = {
   title: "Agentic AI Coding",
   outcome:
-    "A working lab for AI-assisted iteration, source-control save points, watched open-source tools, and unfinished product ideas.",
+    "A documentation of my journey into pseudo-SWE. AI-assisted coding, unfinished product ideas, and a random library of tools I want to look into.",
   category: "Agentic SWE · Entrepreneurship · Product Management",
   year: "2026–ongoing",
   href: "/projects/vibe-coding",

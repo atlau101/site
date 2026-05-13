@@ -80,7 +80,7 @@ function ProofOfMotionBand() {
           </h2>
         </div>
         <p className="max-w-[30ch] text-sm leading-6" style={{ color: palette.muted }}>
-          Not traction. Practice volume, product judgment, and better taste under version control.
+          Practice Volume, Product Judgment, Iteration Through Version Control.
         </p>
       </div>
 
@@ -240,9 +240,7 @@ function StoryTab() {
                   <h3 className="font-heading text-2xl font-black uppercase leading-none" style={{ color: palette.ink }}>
                     {note.label}
                   </h3>
-                  <p className="mt-3 text-sm leading-7" style={{ color: palette.muted }}>
-                    {note.body}
-                  </p>
+                  <p className="mt-3 text-sm leading-7" style={{ color: palette.muted }} dangerouslySetInnerHTML={{ __html: note.body }} />
                 </div>
               </article>
             ))}
@@ -304,9 +302,7 @@ function EnvironmentTab() {
                   </div>
                 </summary>
                 <div className="mt-5 border-t pt-5" style={{ borderColor: palette.line }}>
-                  <p className="max-w-[62ch] text-sm leading-7" style={{ color: palette.muted }}>
-                    {tool.body}
-                  </p>
+                  <p className="max-w-[62ch] text-sm leading-7" style={{ color: palette.muted }} dangerouslySetInnerHTML={{ __html: tool.body }} />
                   <a
                     href={tool.url}
                     target="_blank"
@@ -363,9 +359,7 @@ function ProjectsTab({ activeProjectSlug }: { activeProjectSlug?: VibeProjectSlu
                       {project.status}
                     </span>
                   </div>
-                  <p className="mt-4 max-w-[58ch] text-sm leading-7" style={{ color: palette.muted }}>
-                    {project.summary}
-                  </p>
+                  <p className="mt-4 max-w-[58ch] text-sm leading-7" style={{ color: palette.muted }} dangerouslySetInnerHTML={{ __html: project.summary }} />
                 </div>
               </Link>
             );
@@ -430,13 +424,21 @@ function ProjectDetail({ slug }: { slug: VibeProjectSlug }) {
           </Link>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-[1fr_18rem]">
-          <div className="max-w-[65ch] space-y-5 text-lg leading-9" style={{ color: palette.ink }}>
-            {project.detailBody.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
+        <div className="space-y-8">
+          <div className="border p-6 sm:p-8" style={{ background: palette.paper, borderColor: palette.line }}>
+            <Eyebrow>What it is</Eyebrow>
+            <p className="mt-4 text-xl leading-9 sm:text-2xl sm:leading-10" style={{ color: palette.ink }}>
+              {project.productDef}
+            </p>
           </div>
-          <VisualSlot label={project.visualLabel} />
+          <div className="grid gap-6 lg:grid-cols-[1fr_18rem]">
+            <div className="max-w-[65ch] space-y-5 text-lg leading-9" style={{ color: palette.ink }}>
+              {project.detailBody.map((paragraph, idx) => (
+                <p key={idx} className="mb-5" dangerouslySetInnerHTML={{ __html: paragraph }} />
+              ))}
+            </div>
+            <VisualSlot label={project.visualLabel} />
+          </div>
         </div>
       </div>
     </section>
@@ -478,9 +480,7 @@ function WatchedTab() {
                 </div>
               </summary>
               <div className="mt-5 border-t pt-5" style={{ borderColor: palette.line }}>
-                <p className="max-w-[62ch] text-sm leading-7" style={{ color: palette.muted }}>
-                  {repo.body}
-                </p>
+                <p className="max-w-[62ch] text-sm leading-7" style={{ color: palette.muted }} dangerouslySetInnerHTML={{ __html: repo.body }} />
                 <a
                   href={repo.url}
                   target="_blank"
