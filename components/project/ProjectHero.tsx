@@ -47,21 +47,21 @@ export const ProjectHero: React.FC<ProjectHeroProps> = ({ project }) => {
             className="bg-primary md:col-span-5 md:border-l-[3px] md:border-foreground"
           >
             <div className="grid grid-cols-2 gap-4 border-b-[3px] border-foreground px-5 py-5 md:px-7">
-              <span className="annotation text-primary-foreground/72">Year</span>
+              <span className="annotation !text-primary-foreground">Year</span>
               <p className="font-heading text-lg font-black uppercase tracking-[-0.03em] text-primary-foreground">
                 {project.year}
               </p>
             </div>
 
             <div className="grid grid-cols-2 gap-4 border-b-[3px] border-foreground px-5 py-5 md:px-7">
-              <span className="annotation text-primary-foreground/72">Type</span>
+              <span className="annotation !text-primary-foreground">Type</span>
               <p className="font-heading text-lg font-black uppercase tracking-[-0.03em] text-primary-foreground">
                 {project.type}
               </p>
             </div>
 
             <div className="grid grid-cols-2 gap-4 px-5 py-5 md:px-7">
-              <span className="annotation text-primary-foreground/72">Skills</span>
+              <span className="annotation !text-primary-foreground">Skills</span>
               <div className="space-y-2">
                 {project.skills.map((skill, i) => (
                   <p

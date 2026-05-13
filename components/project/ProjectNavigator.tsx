@@ -81,7 +81,7 @@ export function ProjectNavigator({ navigation }: ProjectNavigatorProps) {
             </div>
 
             <div className="hidden min-w-0 flex-col justify-center border-x-[2px] border-foreground bg-primary px-3 text-center lg:flex">
-              <span className="annotation text-primary-foreground/72" style={{ fontSize: "0.62rem" }}>
+              <span className="annotation !text-primary-foreground" style={{ fontSize: "0.62rem" }}>
                 Current project
               </span>
               <span className="font-heading text-[0.7rem] font-black uppercase tracking-[0.04em] text-primary-foreground">
