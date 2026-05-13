@@ -117,11 +117,10 @@ function TabNav({ activeTab }: { activeTab: VibeTabId }) {
             key={tab.id}
             href={tab.href}
             scroll={false}
-            className="border px-4 py-2 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors duration-200"
+            className={`border px-4 py-2 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors duration-200${!active ? " hover:bg-paper-low" : ""}`}
             style={{
               borderColor: palette.line,
-              background: active ? palette.ink : "transparent",
-              color: active ? palette.paper : palette.ink,
+              ...(active ? { background: palette.ink, color: palette.paper } : { color: palette.ink }),
             }}
           >
             {tab.label}
@@ -281,7 +280,7 @@ function EnvironmentTab() {
 
           <div className="grid gap-3">
             {vibeTools.map((tool) => (
-              <details key={tool.url} className="group border p-5" style={{ background: palette.paper, borderColor: palette.line }}>
+              <details key={tool.url} className="group border border-rule bg-paper p-5 transition-colors duration-200 hover:border-ink hover:bg-paper-low" style={{}}>
                 <summary className="cursor-pointer list-none">
                   <div className="flex items-start justify-between gap-3">
                     <div>
@@ -344,10 +343,10 @@ function ProjectsTab({ activeProjectSlug }: { activeProjectSlug?: VibeProjectSlu
                 key={project.slug}
                 href={project.href}
                 scroll={false}
-                className="grid gap-5 border-b py-8 transition-colors duration-200 hover:bg-paper md:grid-cols-[5rem_1fr]"
-                style={{ borderColor: palette.line, background: active ? palette.paper : "transparent" }}
+                className={`group grid gap-5 border-b py-8 transition-colors duration-200 md:grid-cols-[5rem_1fr]${!active ? " hover:bg-paper" : ""}`}
+                style={{ borderColor: palette.line, ...(active ? { background: palette.paper } : {}) }}
               >
-                <span className="font-heading text-5xl font-black leading-none tabular-nums" style={{ color: active ? palette.green : "oklch(0.18 0.018 35 / 0.25)" }}>
+                <span className={`font-heading text-5xl font-black leading-none tabular-nums transition-colors duration-200${active ? "" : " text-[oklch(0.18_0.018_35/0.25)] group-hover:text-forest"}`} style={active ? { color: palette.green } : undefined}>
                   {project.num}
                 </span>
                 <div>
@@ -382,11 +381,11 @@ function ProjectSubnav({ activeProjectSlug }: { activeProjectSlug: VibeProjectSl
                 key={project.slug}
                 href={project.href}
                 scroll={false}
-                className="border px-3 py-1 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] transition-colors duration-200"
+                className={`border px-3 py-1 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] transition-colors duration-200${!active ? " hover:bg-paper-low" : ""}`}
                 style={{
-                  borderColor: active ? palette.ink : "oklch(0.23 0.018 35 / 0.4)",
-                  background: active ? palette.ink : "transparent",
-                  color: active ? palette.paper : palette.muted,
+                  ...(active
+                    ? { borderColor: palette.ink, background: palette.ink, color: palette.paper }
+                    : { borderColor: "oklch(0.23 0.018 35 / 0.4)", color: palette.muted }),
                 }}
               >
                 {project.title}
@@ -456,16 +455,15 @@ function WatchedTab() {
           </h2>
           <p className="mt-5 text-sm leading-7" style={{ color: palette.muted }}>
             Open source repos I'm watching, or looking to try soon.
-            <p>
-            </p>
-            <p>
-            </p><em>Ranges anywhere from agent Harnesses, to UX/UI tools, to data wrangling — the possibilities and lists go on and on. Seeing what other people make lets me optimize my workflow with their tools, while also providing inspiration.</em>
+            <p></p>
+            <p></p>
+            <em>Ranges anywhere from agent Harnesses, to UX/UI tools, to data wrangling — the possibilities and lists go on and on. Seeing what other people make lets me optimize my workflow with their tools, while also providing inspiration.</em>
           </p>
         </div>
 
         <div className="grid gap-3">
           {vibeWatched.map((repo) => (
-            <details key={repo.url} className="group border-[3px] p-5" style={{ background: palette.paper, borderColor: palette.line }}>
+            <details key={repo.url} className="group border-[3px] border-rule bg-paper p-5 transition-colors duration-200 hover:border-ink hover:bg-paper-low" style={{}}>
               <summary className="cursor-pointer list-none">
                 <div className="flex flex-col gap-3 md:flex-row md:items-baseline md:justify-between">
                   <div>
