@@ -6,6 +6,14 @@ import { motion, useScroll } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { ReturnHomeAnchorLink } from "./ReturnHomeAnchorLink";
 
+function openMobileSocial(e: React.MouseEvent, appScheme: string, webUrl: string) {
+  if (typeof navigator === "undefined") return;
+  if (!/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) return;
+  e.preventDefault();
+  window.location.href = appScheme;
+  setTimeout(() => { window.open(webUrl, "_blank", "noopener,noreferrer"); }, 500);
+}
+
 interface NavbarProps {
   name?: string;
   links?: Array<{ label: string; href: string }>;
@@ -163,6 +171,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn profile"
+                onClick={(e) => openMobileSocial(e, "linkedin://in/atlau101/", "https://www.linkedin.com/in/atlau101/")}
                 className="flex h-11 w-11 touch-manipulation items-center justify-center text-foreground/40 transition-colors duration-200 hover:text-foreground active:bg-muted active:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card md:h-auto md:w-auto"
               >
                 <svg viewBox="0 0 24 24" fill="currentColor" className="h-[18px] w-[18px] md:h-3.5 md:w-3.5" aria-hidden="true">
@@ -174,6 +183,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub profile"
+                onClick={(e) => openMobileSocial(e, "github://github.com/atlau101", "https://github.com/atlau101")}
                 className="flex h-11 w-11 touch-manipulation items-center justify-center text-foreground/40 transition-colors duration-200 hover:text-foreground active:bg-muted active:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card md:h-auto md:w-auto"
               >
                 <svg viewBox="0 0 24 24" fill="currentColor" className="h-[18px] w-[18px] md:h-3.5 md:w-3.5" aria-hidden="true">
