@@ -3,6 +3,9 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 
+const ABOUT_SHORT =
+  "I'm drawn to problems that don't arrive labeled — the kind where figuring out what you're dealing with is most of the work. That's the thread through consulting, data analysis, and machine learning: get clear on what actually matters, get something in front of real feedback early, and revise where reality pushes back.";
+
 export function AboutStrip() {
   return (
     <section
@@ -44,15 +47,23 @@ export function AboutStrip() {
               </p>
             </div>
             <div className="space-y-0 px-5 py-5 md:px-7 md:py-7">
-              <p className="max-w-[62ch] text-base leading-7 text-foreground md:text-lg md:leading-8">
-                I&apos;ve always been drawn to problems that don&apos;t come with obvious answers, the kind where you have to figure out what you&apos;re even dealing with before you can start solving it. I learned this after various experiences in consulting, business development, and data analysis and machine learning. The thread connecting all of it was never the domain, but the process of making sense of something messy.
+              {/* Mobile: single hand-cut paragraph */}
+              <p className="md:hidden max-w-[62ch] text-base leading-7 text-foreground">
+                {ABOUT_SHORT}
               </p>
-              <p className="mt-5 max-w-[62ch] border-t border-foreground pt-5 text-base leading-7 text-foreground md:text-lg md:leading-8">
-                What I&apos;ve learned along the way is that clarity comes from knowing what gaps in knowledge actually matter. If I don&apos;t know something, why is that so? I also learned the hard way that there&apos;s a difference between preparing to act and actually acting. Getting something in front of real feedback early almost always teaches you more than spending twice as long refining it in isolation.
-              </p>
-              <p className="mt-5 max-w-[62ch] border-t border-foreground pt-5 text-base leading-7 text-foreground md:text-lg md:leading-8">
-                That&apos;s shaped how I work now: get to a clear baseline quickly, remove anything blocking that path, and build from there. Everything else is a branch, not a blocker. From there, I revise where reality pushes back.
-              </p>
+
+              {/* Desktop: full three-paragraph version */}
+              <div className="hidden md:block">
+                <p className="max-w-[62ch] text-lg leading-8 text-foreground">
+                  I&apos;ve always been drawn to problems that don&apos;t come with obvious answers, the kind where you have to figure out what you&apos;re even dealing with before you can start solving it. I learned this after various experiences in consulting, business development, and data analysis and machine learning. The thread connecting all of it was never the domain, but the process of making sense of something messy.
+                </p>
+                <p className="mt-5 max-w-[62ch] border-t border-foreground pt-5 text-lg leading-8 text-foreground">
+                  What I&apos;ve learned along the way is that clarity comes from knowing what gaps in knowledge actually matter. If I don&apos;t know something, why is that so? I also learned the hard way that there&apos;s a difference between preparing to act and actually acting. Getting something in front of real feedback early almost always teaches you more than spending twice as long refining it in isolation.
+                </p>
+                <p className="mt-5 max-w-[62ch] border-t border-foreground pt-5 text-lg leading-8 text-foreground">
+                  That&apos;s shaped how I work now: get to a clear baseline quickly, remove anything blocking that path, and build from there. Everything else is a branch, not a blocker. From there, I revise where reality pushes back.
+                </p>
+              </div>
             </div>
           </motion.div>
         </div>

@@ -85,7 +85,7 @@ export function Hero() {
       </div>
 
       <p
-        className="pointer-events-none absolute bottom-5 left-1/2 z-20 w-full max-w-[18rem] -translate-x-1/2 px-6 text-center annotation select-none md:bottom-3 xl:bottom-8"
+        className="pointer-events-none absolute bottom-5 left-1/2 z-20 w-full max-w-[18rem] -translate-x-1/2 px-6 text-center annotation select-none hidden md:block md:bottom-3 xl:bottom-8"
         style={{
           opacity: 0.38,
           letterSpacing: "0.12em",
