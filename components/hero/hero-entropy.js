@@ -700,6 +700,9 @@ export function init(canvasId, textOverlayEl, headlineEl, options = {}) {
 
   return {
     setPaused,
+    triggerCoherence() {
+      startSignal(Date.now());
+    },
     destroy() {
       cancelAnimationFrame(rafId);
       clearTimeout(resumeTimer);
