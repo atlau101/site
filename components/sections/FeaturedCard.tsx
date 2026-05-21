@@ -37,15 +37,15 @@ export const FeaturedCard: React.FC<FeaturedCardProps> = ({
       <Link
         href={href}
         transitionTypes={["forward"]}
-        className="group block w-full cursor-pointer no-underline"
+        className="group block w-full cursor-pointer touch-manipulation no-underline"
       >
-        <div className="brutalist-panel overflow-hidden transition-transform duration-200 group-hover:-translate-y-[3px] group-hover:translate-x-[3px]">
+        <div className="brutalist-panel overflow-hidden transition-transform duration-200 group-hover:-translate-y-[3px] group-hover:translate-x-[3px] group-active:translate-x-[1px] group-active:translate-y-[1px] group-active:bg-muted md:group-active:bg-card">
           <div className="grid gap-0 md:grid-cols-3">
             <div className="flex flex-col justify-between gap-6 px-6 py-6 md:col-span-2 md:px-8 md:py-8">
               <span className="annotation text-secondary">{category}</span>
 
               <ViewTransition name={`project-title-${slug}`}>
-                <h3 className="font-heading text-3xl font-black leading-[0.95] text-foreground transition-colors duration-200 group-hover:text-primary md:text-5xl">
+                <h3 className="font-heading text-3xl font-black leading-[0.95] text-foreground transition-colors duration-200 group-hover:text-primary group-active:text-primary md:text-5xl">
                   {title}
                 </h3>
               </ViewTransition>

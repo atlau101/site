@@ -104,12 +104,12 @@ export default function Home() {
         {/* Featured projects — Tier 1 */}
         <section
           id="work"
-          className="w-full py-16 md:py-24 px-6 sm:px-8 lg:px-12 bg-background"
+          className="w-full bg-background px-6 py-10 sm:px-8 md:py-24 lg:px-12"
         >
           <div className="max-w-7xl mx-auto">
             <div className="mb-10 space-y-3">
               <p className="annotation text-secondary">Featured work / 02</p>
-              <h2 className="font-heading text-4xl md:text-5xl font-black uppercase leading-[0.94] text-foreground">
+              <h2 className="font-heading text-3xl font-black uppercase leading-[0.94] text-foreground sm:text-4xl md:text-5xl">
                 Featured work
               </h2>
             </div>

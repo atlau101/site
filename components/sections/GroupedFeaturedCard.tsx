@@ -68,11 +68,66 @@ export const GroupedFeaturedCard: React.FC<GroupedFeaturedCardProps> = ({
   }, []);
 
   return (
-    <div className="brutalist-panel overflow-hidden">
+    <>
+      <details open className="brutalist-panel overflow-hidden md:hidden">
+        <summary className="cursor-pointer space-y-5 px-6 py-6 text-left transition-colors duration-200 active:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset">
+          <span className="annotation text-secondary">{category}</span>
+
+          <div className="flex items-start justify-between gap-4">
+            <h3 className="flex-1 font-heading text-3xl font-black leading-[0.95] text-foreground">
+              {title}
+            </h3>
+            <span className="shrink-0 border-[3px] border-foreground bg-primary px-3 py-2 text-[0.72rem] font-bold uppercase tracking-[0.16em] text-primary-foreground">
+              Projects
+            </span>
+          </div>
+
+          <p className="max-w-[42rem] text-base leading-7 text-foreground/78">
+            {outcome}
+          </p>
+        </summary>
+
+        <div className="divide-y divide-foreground/40 border-t-[3px] border-foreground">
+          {href && (
+            <Link
+              href={href}
+              transitionTypes={["forward"]}
+              className="flex min-h-11 touch-manipulation items-center justify-between bg-card px-6 py-5 no-underline transition-colors duration-200 active:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
+            >
+              <div className="flex flex-col gap-2">
+                <span className="font-heading text-2xl font-black leading-tight text-foreground">
+                  Open {title}
+                </span>
+                <span className="annotation text-secondary">Project hub</span>
+              </div>
+              <span className="ml-4 shrink-0 text-2xl text-primary">→</span>
+            </Link>
+          )}
+
+          {projects.map((project) => (
+            <Link
+              key={project.href}
+              href={project.href}
+              transitionTypes={["forward"]}
+              className="flex min-h-11 touch-manipulation items-center justify-between bg-background px-6 py-5 no-underline transition-colors duration-200 active:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
+            >
+              <div className="flex flex-col gap-2">
+                <span className="font-heading text-xl font-black leading-tight text-foreground">
+                  {project.title}
+                </span>
+                <span className="annotation text-secondary">{project.category}</span>
+              </div>
+              <span className="ml-4 shrink-0 text-xl text-primary">→</span>
+            </Link>
+          ))}
+        </div>
+      </details>
+
+      <div className="brutalist-panel hidden overflow-hidden md:block">
       <button
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
-        className="w-full cursor-pointer space-y-5 px-6 py-6 text-left transition-colors duration-200 hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset md:px-8 md:py-8"
+        className="w-full cursor-pointer space-y-5 px-6 py-6 text-left transition-colors duration-200 hover:bg-muted active:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset md:px-8 md:py-8"
       >
         <span className="annotation text-secondary">{category}</span>
 
@@ -145,7 +200,7 @@ export const GroupedFeaturedCard: React.FC<GroupedFeaturedCardProps> = ({
                     <Link
                       href={href}
                       transitionTypes={["forward"]}
-                      className="group flex items-center justify-between bg-card px-6 py-6 no-underline transition-colors duration-200 hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset md:px-8"
+                    className="group flex min-h-11 touch-manipulation items-center justify-between bg-card px-6 py-6 no-underline transition-colors duration-200 hover:bg-muted active:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset md:px-8"
                     >
                       <div className="flex flex-col gap-2">
                         <span className="font-heading text-2xl font-black leading-tight text-foreground">
@@ -167,7 +222,7 @@ export const GroupedFeaturedCard: React.FC<GroupedFeaturedCardProps> = ({
                       <Link
                         href={project.href}
                         transitionTypes={["forward"]}
-                        className="group flex items-center justify-between bg-background px-6 py-5 no-underline transition-colors duration-200 hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset md:px-8"
+                      className="group flex min-h-11 touch-manipulation items-center justify-between bg-background px-6 py-5 no-underline transition-colors duration-200 hover:bg-muted active:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset md:px-8"
                       >
                         <div className="flex flex-col gap-2">
                           <ViewTransition name={`project-title-${pSlug}`}>
@@ -189,6 +244,7 @@ export const GroupedFeaturedCard: React.FC<GroupedFeaturedCardProps> = ({
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+      </div>
+    </>
   );
 };

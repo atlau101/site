@@ -154,3 +154,60 @@ The shape language is strictly orthogonal. A border-radius of 0px is applied to 
 
 ### Lists
 - Use simple, hanging indents or numbered lists in the Monospace font style to maintain the feeling of a structured memo.
+
+## Responsive / Mobile
+
+Mobile is a deliberately simpler reading mode. Same aesthetic, same content — calmer density, no hover dependency.
+
+### Breakpoint model
+Single codebase. Tailwind `md:` (≥768px) is the desktop threshold. No separate routes, no `.mobile.tsx` files.
+
+### Type scale on mobile (below `md:`)
+| Token | Desktop | Mobile |
+|---|---|---|
+| `display-lg` | 4.5rem / lh 1.1 | 2.75rem / lh 1.15 |
+| `headline-lg` | 2.5rem / lh 1.2 | 1.75rem / lh 1.25 |
+| `body-lg` | 1.25rem / lh 1.7 | 1.0625rem / lh 1.55 |
+
+Body measure: cap at ~62ch on mobile (vs 65–75ch desktop).
+
+### Spacing on mobile
+- Section padding baseline: `py-10` mobile / `py-24` desktop.
+- Block gaps: reduce `ProofStrip` and `AboutStrip` spacing so they read as one scroll-glance.
+
+### Interaction rules (mobile)
+- **No hover-only affordances.** Every state visible on `:hover` must be persistent or available via tap/`:active`. This is a hard rule — not a guideline.
+- `pointer: coarse` media query can supplement Tailwind breakpoints when a JS-free CSS-only solution is sufficient.
+
+### Component-level decisions
+
+**Nav (`Nav.tsx`)**
+- Kinetic per-character ink animation: disabled below `md:`. Render plain text.
+- Section anchors: collapse to a `Menu` label (the word, not a hamburger) that opens a native `<dialog>` sheet. Links rendered at `headline-md` scale inside.
+- LinkedIn/GitHub icons: bump from 14px to 18px hit area on mobile.
+- SF clock: `hidden md:flex` — leave it.
+
+**FeaturedCard / GroupedFeaturedCard**
+- Whole card is a tap target on mobile (single `<Link>` wrapping title + outcome + category).
+- `View →` / chevron CTA: always rendered; `opacity-60` on desktop, full opacity on mobile.
+- `GroupedFeaturedCard` children: start expanded on mobile. Use `<details>`/`<summary>` or `defaultOpen` prop. Desktop keeps the click/hover reveal.
+- Child link tap target: ≥44px height.
+
+**VisualsSlider**
+- Keep the indexed slider model. Add horizontal swipe on the visual frame without replacing the counter, caption, or keyboard controls.
+- Prev/next arrows: always visible and sized for mobile touch.
+
+**ProjectNavigator**
+- Secondary metadata: always rendered on mobile (no hover-reveal).
+- Layout: stacked vertical pair on mobile instead of horizontal.
+
+**ProjectHero / View Transitions**
+- Verify the `ViewTransition name={project-title-${slug}}` morph on Safari iOS.
+- If it stutters: gate with `(prefers-reduced-motion: no-preference) and (pointer: fine)`.
+
+**Hero canvas**
+- Not redesigned for mobile.
+- Perf gate: if below 30fps on real iPhone (check via Safari devtools), render a static settled-frame fallback gated on `matchMedia('(max-width: 640px)')` + `useReducedMotion()`.
+
+### Touch feedback
+Every interactive element must give a visible `:active` state — a background tint shift is sufficient. No element should look unpressed after a tap.

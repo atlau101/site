@@ -29,7 +29,7 @@ function NavAction({ item, align }: NavActionProps) {
     <Link
       href={item.href}
       transitionTypes={[item.transitionType]}
-      className={`group flex flex-col justify-center gap-1 border-[2px] border-foreground bg-background px-3 py-2.5 no-underline transition-transform duration-200 hover:-translate-y-[1px] hover:translate-x-[1px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card sm:px-4 ${alignmentClass}`}
+      className={`group flex min-h-11 touch-manipulation flex-col justify-center gap-1 border-[2px] border-foreground bg-background px-3 py-2.5 no-underline transition-transform duration-200 hover:-translate-y-[1px] hover:translate-x-[1px] active:translate-x-[1px] active:translate-y-[1px] active:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card sm:px-4 ${alignmentClass}`}
     >
       <span className="annotation text-secondary" style={{ fontSize: "0.64rem" }}>
         {item.eyebrow}
@@ -75,7 +75,7 @@ export function ProjectNavigator({ navigation }: ProjectNavigatorProps) {
             align={singleAction.direction === "previous" ? "left" : "right"}
           />
         ) : (
-          <div className="grid grid-cols-2 gap-1.5 lg:flex lg:items-stretch">
+          <div className="grid gap-1.5 sm:grid-cols-2 lg:flex lg:items-stretch">
             <div className="lg:flex-1">
               <NavAction item={previous!} align="left" />
             </div>

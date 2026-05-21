@@ -271,9 +271,16 @@ html {
   }
 
   .text-display {
-    font-size: clamp(3.2rem, 6vw + 1rem, 7rem);
-    line-height: 0.92;
+    font-size: clamp(2.75rem, 8vw + 0.35rem, 7rem);
+    line-height: 0.98;
     letter-spacing: -0.06em;
+  }
+
+  @media (min-width: 768px) {
+    .text-display {
+      font-size: clamp(3.2rem, 6vw + 1rem, 7rem);
+      line-height: 0.92;
+    }
   }
 
   .mega-margin {
