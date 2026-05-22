@@ -7,6 +7,7 @@ export const bus315Project: ProjectData = {
   type: 'Data Mining · ML · R',
   skills: ['R', 'dplyr', 'K-Prototypes Clustering', 'Data Engineering', 'Feature Engineering', 'CRM Analytics'],
   tagline: 'Applied k-prototypes clustering to a mock B2B CRM to surface pipeline segments from messy, mixed-type data.',
+  descriptionLead: `Applied k-prototypes clustering to a mock B2B CRM in a Data Mining course, surfacing five distinct pipeline segments from mixed-type data. The dataset was synthetic and the scale was modest, but the work taught me how much of real ML happens before the model runs.`,
   description: `One of my earlier data projects. Part of my Data Mining course. Applied three core techniques — classification, clustering, and association rule mining — to a domain I actually wanted to work in: B2B SaaS sales. Took a mock CRM dataset with four relational tables (leads, accounts, products, sales agents) and merged them into a single analysis-ready master table using R. Performed significant data engineering & cleaning. Ran k-prototypes clustering and mapped aggregate profiles for each cluster. The dataset was mock, the scale was modest, and this was a class project — but it was a good experience to wrangling *somewhat* realistic data.
   VISUALS & MODEL EVALS COMING SOON.`,
   outputs: [

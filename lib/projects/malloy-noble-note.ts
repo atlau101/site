@@ -7,7 +7,8 @@ export const malloyNobleNoteProject: ProjectData = {
   type: 'GTM Strategy · Brand Audit · Email Marketing',
   skills: ['Brand Audit', 'ICP Development', 'GTM Strategy', 'Email Marketing', 'Positioning'],
   tagline: 'A GTM strategy for Noble Note, a premium stationery startup — including a brand audit, ICP reframe, and lifecycle email sequence for their Kickstarter launch.',
-  description: `Built a GTM strategy for Noble Note, a startup selling premium MagSafe leather notebooks and aerospace-grade aluminum pens. Performed a brand audit across their website and social media footprint: found heavily inconsistent messaging, multiple old brand names still live, and a significant gap between the actual buyer and the company's stated ICP. Delivered unified brand guidelines, mock-ups for social media and ad content, a new ICP profile, and a lifecycle email marketing sequence for their Kickstarter launch — welcome email, lead magnet placement, and flows segmented by audience.`,
+  descriptionLead: `Built a go-to-market strategy for Noble Note, a premium stationery startup launching on Kickstarter. Brand audit, ICP reframe, and a lifecycle email sequence aimed at 1,000 units before Christmas (~$160K).`,
+  description: `Performed a brand audit across their website and social media footprint: found heavily inconsistent messaging, multiple old brand names still live, and a significant gap between the actual buyer and the company's stated ICP. Delivered unified brand guidelines, mock-ups for social media and ad content, a new ICP profile, and a lifecycle email marketing sequence for their Kickstarter launch — welcome email, lead magnet placement, and flows segmented by audience.`,
   outputs: [
     { label: 'Launch Goal', value: '1,000 units before Christmas, or about $160K in target revenue' },
     { label: 'Strategic Repositioning', value: 'Shifted the brand toward lifestyle, gifting, and on-the-go professional use' },

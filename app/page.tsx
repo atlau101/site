@@ -1,5 +1,4 @@
 import { Hero } from "@/components/hero/Hero";
-import { ProofStrip } from "@/components/sections/ProofStrip";
 import { AboutStrip } from "@/components/sections/AboutStrip";
 import { FeaturedCard } from "@/components/sections/FeaturedCard";
 import { GroupedFeaturedCard } from "@/components/sections/GroupedFeaturedCard";
@@ -10,7 +9,7 @@ import { LandingScrollRestorer } from "@/components/sections/LandingScrollRestor
 const malloyGroup = {
   title: "Malloy Group",
   outcome:
-    "Three client consulting splits — competitive analysis, feasibility study, and GTM strategy. Real companies, real deliverables.",
+    "Three consulting splits for real clients: competitive analysis, feasibility, GTM.",
   category: "Consulting · GTM · Brand · 2024–2025",
   href: "/projects/malloy",
   projects: [
@@ -35,8 +34,8 @@ const malloyGroup = {
 const dataProjects = {
   title: "Data Projects",
   outcome:
-    "Analytics and predicting modeling projects across coursework and extracurriculars. Each built around real world hypotheses and problems.",
-  category: "Data Analytics · ML · Visualization. (Python, Tableau, R)",
+    "Analytics and predictive modeling, each built around a real hypothesis.",
+  category: "Data analytics · ML · Visualization",
   projects: [
     {
       title: "B2B Sales Pipeline Analytics",
@@ -64,7 +63,7 @@ const dataProjects = {
 const chamberGPT = {
   title: "ChamberGPT",
   outcome:
-    "Member and Guest facing support chatbot for the SF Chamber of Commerce. Built on voiceflow. $0 Budget, intern run, high forecasted impact.",
+    "Support chatbot for the SF Chamber of Commerce: $0 budget, intern-built on Voiceflow.",
   category: "AI · Workflows · Automation",
   year: "Spring 2025",
   href: "/projects/chambergpt",
@@ -95,9 +94,6 @@ export default function Home() {
         <LandingScrollRestorer />
         <Hero />
 
-        {/* Proof strip — 4 outcomes anchoring the hero claim */}
-        <ProofStrip />
-
         {/* About */}
         <AboutStrip />
 
@@ -107,7 +103,7 @@ export default function Home() {
           className="w-full bg-background px-6 py-10 sm:px-8 md:py-24 lg:px-12"
         >
           <div className="max-w-7xl mx-auto">
-            <div className="mb-10 space-y-3">
+            <div className="mb-6 space-y-3 md:mb-10">
               <p className="annotation text-secondary">Featured work / 02</p>
               <h2 className="font-heading text-3xl font-black uppercase leading-[0.94] text-foreground sm:text-4xl md:text-5xl">
                 Featured work

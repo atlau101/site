@@ -29,7 +29,7 @@ function TakeawaySheet({
   body: string;
   index: number;
 }) {
-  const [open, setOpen] = useState(index === 0);
+  const [open, setOpen] = useState(false);
 
   return (
     <article className="relative">

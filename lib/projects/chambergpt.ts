@@ -7,7 +7,8 @@ export const chambergptProject: ProjectData = {
   type: 'AI · Workflows · Automation',
   skills: ['Voiceflow', 'Platform Evaluation', 'AI & Chatbots', 'No-Code'],
   tagline: 'A member/guest-facing support chatbot for the SF Chamber of Commerce, built on Voiceflow with $0 budget.',
-  description: `Led an end-to-end project for the San Francisco Chamber of Commerce's Business Development team, building a member & guest-facing chatbot designed to answer questions across four knowledge domains: General Services, Marketing, Small Business Development, and Public Policy Advocacy. The bot was projected to reduce inbound inquiries by 20–30% and increase membership conversion by 5–10%, all on a zero budget. I also developed a detailed handoff memo for whoever inherited the project, covering full workflow documentation, known issues, platform limitations, and future ideas.`,
+  descriptionLead: `Built a member-facing support chatbot for the SF Chamber of Commerce on Voiceflow with a $0 budget. Projected to deflect 20–30% of repetitive inbound questions across four knowledge domains and lift membership conversion 5–10%.`,
+  description: `The bot was designed to answer questions across four knowledge domains: General Services, Marketing, Small Business Development, and Public Policy Advocacy. I also developed a detailed handoff memo for whoever inherited the project, covering full workflow documentation, known issues, platform limitations, and future ideas.`,
   outputs: [
     { label: 'Support Coverage', value: '4 recurring member-service domains in one bot flow' },
     { label: 'Projected Inquiry Deflection', value: '20–30% fewer repetitive inbound questions' },

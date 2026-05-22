@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { ProjectData } from '@/lib/projects/types';
 import { VisualsSlider } from './VisualsSlider';
+import { ProjectDescription } from './ProjectDescription';
 
 interface ProjectGeneralProps {
   project: ProjectData;
@@ -48,12 +49,12 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
             className="md:col-span-9 border p-8 md:p-10"
             style={{ background: palette.paper, borderColor: palette.line }}
           >
-            <p
-              className="mb-8 font-heading text-lg font-normal leading-relaxed md:text-xl"
-              style={{ color: palette.ink }}
-            >
-              {project.description}
-            </p>
+            <div className="mb-8">
+              <ProjectDescription
+                lead={project.descriptionLead}
+                body={project.description}
+              />
+            </div>
 
             {project.image && (
               <div className="mt-8">

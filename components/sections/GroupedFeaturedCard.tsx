@@ -4,7 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import { ViewTransition } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ChevronRight } from "lucide-react";
 
 export interface SubProject {
   title: string;
@@ -69,17 +69,21 @@ export const GroupedFeaturedCard: React.FC<GroupedFeaturedCardProps> = ({
 
   return (
     <>
-      <details open className="brutalist-panel overflow-hidden md:hidden">
-        <summary className="cursor-pointer space-y-5 px-6 py-6 text-left transition-colors duration-200 active:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset">
+      <details className="brutalist-panel overflow-hidden md:hidden [&[open]>summary_.chevron-icon]:rotate-90">
+        <summary className="cursor-pointer list-none space-y-4 px-6 py-6 text-left transition-colors duration-200 active:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset">
           <span className="annotation text-secondary">{category}</span>
 
-          <div className="flex items-start justify-between gap-4">
+          <div className="flex items-center justify-between gap-4">
             <h3 className="flex-1 font-heading text-3xl font-black leading-[0.95] text-foreground">
               {title}
             </h3>
-            <span className="shrink-0 border-[3px] border-foreground bg-primary px-3 py-2 text-[0.72rem] font-bold uppercase tracking-[0.16em] text-primary-foreground">
-              Projects
-            </span>
+            <div className="flex shrink-0 items-center gap-3">
+              <span className="annotation text-secondary">{projects.length} projects</span>
+              <ChevronRight
+                className="chevron-icon h-5 w-5 text-primary transition-transform duration-200"
+                aria-hidden="true"
+              />
+            </div>
           </div>
 
           <p className="max-w-[42rem] text-base leading-7 text-foreground/78">

@@ -21,6 +21,7 @@ export interface ProjectData {
   type: string;
   skills: string[];
   tagline: string;
+  descriptionLead?: string;
   description: string;
   image?: string;
   imageCaption?: string;
