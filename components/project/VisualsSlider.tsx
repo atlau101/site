@@ -81,6 +81,7 @@ export const VisualsSlider: React.FC<VisualsSliderProps> = ({ visuals }) => {
             src={current.src}
             alt={current.caption}
             fill
+            loading="eager"
             sizes="(max-width: 640px) calc(100vw - 112px), (max-width: 1024px) calc(100vw - 200px), 800px"
             className="object-contain"
           />

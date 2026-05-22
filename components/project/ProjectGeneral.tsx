@@ -88,7 +88,7 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
                 className="mt-8 border-t pt-8"
                 style={{ borderColor: palette.line }}
               >
-                <VisualsSlider visuals={project.visuals} />
+                <VisualsSlider key={project.slug} visuals={project.visuals} />
               </div>
             )}
           </div>

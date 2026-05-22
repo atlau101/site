@@ -14,6 +14,40 @@ export const uberAnalyticsProject: ProjectData = {
     { label: 'Business Questions Framed', value: '3 decision-oriented views built from one ride dataset' },
     { label: 'Operational Risk Isolated', value: 'Cancellation threshold identified at the trip level (15.1 min)' },
   ],
+  visuals: [
+    {
+      src: '/proj-attachments/uber-analytics/dashboard.png',
+      caption: 'Final Tableau dashboard. All three hypothesis charts consolidated under vehicle-type filters, with KPIs across the top: total booking value (revenue), average ride time, average time-to-pickup, cancellation rate, and average customer and driver ratings.',
+    },
+    {
+      src: '/proj-attachments/uber-analytics/hypotheses.png',
+      caption: 'The three business hypotheses framing the analysis — driver wait time vs. cancellations, premium vehicle value and ratings, and digital payments vs. revenue dominance.',
+    },
+    {
+      src: '/proj-attachments/uber-analytics/h1-chart.png',
+      caption: 'Hypothesis 1 — line chart of cancellation rate vs. driver wait time (VTAT). No meaningful correlation exists under 15.1 minutes. Past that threshold, cancellation rate spikes from ~10% to 100% across every vehicle category.',
+    },
+    {
+      src: '/proj-attachments/uber-analytics/h1-design.png',
+      caption: 'H1 design evolution. The first pass plotted all vehicle types simultaneously — too noisy to read clearly, even though the 15-minute cliff was already visible. Added a parameter toggle to collapse to an aggregate view or expand by vehicle type. The trend line was removed (R² ≈ 0.6, and the cliff speaks for itself).',
+    },
+    {
+      src: '/proj-attachments/uber-analytics/h2-chart.png',
+      caption: 'Hypothesis 2 — dual box plots of customer rating and booking value, split by vehicle class. Customer ratings are statistically flat across all vehicle types (means cluster at ~4, distributions span 3–5). Booking value tells a different story: UberXL has the lowest typical booking value of any vehicle type.',
+    },
+    {
+      src: '/proj-attachments/uber-analytics/h2-design.png',
+      caption: 'H2 design evolution. Started as a scatter plot of ride time vs. customer rating — the wrong variables entirely. Switched to dual box plots measuring booking value and customer rating by vehicle class, which directly tests the hypothesis. Also corrected the y-axis on the rating chart: Tableau defaulted it to start at 3, which would have made flat ratings look like meaningful variance.',
+    },
+    {
+      src: '/proj-attachments/uber-analytics/h3-chart.png',
+      caption: 'Hypothesis 3 — bar chart of total revenue by payment method. UPI (Unified Payments Interface) accounts for the majority of booking value. UPI is India\'s bank-to-bank digital payment system, pushed by the government as the country\'s primary payment rail.',
+    },
+    {
+      src: '/proj-attachments/uber-analytics/recommendations.png',
+      caption: 'Four recommendations from the analysis: (1) build a better satisfaction signal — ratings never dropped below 3.93, so the 1–5 scale isn\'t surfacing real variance; (2) push UPI as the default payment method in-app; (3) introduce a driver-side fee for wait times beyond 14 minutes, since cancellations cliff at 15; (4) audit the premium vehicle experience end-to-end — underperformance at the booking-value level points to a product problem, not a pricing one.',
+    },
+  ],
   lessons: [
     {
       title: 'The chart that tests the hypothesis is rarely the first one you build.',
