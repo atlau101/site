@@ -10,11 +10,23 @@ interface VisualsSliderProps {
 
 export const VisualsSlider: React.FC<VisualsSliderProps> = ({ visuals }) => {
   const [idx, setIdx] = useState(0);
+  const [zoom, setZoom] = useState({ scale: 1, x: 0, y: 0 });
   const reduced = useReducedMotion();
   const trackRef = useRef<HTMLDivElement>(null);
   const lightboxRef = useRef<HTMLDialogElement>(null);
   const lightboxTriggerRef = useRef<HTMLButtonElement | null>(null);
   const rafRef = useRef<number | null>(null);
+  const pinchRef = useRef<{
+    pointers: Map<number, { x: number; y: number }>;
+    startDistance: number;
+    startCenter: { x: number; y: number };
+    startZoom: { scale: number; x: number; y: number };
+  }>({
+    pointers: new Map(),
+    startDistance: 0,
+    startCenter: { x: 0, y: 0 },
+    startZoom: { scale: 1, x: 0, y: 0 },
+  });
   const n = visuals.length;
 
   useEffect(() => {
@@ -25,10 +37,19 @@ export const VisualsSlider: React.FC<VisualsSliderProps> = ({ visuals }) => {
     };
   }, []);
 
+  const resetZoom = () => {
+    pinchRef.current.pointers.clear();
+    pinchRef.current.startDistance = 0;
+    setZoom({ scale: 1, x: 0, y: 0 });
+  };
+
   const scrollToIndex = (nextIdx: number) => {
     const track = trackRef.current;
     if (!track) return;
     const next = Math.max(0, Math.min(nextIdx, n - 1));
+    if (next !== idx) {
+      resetZoom();
+    }
     track.scrollTo({
       left: next * track.clientWidth,
       behavior: reduced ? 'auto' : 'smooth',
@@ -50,6 +71,9 @@ export const VisualsSlider: React.FC<VisualsSliderProps> = ({ visuals }) => {
       if (!track) return;
       const width = track.clientWidth || 1;
       const next = Math.max(0, Math.min(Math.round(track.scrollLeft / width), n - 1));
+      if (next !== idx) {
+        resetZoom();
+      }
       setIdx(next);
     });
   };
@@ -63,11 +87,74 @@ export const VisualsSlider: React.FC<VisualsSliderProps> = ({ visuals }) => {
   };
 
   const closeLightbox = () => {
+    resetZoom();
     lightboxRef.current?.close();
   };
 
   const handleLightboxClose = () => {
+    resetZoom();
     lightboxTriggerRef.current?.focus();
+  };
+
+  const getPinchDistance = (points: Array<{ x: number; y: number }>) => {
+    const [a, b] = points;
+    return Math.hypot(a.x - b.x, a.y - b.y);
+  };
+
+  const getPinchCenter = (points: Array<{ x: number; y: number }>) => {
+    const [a, b] = points;
+    return {
+      x: (a.x + b.x) / 2,
+      y: (a.y + b.y) / 2,
+    };
+  };
+
+  const handleZoomPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType !== 'touch') return;
+    try {
+      e.currentTarget.setPointerCapture(e.pointerId);
+    } catch {
+      // Synthetic pointer events in tests may not be capturable.
+    }
+    pinchRef.current.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+    if (pinchRef.current.pointers.size === 2) {
+      const points = Array.from(pinchRef.current.pointers.values());
+      pinchRef.current.startDistance = getPinchDistance(points);
+      pinchRef.current.startCenter = getPinchCenter(points);
+      pinchRef.current.startZoom = zoom;
+    }
+  };
+
+  const handleZoomPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType !== 'touch' || !pinchRef.current.pointers.has(e.pointerId)) return;
+    pinchRef.current.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+    if (pinchRef.current.pointers.size !== 2 || pinchRef.current.startDistance <= 0) return;
+    e.preventDefault();
+
+    const points = Array.from(pinchRef.current.pointers.values());
+    const distance = getPinchDistance(points);
+    const center = getPinchCenter(points);
+    const nextScale = Math.max(
+      1,
+      Math.min(4, pinchRef.current.startZoom.scale * (distance / pinchRef.current.startDistance)),
+    );
+
+    setZoom({
+      scale: nextScale,
+      x: nextScale === 1 ? 0 : pinchRef.current.startZoom.x + center.x - pinchRef.current.startCenter.x,
+      y: nextScale === 1 ? 0 : pinchRef.current.startZoom.y + center.y - pinchRef.current.startCenter.y,
+    });
+  };
+
+  const handleZoomPointerEnd = (e: React.PointerEvent<HTMLDivElement>) => {
+    pinchRef.current.pointers.delete(e.pointerId);
+    pinchRef.current.startDistance = 0;
+
+    if (zoom.scale <= 1.01) {
+      setZoom({ scale: 1, x: 0, y: 0 });
+    }
   };
 
   return (
@@ -233,8 +320,10 @@ export const VisualsSlider: React.FC<VisualsSliderProps> = ({ visuals }) => {
         className="m-0 h-[100svh] max-h-none w-screen max-w-none border-0 bg-[oklch(0.974_0.005_95)] p-0 text-foreground backdrop:bg-foreground/55"
       >
         <div className="flex h-full flex-col">
-          <div className="flex min-h-16 items-center justify-between gap-3 border-b border-foreground/20 px-4 py-3">
-            <p className="annotation truncate text-muted-foreground">{visuals[idx].caption}</p>
+          <div className="flex min-h-16 items-center justify-between gap-3 border-b border-foreground/20 px-4 py-3 md:min-h-20 md:px-6">
+            <p className="annotation truncate text-muted-foreground md:!text-[0.95rem]">
+              {visuals[idx].caption}
+            </p>
             <button
               type="button"
               onClick={closeLightbox}
@@ -245,52 +334,98 @@ export const VisualsSlider: React.FC<VisualsSliderProps> = ({ visuals }) => {
             </button>
           </div>
 
-          <div className="grid min-h-0 flex-1 grid-cols-[3rem_minmax(0,1fr)_3rem] items-center gap-1 px-2 py-3 md:grid-cols-[4.5rem_minmax(0,1fr)_4.5rem] md:px-4">
+          <div className="grid min-h-0 flex-1 grid-cols-1 items-center px-2 py-3 md:grid-cols-[4.5rem_minmax(0,1fr)_4.5rem] md:gap-1 md:px-4">
             <button
               type="button"
               onClick={goBack}
               disabled={idx === 0}
-              className="flex h-12 w-12 touch-manipulation items-center justify-center justify-self-center text-foreground transition-colors hover:bg-muted active:bg-muted disabled:pointer-events-none disabled:opacity-25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="hidden h-12 w-12 touch-manipulation items-center justify-center justify-self-center text-foreground transition-colors hover:bg-muted active:bg-muted disabled:pointer-events-none disabled:opacity-25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:flex"
               aria-label="Previous full image"
             >
               <ChevronLeft size={24} />
             </button>
 
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={visuals[idx].src}
-                initial={reduced ? { opacity: 1 } : { opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={reduced ? { opacity: 1 } : { opacity: 0 }}
-                transition={reduced ? { duration: 0 } : { duration: 0.14 }}
-                className="flex min-h-0 items-center justify-center"
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={visuals[idx].src}
-                  alt={visuals[idx].caption}
-                  draggable={false}
-                  className="block max-h-[calc(100svh-9.5rem)] max-w-full object-contain"
-                />
-              </motion.div>
-            </AnimatePresence>
+            <div
+              className="flex min-h-0 touch-none items-center justify-center overflow-hidden"
+              onPointerDown={handleZoomPointerDown}
+              onPointerMove={handleZoomPointerMove}
+              onPointerUp={handleZoomPointerEnd}
+              onPointerCancel={handleZoomPointerEnd}
+              onLostPointerCapture={handleZoomPointerEnd}
+            >
+              <AnimatePresence>
+                <motion.div
+                  key={visuals[idx].src}
+                  initial={reduced ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.985 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={reduced ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 1.015 }}
+                  transition={reduced ? { duration: 0 } : { duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                  className="flex min-h-0 items-center justify-center"
+                >
+                  <div
+                    style={{
+                      transform: `translate3d(${zoom.x}px, ${zoom.y}px, 0) scale(${zoom.scale})`,
+                      transformOrigin: 'center center',
+                    }}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={visuals[idx].src}
+                      alt={visuals[idx].caption}
+                      draggable={false}
+                      className="block max-h-[calc(100svh-10rem)] max-w-full select-none object-contain md:max-h-[calc(100svh-12rem)]"
+                    />
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
 
             <button
               type="button"
               onClick={advance}
               disabled={idx === n - 1}
-              className="flex h-12 w-12 touch-manipulation items-center justify-center justify-self-center text-foreground transition-colors hover:bg-muted active:bg-muted disabled:pointer-events-none disabled:opacity-25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="hidden h-12 w-12 touch-manipulation items-center justify-center justify-self-center text-foreground transition-colors hover:bg-muted active:bg-muted disabled:pointer-events-none disabled:opacity-25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:flex"
               aria-label="Next full image"
             >
               <ChevronRight size={24} />
             </button>
           </div>
 
-          <div className="flex min-h-14 items-center justify-between gap-4 border-t border-foreground/20 px-4 py-3">
-            <p className="annotation min-w-0 text-muted-foreground">{visuals[idx].caption}</p>
-            <span className="annotation shrink-0 text-muted-foreground" aria-live="polite" aria-atomic="true">
-              {`${String(idx + 1).padStart(2, '0')} / ${String(visuals.length).padStart(2, '0')}`}
-            </span>
+          <div className="flex min-h-28 flex-col items-center justify-center gap-3 border-t border-foreground/20 px-4 py-3 md:min-h-16 md:flex-row md:items-center md:justify-between md:gap-4 md:px-6">
+            {visuals.length > 1 && (
+              <div className="flex items-center justify-center gap-2 md:hidden">
+                <button
+                  type="button"
+                  onClick={goBack}
+                  disabled={idx === 0}
+                  className="flex h-11 w-11 touch-manipulation items-center justify-center border border-foreground/20 bg-background/80 text-foreground transition-colors active:bg-muted disabled:pointer-events-none disabled:opacity-25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  aria-label="Previous full image"
+                >
+                  <ChevronLeft size={21} />
+                </button>
+                <button
+                  type="button"
+                  onClick={advance}
+                  disabled={idx === n - 1}
+                  className="flex h-11 w-11 touch-manipulation items-center justify-center border border-foreground/20 bg-background/80 text-foreground transition-colors active:bg-muted disabled:pointer-events-none disabled:opacity-25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  aria-label="Next full image"
+                >
+                  <ChevronRight size={21} />
+                </button>
+              </div>
+            )}
+            <div className="flex w-full items-start justify-between gap-4 md:w-auto md:flex-1">
+              <p className="annotation min-w-0 text-muted-foreground md:!text-[0.95rem]">
+                {visuals[idx].caption}
+              </p>
+              <span
+                className="annotation shrink-0 text-muted-foreground md:!text-[0.95rem]"
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                {`${String(idx + 1).padStart(2, '0')} / ${String(visuals.length).padStart(2, '0')}`}
+              </span>
+            </div>
           </div>
         </div>
       </dialog>
