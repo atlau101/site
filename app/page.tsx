@@ -4,6 +4,7 @@ import { FeaturedCard } from "@/components/sections/FeaturedCard";
 import { GroupedFeaturedCard } from "@/components/sections/GroupedFeaturedCard";
 import { Footer } from "@/components/sections/Footer";
 import { LandingScrollRestorer } from "@/components/sections/LandingScrollRestorer";
+import { ThinkingProcessSection } from "@/components/sections/ThinkingProcessSection";
 
 // ─── Tier 1: featured projects ────────────────────────────────────────────────
 const malloyGroup = {
@@ -97,6 +98,9 @@ export default function Home() {
         {/* About */}
         <AboutStrip />
 
+        {/* Thinking process */}
+        <ThinkingProcessSection />
+
         {/* Featured projects — Tier 1 */}
         <section
           id="work"
@@ -104,7 +108,7 @@ export default function Home() {
         >
           <div className="max-w-7xl mx-auto">
             <div className="mb-6 space-y-3 md:mb-10">
-              <p className="annotation text-secondary">Featured work / 02</p>
+              <p className="annotation text-secondary">Featured work / 03</p>
               <h2 className="font-heading text-3xl font-black uppercase leading-[0.94] text-foreground sm:text-4xl md:text-5xl">
                 Featured work
               </h2>
