@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ViewTransition } from "react";
 import { ReturnHomeAnchorLink } from "@/components/sections/ReturnHomeAnchorLink";
@@ -273,8 +274,14 @@ function EnvironmentTab() {
             <p className="mt-4 max-w-[58ch] text-sm leading-7" style={{ color: palette.muted }}>
               Personally love using google's VSCode Antigravity. Has all the knick knacks that makes VSCode so convenient, like file Explorer, Source Control, and various extensions while also including agent integrations with Gemini.
             </p>
-            <div className="mt-6">
-              <VisualSlot label="Antigravity screenshot" />
+            <div className="mt-6 overflow-hidden border" style={{ borderColor: palette.line }}>
+              <Image
+                src="/vibe-coding/dev-environment/Antigravity screenshot.png"
+                alt="Antigravity IDE — Google's VSCode fork with Gemini agent integration"
+                width={1280}
+                height={720}
+                className="w-full object-cover"
+              />
             </div>
           </div>
 
