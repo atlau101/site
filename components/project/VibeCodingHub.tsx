@@ -1,6 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { ViewTransition } from "react";
+import { ViewTransition, useState, useEffect, useCallback } from "react";
 import { ReturnHomeAnchorLink } from "@/components/sections/ReturnHomeAnchorLink";
 import {
   vibeProjects,
@@ -66,6 +68,268 @@ function VisualSlot({ label }: { label: string }) {
       style={{ background: palette.base, borderColor: palette.line, color: palette.muted }}
     >
       {label} TBD
+    </div>
+  );
+}
+
+function ImageMat({
+  src,
+  caption,
+  priority = false,
+  imgWidth = 1440,
+  imgHeight = 900,
+  onClick,
+}: {
+  src: string;
+  caption: string;
+  priority?: boolean;
+  imgWidth?: number;
+  imgHeight?: number;
+  onClick?: () => void;
+}) {
+  return (
+    <figure className="cursor-zoom-in" onClick={onClick}>
+      <div className="border p-2.5" style={{ background: palette.paper, borderColor: palette.line }}>
+        <Image
+          src={src}
+          alt={caption}
+          width={imgWidth}
+          height={imgHeight}
+          className="block w-full"
+          sizes="(min-width: 1024px) 55vw, 92vw"
+          priority={priority}
+        />
+      </div>
+      <figcaption
+        className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em]"
+        style={{ color: palette.muted }}
+      >
+        {caption}
+      </figcaption>
+    </figure>
+  );
+}
+
+function Lightbox({
+  src,
+  caption,
+  onClose,
+}: {
+  src: string;
+  caption: string;
+  onClose: () => void;
+}) {
+  const [entered, setEntered] = useState(false);
+
+  const close = useCallback(() => {
+    setEntered(false);
+    setTimeout(onClose, 260);
+  }, [onClose]);
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setEntered(true));
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") close(); };
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      cancelAnimationFrame(id);
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [close]);
+
+  return (
+    <div
+      onClick={close}
+      className="fixed inset-0 z-[200] flex items-center justify-center p-6 sm:p-10"
+      style={{
+        background: "oklch(0.18 0.018 35 / 0.96)",
+        transition: "opacity 260ms cubic-bezier(0.16, 1, 0.3, 1)",
+        opacity: entered ? 1 : 0,
+      }}
+    >
+      <button
+        onClick={(e) => { e.stopPropagation(); close(); }}
+        className="absolute right-6 top-6 font-mono text-[11px] uppercase tracking-[0.18em] transition-opacity hover:opacity-60"
+        style={{ color: "oklch(0.78 0.018 35)" }}
+      >
+        × Close
+      </button>
+      <figure
+        onClick={(e) => e.stopPropagation()}
+        className="flex flex-col items-start"
+        style={{
+          transition: "transform 260ms cubic-bezier(0.16, 1, 0.3, 1)",
+          transform: entered ? "scale(1) translateY(0)" : "scale(0.96) translateY(10px)",
+        }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={src}
+          alt={caption}
+          style={{ maxHeight: "84vh", maxWidth: "88vw", width: "auto", height: "auto", display: "block" }}
+        />
+        <figcaption
+          className="mt-3 font-mono text-[11px] uppercase tracking-[0.18em]"
+          style={{ color: "oklch(0.65 0.024 35)" }}
+        >
+          {caption}
+        </figcaption>
+      </figure>
+    </div>
+  );
+}
+
+const hoverLift = "transition-[transform,opacity] duration-200 ease-out hover:z-50 hover:scale-[1.07]";
+const siblingDim = "group-hover/collage:opacity-40 hover:!opacity-100";
+
+function WorkbenchCollage() {
+  const [lightbox, setLightbox] = useState<{ src: string; caption: string } | null>(null);
+
+  const openLightbox = useCallback((src: string, caption: string) => {
+    setLightbox({ src, caption });
+  }, []);
+
+  return (
+    <div className="space-y-8">
+      {/* ── Act 1: Student side ── */}
+      <div>
+        <p className="mb-5 font-mono text-[10px] font-semibold uppercase tracking-[0.24em]" style={{ color: palette.muted }}>
+          Student side
+        </p>
+
+        {/* Mobile: vertical stack */}
+        <div className="flex flex-col gap-6 md:hidden">
+          {[
+            { src: "/vibe-coding/workbench/05-thinking-gym.png", caption: "Reflection gate · pre-unlock", offset: false, priority: true },
+            { src: "/vibe-coding/workbench/08-scaffolding-top.png", caption: "Adversarial helper · post-unlock", offset: true },
+            { src: "/vibe-coding/workbench/04-student-dashboard.png", caption: "Student dashboard", offset: false },
+            { src: "/vibe-coding/workbench/03-role-picker.png", caption: "Role select · student / instructor", offset: true },
+            { src: "/vibe-coding/workbench/07-scaffolding.png", caption: "Scaffolded reply", offset: false },
+            { src: "/vibe-coding/workbench/06-gym-session-start.png", caption: "Session start", offset: true },
+          ].map((img) => (
+            <div key={img.src} style={{ marginLeft: img.offset ? 8 : 0, marginRight: img.offset ? 0 : 8 }}>
+              <ImageMat
+                src={img.src}
+                caption={img.caption}
+                priority={img.priority}
+                onClick={() => openLightbox(img.src, img.caption)}
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop: 12-col asymmetric collage, 2 rows */}
+        <div className="group/collage relative hidden pb-28 md:grid md:grid-cols-12 md:gap-x-3">
+          {/* Row 1 — Hero + Anchor B */}
+          <div className={`relative z-20 col-[1/9] row-[1/2] ${hoverLift} ${siblingDim}`}>
+            <ImageMat
+              src="/vibe-coding/workbench/05-thinking-gym.png"
+              caption="Reflection gate · pre-unlock"
+              priority
+              onClick={() => openLightbox("/vibe-coding/workbench/05-thinking-gym.png", "Reflection gate · pre-unlock")}
+            />
+          </div>
+          <div className={`relative z-10 col-[6/13] row-[1/2] mt-10 -rotate-[1deg] ${hoverLift} ${siblingDim}`}>
+            <ImageMat
+              src="/vibe-coding/workbench/08-scaffolding-top.png"
+              caption="Adversarial helper · post-unlock"
+              onClick={() => openLightbox("/vibe-coding/workbench/08-scaffolding-top.png", "Adversarial helper · post-unlock")}
+            />
+          </div>
+
+          {/* Row 2 — cascading strip */}
+          <div className={`relative z-30 col-[1/5] row-[2/3] -mt-8 rotate-[1deg] ${hoverLift} ${siblingDim}`}>
+            <ImageMat
+              src="/vibe-coding/workbench/03-role-picker.png"
+              caption="Role select"
+              onClick={() => openLightbox("/vibe-coding/workbench/03-role-picker.png", "Role select · student / instructor")}
+            />
+          </div>
+          <div className={`relative z-20 col-[3/9] row-[2/3] mt-6 rotate-[0.8deg] ${hoverLift} ${siblingDim}`}>
+            <ImageMat
+              src="/vibe-coding/workbench/04-student-dashboard.png"
+              caption="Student dashboard"
+              onClick={() => openLightbox("/vibe-coding/workbench/04-student-dashboard.png", "Student dashboard")}
+            />
+          </div>
+          <div className={`relative z-10 col-[7/12] row-[2/3] mt-2 -rotate-[1.5deg] ${hoverLift} ${siblingDim}`}>
+            <ImageMat
+              src="/vibe-coding/workbench/07-scaffolding.png"
+              caption="Scaffolded reply"
+              onClick={() => openLightbox("/vibe-coding/workbench/07-scaffolding.png", "Scaffolded reply")}
+            />
+          </div>
+          <div className={`relative z-0 col-[10/13] row-[2/3] mt-14 rotate-[0.5deg] ${hoverLift} ${siblingDim}`}>
+            <ImageMat
+              src="/vibe-coding/workbench/06-gym-session-start.png"
+              caption="Session start"
+              onClick={() => openLightbox("/vibe-coding/workbench/06-gym-session-start.png", "Session start")}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* ── Act 2: Instructor side ── */}
+      <div>
+        <p className="mb-5 font-mono text-[10px] font-semibold uppercase tracking-[0.24em]" style={{ color: palette.muted }}>
+          Instructor side
+        </p>
+
+        {/* Mobile: vertical stack */}
+        <div className="flex flex-col gap-6 md:hidden">
+          {[
+            { src: "/vibe-coding/workbench/09-instructor-dashboard.png", caption: "Instructor overview", offset: false },
+            { src: "/vibe-coding/workbench/10-instructor-assignments.png", caption: "Assignments view", offset: true },
+            { src: "/vibe-coding/workbench/11-instructor-gate-adjustment.png", caption: "Gate adjustment · settings", offset: false, imgWidth: 3018, imgHeight: 1604 },
+          ].map((img) => (
+            <div key={img.src} style={{ marginLeft: img.offset ? 8 : 0, marginRight: img.offset ? 0 : 8 }}>
+              <ImageMat
+                src={img.src}
+                caption={img.caption}
+                imgWidth={img.imgWidth}
+                imgHeight={img.imgHeight}
+                onClick={() => openLightbox(img.src, img.caption)}
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop: cascading 3-image strip */}
+        <div className="group/collage relative hidden pb-20 md:grid md:grid-cols-12 md:gap-x-3">
+          <div className={`relative z-20 col-[1/6] row-[1/2] ${hoverLift} ${siblingDim}`}>
+            <ImageMat
+              src="/vibe-coding/workbench/09-instructor-dashboard.png"
+              caption="Instructor overview"
+              onClick={() => openLightbox("/vibe-coding/workbench/09-instructor-dashboard.png", "Instructor overview")}
+            />
+          </div>
+          <div className={`relative z-10 col-[4/10] row-[1/2] mt-8 -rotate-[1deg] ${hoverLift} ${siblingDim}`}>
+            <ImageMat
+              src="/vibe-coding/workbench/10-instructor-assignments.png"
+              caption="Assignments view"
+              onClick={() => openLightbox("/vibe-coding/workbench/10-instructor-assignments.png", "Assignments view")}
+            />
+          </div>
+          <div className={`relative z-0 col-[8/13] row-[1/2] mt-16 rotate-[0.8deg] ${hoverLift} ${siblingDim}`}>
+            <ImageMat
+              src="/vibe-coding/workbench/11-instructor-gate-adjustment.png"
+              caption="Gate adjustment · settings"
+              imgWidth={3018}
+              imgHeight={1604}
+              onClick={() => openLightbox("/vibe-coding/workbench/11-instructor-gate-adjustment.png", "Gate adjustment · settings")}
+            />
+          </div>
+        </div>
+      </div>
+
+      {lightbox && (
+        <Lightbox
+          src={lightbox.src}
+          caption={lightbox.caption}
+          onClose={() => setLightbox(null)}
+        />
+      )}
     </div>
   );
 }
@@ -437,14 +701,22 @@ function ProjectDetail({ slug }: { slug: VibeProjectSlug }) {
               {project.productDef}
             </p>
           </div>
-          <div className="grid gap-6 lg:grid-cols-[1fr_18rem]">
+          {project.slug === "workbench" ? (
             <div className="max-w-[65ch] space-y-5 text-lg leading-9" style={{ color: palette.ink }}>
               {project.detailBody.map((paragraph, idx) => (
                 <p key={idx} className="mb-5" dangerouslySetInnerHTML={{ __html: paragraph }} />
               ))}
             </div>
-            <VisualSlot label={project.visualLabel} />
-          </div>
+          ) : (
+            <div className="grid gap-6 lg:grid-cols-[1fr_18rem]">
+              <div className="max-w-[65ch] space-y-5 text-lg leading-9" style={{ color: palette.ink }}>
+                {project.detailBody.map((paragraph, idx) => (
+                  <p key={idx} className="mb-5" dangerouslySetInnerHTML={{ __html: paragraph }} />
+                ))}
+              </div>
+              <VisualSlot label={project.visualLabel} />
+            </div>
+          )}
         </div>
       </div>
     </section>
@@ -504,6 +776,14 @@ function WatchedTab() {
   );
 }
 
+function WorkbenchCollageSection() {
+  return (
+    <section className="px-6 pb-20 sm:px-8 lg:px-12" style={{ background: palette.base }}>
+      <WorkbenchCollage />
+    </section>
+  );
+}
+
 export function VibeCodingHub({ activeTab = "story", activeProjectSlug }: VibeCodingHubProps) {
   return (
     <div style={{ background: palette.base, color: palette.ink }}>
@@ -512,6 +792,7 @@ export function VibeCodingHub({ activeTab = "story", activeProjectSlug }: VibeCo
         <>
           <ProjectSubnav activeProjectSlug={activeProjectSlug} />
           <ProjectDetail key={activeProjectSlug} slug={activeProjectSlug} />
+          {activeProjectSlug === "workbench" && <WorkbenchCollageSection />}
         </>
       ) : null}
       {!activeProjectSlug && activeTab === "story" ? <StoryTab /> : null}
