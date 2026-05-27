@@ -3,6 +3,7 @@
 .env
 .env.local
 
+.impeccable-live.json
 .playwright 
 .playwright-cli
 oldprogress.md
