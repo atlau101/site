@@ -4,6 +4,8 @@ import { ChevronLeft, ChevronRight, Maximize2, X } from 'lucide-react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { ProjectVisual } from '@/lib/projects/types';
 
+const isVideoSrc = (src: string) => /\.(mov|mp4|webm)(\?|$)/i.test(src);
+
 interface VisualsSliderProps {
   visuals: ProjectVisual[];
 }
@@ -191,14 +193,27 @@ export const VisualsSlider: React.FC<VisualsSliderProps> = ({ visuals }) => {
                   key={`${visual.src}-${i}`}
                   className="relative flex w-full shrink-0 snap-center select-none items-center justify-center overflow-hidden bg-[oklch(0.974_0.005_95)] md:min-h-0"
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={visual.src}
-                    alt={visual.caption}
-                    draggable={false}
-                    loading={i === 0 ? 'eager' : 'lazy'}
-                    className="block h-auto w-full object-contain md:max-h-[min(72vh,44rem)] md:w-auto md:max-w-full"
-                  />
+                  {isVideoSrc(visual.src) ? (
+                    <video
+                      src={visual.src}
+                      aria-label={visual.caption}
+                      controls
+                      playsInline
+                      muted
+                      loop
+                      preload={i === 0 ? 'metadata' : 'none'}
+                      className="block h-auto w-full object-contain md:max-h-[min(72vh,44rem)] md:w-auto md:max-w-full"
+                    />
+                  ) : (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img
+                      src={visual.src}
+                      alt={visual.caption}
+                      draggable={false}
+                      loading={i === 0 ? 'eager' : 'lazy'}
+                      className="block h-auto w-full object-contain md:max-h-[min(72vh,44rem)] md:w-auto md:max-w-full"
+                    />
+                  )}
                 </div>
               ))}
             </div>
@@ -368,13 +383,23 @@ export const VisualsSlider: React.FC<VisualsSliderProps> = ({ visuals }) => {
                       transformOrigin: 'center center',
                     }}
                   >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={visuals[idx].src}
-                      alt={visuals[idx].caption}
-                      draggable={false}
-                      className="block max-h-[calc(100svh-10rem)] max-w-full select-none object-contain md:max-h-[calc(100svh-12rem)]"
-                    />
+                    {isVideoSrc(visuals[idx].src) ? (
+                      <video
+                        src={visuals[idx].src}
+                        aria-label={visuals[idx].caption}
+                        controls
+                        playsInline
+                        className="block max-h-[calc(100svh-10rem)] max-w-full select-none object-contain md:max-h-[calc(100svh-12rem)]"
+                      />
+                    ) : (
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img
+                        src={visuals[idx].src}
+                        alt={visuals[idx].caption}
+                        draggable={false}
+                        className="block max-h-[calc(100svh-10rem)] max-w-full select-none object-contain md:max-h-[calc(100svh-12rem)]"
+                      />
+                    )}
                   </div>
                 </motion.div>
               </AnimatePresence>

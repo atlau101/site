@@ -14,6 +14,11 @@ export interface ProjectVisual {
   caption: string;
 }
 
+export interface ProjectLink {
+  label: string;
+  href: string;
+}
+
 export interface ProjectData {
   slug: string;
   title: string;
@@ -27,6 +32,7 @@ export interface ProjectData {
   imageCaption?: string;
   visuals?: ProjectVisual[];
   outputs?: ProjectOutputs[];
+  links?: ProjectLink[];
   lessons: Lesson[];
   redos: string[];
   specifics?: string;

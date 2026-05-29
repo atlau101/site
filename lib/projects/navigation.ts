@@ -34,6 +34,7 @@ const STANDALONE_CHAIN = [
   "uber-analytics",
   "wildfire-ml",
   "lmu-datathon",
+  "sba-credit-deserts",
   "chambergpt",
   "fillmore",
   "vibe-coding",

@@ -61,6 +61,15 @@ const dataProjects = {
   ],
 };
 
+const sbaCreditDeserts = {
+  title: "Small-Business Credit Desert Early Warning System",
+  outcome:
+    "Two-layer XGBoost forecast and MapLibre dashboard predicting credit deserts across 77K U.S. tracts at 3- and 6-year horizons.",
+  category: "Data Engineering · ML Forecasting · Public-Interest Analytics",
+  year: "Spring 2026",
+  href: "/projects/sba-credit-deserts",
+};
+
 const chamberGPT = {
   title: "ChamberGPT",
   outcome:
@@ -124,17 +133,22 @@ export default function Home() {
                 <GroupedFeaturedCard {...dataProjects} />
               </div>
 
-              {/* 3 — ChamberGPT */}
+              {/* 3 — SBA Credit Deserts */}
+              <div id="project-sba-credit-deserts" className="rule-h-faint">
+                <FeaturedCard {...sbaCreditDeserts} />
+              </div>
+
+              {/* 4 — ChamberGPT */}
               <div id="project-chambergpt" className="rule-h-faint">
                 <FeaturedCard {...chamberGPT} />
               </div>
 
-              {/* 4 — Fillmore Ecosystem */}
+              {/* 5 — Fillmore Ecosystem */}
               <div id="project-fillmore" className="rule-h-faint">
                 <FeaturedCard {...fillmoreEcosystem} />
               </div>
 
-              {/* 5 — Vibe Coding */}
+              {/* 6 — Vibe Coding */}
               <div id="project-vibe-coding" className="rule-h-faint">
                 <FeaturedCard {...vibeCoding} />
               </div>
