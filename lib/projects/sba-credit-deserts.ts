@@ -79,6 +79,11 @@ export const sbaCreditDesertsProject: ProjectData = {
       summary: 'Random-baseline AP is ~1.7% here — single-number metrics hide whether the model actually surfaces deserts.',
       full: `Credit deserts are by definition rare events. The base rate of a tract becoming a "service desert" at a given horizon hovers around 1–2%, which means a model can hit 98% accuracy by predicting "not a desert" for every tract on the map. AUC has the same problem in milder form — it stays high even when the model is useless at the top of the ranking.\n\nWe evaluated everything against **average precision (AP)** and **AP-lift over the random baseline**, walk-forward across 8 time-split folds, with **per-fold isotonic calibration** so the probabilities meant something. The final h+3 Diagnostic fit was AUC 0.875 / AP 0.322 — about 19× lift over a 1.7% baseline. We reported fold spread on every metric so the headline number couldn\'t hide variance.`,
     },
+    {
+      title: 'Honest sensitivity beats a satisfying simulation.',
+      summary: 'We wanted a what-if engine. The model said small effects are the real answer. We shipped that instead of tuning for drama.',
+      full: `Going into the presentation, we built six scenario sliders into the Influenceable lens — SSBCI coverage, bank branch density, microlender reach, lender concentration — originally designed as a what-if engine. The idea: move the SSBCI slider up, watch tracts cross the high-risk line, hand a policymaker a number. Intuitive, satisfying, and ultimately not grounded in anything real.\n\nEach slider represents a category of real, measured conditions from the data, and shows how sensitive the model's national risk forecast is to movement in that category. We computed those sensitivities through ablation: train the model, remove a feature category, and measure how predictions shift without it. What we found was uncomfortable. Moving any single lever, or multiple levers simultaneously, barely changed the risk percentages for most tracts and counties; the needle almost doesn't move across a lot of them. \n\nThat felt like a failure until we thought through the alternative. We could have tuned the sliders to produce bigger swings — more dramatic recoloring, a more satisfying simulation. But that would have been made-up numbers wearing the clothes of analysis. The model doesn't behave that way, and dressing it up to look like it did would have misled anyone who trusted the output.\n\nThe sensitivities also aren't uniform across the map. A slider that barely moves the national aggregate might shift a specific at-risk county by a full percentage point. The story is in the *where*, not the average.\n\nSo we kept the sliders honest. The in-product copy says explicitly: this is sensitivity, not a causal guarantee. The real value of the dashboard was never "move lever → fix problem." It's identifying *where* risk is concentrated and *why* — and making that legible to the people who can actually act on it.`,
+    },
   ],
   redos: [],
   specifics: `## The pivot: from loans to places
@@ -126,6 +131,16 @@ Three primary controls:
 Plus six **scenario sliders** for the Influenceable lens — SSBCI program coverage, SBA branch density, microlender ecosystem, lender concentration, and others. Move a slider and the map recolors live. Each lever uses model sensitivity, category-dependence checks, and feature strength to estimate how the forecast responds. It is sensitivity, not a causal guarantee, and the in-product copy says exactly that.
 
 Right rail surfaces the top states by mean risk, the weakest-lens states, the national risk-decile distribution, and an in-state percentile drill-down when a state is clicked.
+
+## How the scenario levers actually work — and why they barely move
+
+Each slider represents a category of real, measured conditions from the data, and shows how sensitive the model's national risk forecast is to movement in that category. The sensitivities come from **ablation**: train the full Influenceable model, re-fit it with one feature category removed, and measure how the predicted risk distribution shifts across the panel.
+
+What we found when we ran this: at the national aggregate, moving any lever — or several levers simultaneously — produces small changes in risk percentages. For most counties and most tracts, the movement was fractions of a point. This was uncomfortable, because the original vision was a real what-if engine: push SSBCI coverage up 20%, watch the high-risk tracts clear. The model refused to give us that story.
+
+The effects aren't uniform, though. Ablation outputs a *distribution* across 77K tracts — a lever that barely moves the national average might shift a specific at-risk county by a full percentage point. The aggregate looks flat; the tract-level story is more textured. The sliders surface where those pockets of sensitivity actually live.
+
+We could have tuned the weights to produce bigger swings and more dramatic recoloring. We didn't, because those would have been made-up numbers. The small movements are the honest answer: no single policy lever is a silver bullet, and pretending otherwise would have misled anyone trying to act on the output. The real value isn't a simulation of a fix — it's making the pattern of risk legible so that the right levers, applied in the right places, can be identified.
 
 ## Known limitations
 
